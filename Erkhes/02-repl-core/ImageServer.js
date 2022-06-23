@@ -1,10 +1,10 @@
 const http = require("http");
 const fs = require("fs");
-const fileName1 = `${__dirname}/data/dog1.jpeg`;
+const imageFile = `${__dirname}/data/dog1.jpeg`;
 
 http
   .createServer(function (request, response) {
-    fs.createReadStream(fileName1)
+    fs.createReadStream(imageFile)
       .on("error", () => {
         console.error("err");
       })
