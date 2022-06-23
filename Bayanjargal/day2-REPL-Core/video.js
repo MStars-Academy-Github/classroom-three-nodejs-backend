@@ -7,8 +7,8 @@ console.log(filename);
 
 http
   .createServer(function (request, response) {
-    response.setHeader("Content-Type", "image/png");
-    fs.createReadStream(filename)
+    response.setHeader("Content-Type", "video/mp4");
+    fs.createReadStream(video)
       .on("error", () => console.log("err"))
       .pipe(response);
   })
