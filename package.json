@@ -26,5 +26,6 @@
 >>>>>>> 68793bdecfb02df34b50c8ca92954eec81b7908b
   "dependencies": {
     "react": "^18.2.0"
-  }
+  },
+  "devDependencies": {}
 }
