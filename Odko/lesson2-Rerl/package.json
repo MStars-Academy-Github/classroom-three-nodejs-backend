@@ -1,0 +1,19 @@
+{
+  "name": "lesson2-rerc",
+  "version": "1.0.0",
+  "description": "creating node core and repl exercises",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "core",
+    "modules",
+    "exercises"
+  ],
+  "author": "Odko",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
