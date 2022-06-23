@@ -7,7 +7,7 @@ console.log(filename);
 
 http
   .createServer(function (request, response) {
-    response.setHeader("Content-Type", "audio/mpeg");
+    response.setHeader("Content-Type", "audio/mp3");
     file
       .createReadStream(filename)
       .on("error", () => {
