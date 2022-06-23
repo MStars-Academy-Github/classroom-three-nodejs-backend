@@ -1,0 +1,27 @@
+{
+  "name": "day1-server",
+  "version": "1.0.0",
+  "description": "creating node core and repl exercies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MStars-Academy-Github/classroom-three-nodejs-backend.git"
+  },
+  "keywords": [
+    "core",
+    "models",
+    "exercies"
+  ],
+  "author": "NABA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MStars-Academy-Github/classroom-three-nodejs-backend/issues"
+  },
+  "homepage": "https://github.com/MStars-Academy-Github/classroom-three-nodejs-backend#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
