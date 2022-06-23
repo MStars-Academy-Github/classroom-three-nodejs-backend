@@ -6,4 +6,4 @@ server
     response.write("<h1>Hello World!</h1>\n");
     response.end();
   })
-  .listen(3000);
+  .listen(3004);
