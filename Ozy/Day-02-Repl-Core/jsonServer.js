@@ -1,15 +1,15 @@
 const http = require("http");
 const fs = require("fs");
-const audioFile = `${__dirname}/data/beat.mp3`;
+
+const fileName = `${__dirname}/data/test.json`;
 
 http
   .createServer(function (request, response) {
-    response.setHeader("Content-type", "audio.mpeg");
-    fs.createReadStream(audioFile)
+    fs.createReadStream(fileName)
       .on("error", () => {
         console.error("err");
       })
       .pipe(response);
   })
   .listen(3000);
-console.log("Server running at https://localhost:3000");
+console.log("Server running at http://localhost:3000");
