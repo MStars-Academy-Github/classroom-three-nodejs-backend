@@ -1,0 +1,12 @@
+{
+  "name": "day-02_repl_coremodule",
+  "version": "1.0.0",
+  "description": "creating node core and repl exercises",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "sumiya",
+  "license": "ISC"
+}
