@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 
-const filename = `${__dirname}/data/image.jpg`;
+const imagefile = `${__dirname}/data/image.jpg`;
 console.log(filename);
 
 http
