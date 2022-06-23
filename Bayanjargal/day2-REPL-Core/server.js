@@ -11,23 +11,23 @@ http
     if(request.url === '/'){
         console.log("root")
     }
-     if(request.url === '/json'){
+     else if(request.url === '/json'){
         console.log("its json")
         return serveJsonFile(request,response)
     }
-     if(request.url === '/audio'){
+    else if(request.url === '/audio'){
         return audioServeFile(request,response)
         console.log("its audio")
     }
-     if(request.url === '/video'){
+    else if(request.url === '/video'){
         return videoServeFile(request,response)
         console.log("its video")
     }
-     if(request.url === '/image'){
+    else if(request.url === '/image'){
         return imageServeFile(request,response)
         console.log("its image")
-    }
-    response.end("not found")
+    }else( response.end("not found"))
+   
   })
   .listen(3000);
 console.log("server running at http://localhost:3000");
