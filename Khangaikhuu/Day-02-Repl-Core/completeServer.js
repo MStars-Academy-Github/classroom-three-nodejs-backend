@@ -9,32 +9,26 @@ const videoFile = `${__dirname}/data/test.json`;
 http
   .createServer((request, response) => {
     console.log(request.url);
-
     if (request.url === '/') {
         console.log('it is groot')
+        response.end('<h1>It is root</h1>');
     }
-
-    if (request.url === '/json') {
+    else if (request.url === '/json') {
         return serveJsonFile(request, response) 
     }
-
-    if (request.url === '/image') {
+    else if (request.url === '/image') {
         console.log('it is image')
-    }
-
-
-    if (request.url === '/video') {
+        return serveImageFile(request, response);
+    }else if (request.url === '/video') {
         console.log('it is video')
+        return serveVideoFile(request, response);
     }
-
-    if (request.url === '/audio') {
+    else if (request.url === '/audio') {
         console.log('it is audio')
+        return serveAudioFile(request, response);
     } else {
-
-    response.end('Not Found');
-
+        response.end('Not Found');
     }
-    
   })
   .listen(3004);
 
