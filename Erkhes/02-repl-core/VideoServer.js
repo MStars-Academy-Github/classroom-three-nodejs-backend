@@ -1,13 +1,11 @@
 const http = require("http");
 const fs = require("fs");
-const fileName = `${__dirname}/data/fish.mp4`;
-
-console.log(fileName);
+const videoFile = `${__dirname}/data/fish.mp4`;
 
 http
   .createServer(function (request, response) {
     response.setHeader("Content-type", "video/mp4");
-    fs.createReadStream(fileName)
+    fs.createReadStream(videoFile)
       .on("error", () => {
         console.error("err");
       })
