@@ -12,15 +12,23 @@ http
     // response.setHeader('Access-Control-Request-Method', '*');
     // response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     // response.setHeader('Access-Control-Allow-Headers', '*');
-    if (request.url === "/add/food") {
-      console.log("add food");
 
+    if (request.url === "/json") {
+      return serverJsonFile(request, response);
+    } else if (request.url === "/image") {
+      return serverImageFile(request, response);
+    } else if (request.url === "/audio") {
+      return serverAudioFile(request, response);
+    } else if (request.url === "/video") {
+      return serverVideoFile(request, response);
+    } else if (request.url === "/add/food") {
+      console.log("add food");
       if (request.method === "POST") {
         console.log("POST");
         request.on("data", (chunk) => {
-          // console.log(`data ${chunk}`);
+          console.log(`data ${chunk}`);
           file.readFile(
-            "../lesson3/assignment/data/foods.json",
+            "../lesson3-Read-Write/assignment/data/foods.json",
             "utf-8",
             (err, data) => {
               if (err) {
@@ -30,7 +38,7 @@ http
                 let chunk1 = JSON.parse(chunk);
                 arr.push(chunk1);
                 file.writeFile(
-                  "../lesson3/assignment/data/foods.json",
+                  "../lesson3-Read-Write/assignment/data/foods.json",
                   JSON.stringify(arr),
                   (err) => {
                     if (err) {
@@ -44,23 +52,14 @@ http
             }
           );
         });
+        response.end("Not Found");
         request.on("end", () => {
           console.log("end");
         });
       }
+    } else {
+      response.end("Not Found");
     }
-
-    // if (request.url === "/json") {
-    //   return serverJsonFile(request, response);
-    // } else if (request.url === "/image") {
-    //   return serverImageFile(request, response);
-    // } else if (request.url === "/audio") {
-    //   return serverAudioFile(request, response);
-    // } else if (request.url === "/video") {
-    //   return serverVideoFile(request, response);
-    // } else {
-    //   response.end("Not Found");
-    // }
   })
   .listen(3000);
 console.log("server running at http://localhost:3000");
