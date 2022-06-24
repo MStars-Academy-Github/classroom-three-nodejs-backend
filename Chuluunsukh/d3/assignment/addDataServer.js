@@ -1,4 +1,4 @@
-const { fstat } = require("fs");
+const fs = require("fs");
 const http = require("http");
 
 http
@@ -13,6 +13,30 @@ http
         console.log("It is add food and Post method");
         request.on("data", (chunk) => {
           console.log(`Data chunk available: ${chunk}`);
+          fs.readFile("./data/foods.json", "utf-8", (err, data) => {
+            if (err) {
+              console.error(err);
+              return;
+            } else {
+              const foodData = JSON.parse(data);
+              console.log(foodData);
+              const chunkObject = JSON.parse(chunk);
+              console.log(chunkObject);
+              foodData.data.push(chunkObject);
+              console.log(foodData);
+              fs.writeFile(
+                "./data/foods.json",
+                JSON.stringify(foodData),
+                (err) => {
+                  if (err) {
+                    console.error(err);
+                  } else {
+                    console.log("success");
+                  }
+                }
+              );
+            }
+          });
         });
         request.on("end", () => {
           // end of data
