@@ -1,8 +1,8 @@
 {
-  "name": "Modules",
+  "name": "day3-assingment",
   "version": "1.0.0",
   "description": "",
-  "main": "AddDataServer.js",
+  "main": "exercise1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

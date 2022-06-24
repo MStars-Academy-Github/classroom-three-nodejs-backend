@@ -1,6 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const jsondata = `${__dirname}/data/info.json`;
+
 console.log(jsondata)
 
 http
