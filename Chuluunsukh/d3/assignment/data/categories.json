@@ -1,10 +1,12 @@
+[
+    {
+    "name": "banhar",
+    "gender": "male",
+    "specie": "dog"
+},
 {
-    "success": true,
-    "data": [{
-        "_id": "61822b32c0d7632762f7754e",
-        "name": "Үндсэн хоол",
-        "color": "blue",
-        "__v": 0
-    }
-    ] 
+    "name": "muujgai",
+    "gender": "female",
+    "specie": "cat"
 }
+]
