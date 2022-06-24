@@ -48,7 +48,6 @@ http
           console.log("end");
         });
       }
-      response.end();
     }
 
     // if (request.url === "/json") {
