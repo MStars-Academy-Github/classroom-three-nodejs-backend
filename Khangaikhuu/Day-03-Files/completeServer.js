@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
+const serveJsonFile = require("./JsonServe")
 
-const jsonFile = `${__dirname}/data/test.json`;
 const audioFile = `${__dirname}/data/test.json`;
 const imageFile = `${__dirname}/data/test.json`;
 const videoFile = `${__dirname}/data/test.json`;
@@ -32,15 +32,6 @@ http
   })
   .listen(3004);
 
-  // serves json file
-  function serveJsonFile(req, res){
-    res.setHeader("Content-Type", "application/json");
-    fs.createReadStream(jsonFile)
-      .on("error", () => {
-        console.log("error");
-      })
-      .pipe(res); 
-  } 
 
   // serves audio file
   function serveAudioFile(req, res){
