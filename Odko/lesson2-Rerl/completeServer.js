@@ -13,10 +13,10 @@ const videofile = `${__dirname}/data/videoplayback .mp4`;
 
 http
   .createServer(function (request, response) {
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    response.setHeader('Access-Control-Request-Method', '*');
-    response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-    response.setHeader('Access-Control-Allow-Headers', '*');
+    // response.setHeader('Access-Control-Allow-Origin', '*');
+    // response.setHeader('Access-Control-Request-Method', '*');
+    // response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    // response.setHeader('Access-Control-Allow-Headers', '*');
     if(request.url === '/json'){
         return serverJsonFile(request, response)
     }else if(request.url === '/image'){
