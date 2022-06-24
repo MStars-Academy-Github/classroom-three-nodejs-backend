@@ -1,0 +1,19 @@
+{
+  "name": "day-02-repl-core",
+  "version": "1.0.0",
+  "description": "creating node core and repl exercises",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "core",
+    "modeles",
+    "exercises"
+  ],
+  "author": "Khangaikhuu Uvgunkhuu",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}

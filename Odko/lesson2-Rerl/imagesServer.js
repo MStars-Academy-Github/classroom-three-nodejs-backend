@@ -6,6 +6,7 @@ console.log(filename);
 
 http
   .createServer(function (request, response) {
+    response.setHeader("Content-Type", "image/jpeg");
     file
       .createReadStream(filename)
       .on("error", () => {
