@@ -40,7 +40,7 @@ http
         console.log("error");
       })
       .pipe(res); 
-  }
+  } 
 
   // serves audio file
   function serveAudioFile(req, res){

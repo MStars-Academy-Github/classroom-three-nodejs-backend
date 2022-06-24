@@ -2,8 +2,6 @@ const http = require("http");
 const fs = require("fs");
 const image = `${__dirname}/data/image/download.png`;
 
-
-
 http
   .createServer(function (request, response) {
     response.setHeader("Content-Type", "image/png");
