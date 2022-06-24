@@ -1,0 +1,24 @@
+{
+    "success": true,
+    "data": [
+      {
+        "_id": "618b4838d9ba304e7d5c83dd",
+        "name": "Үндсэн хоол",
+        "color": "blue",
+        "__v": 0
+      },
+      {
+        "_id": "618b486ed9ba304e7d5c83e1",
+        "name": "салад ба зууш",
+        "color": "yellow",
+        "__v": 0
+      },
+      {
+        "_id": "618b487ed9ba304e7d5c83e3",
+        "name": "амттан",
+        "color": "blue",
+        "__v": 0
+      }
+    ]
+  }
+  
