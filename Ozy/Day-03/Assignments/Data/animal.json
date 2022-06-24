@@ -1,10 +1,4 @@
 [
-    { "name": "banhar",
-       "gender": "male",
-        "specie": "dog"
-    },
-   { "name": "muujgai",
-       "gender": "female",
-        "specie": "cat"
-    }
-  ]
+  { "name": "banhar", "gender": "male", "specie": "dog" },
+  { "name": "muujgai", "gender": "female", "specie": "cat" }
+]
