@@ -6,8 +6,6 @@ const VideoServerFile = require("./VideoServer")
 const ImageServerFile = require("./ImgServer")
 const jsonServerFile = require ("./DataServer")
 
-const JsonFile = `${__dirname}/data/test.json`;
-
 http
   .createServer((request, response) => {
     console.log(request.url);
