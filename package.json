@@ -1,6 +1,4 @@
 {
-<<<<<<< HEAD
-=======
   "name": "day1-server",
   "version": "1.0.0",
   "description": "creating node core and repl exercies",
@@ -23,7 +21,6 @@
     "url": "https://github.com/MStars-Academy-Github/classroom-three-nodejs-backend/issues"
   },
   "homepage": "https://github.com/MStars-Academy-Github/classroom-three-nodejs-backend#readme",
->>>>>>> 68793bdecfb02df34b50c8ca92954eec81b7908b
   "dependencies": {
     "react": "^18.2.0"
   },

@@ -29,7 +29,7 @@ http
     }else( response.end("not found"))
    
   })
-  .listen(3001);
+  .listen(3003);
 console.log("server running at http://localhost:3000");
 
 // serves json file
