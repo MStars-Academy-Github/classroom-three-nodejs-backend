@@ -3,6 +3,7 @@ const http = require("http");
 const JsonFile = `${__dirname}/data/test.json`;
 const querystring = require("querystring");
 const url = require("url");
+const serveFile = require("./serveFile");
 
 http
   .createServer((request, response) => {
@@ -24,6 +25,9 @@ http
       const parseURL = url.parse(request.url, true);
       console.log(parseURL);
       response.end("categories");
+    } else if (request.url.match(/^\/public/)) {
+      console.log("Running");
+      return serveFile(request, response);
     } else {
       response.end("not found");
     }
