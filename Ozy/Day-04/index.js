@@ -26,7 +26,7 @@ http
       console.log(parseURL);
       response.end("categories");
     } else if (request.url.match(/^\/public/)) {
-      console.log("Running");
+      console.log("Public router is called");
       return serveFile(request, response);
     } else {
       response.end("not found");
