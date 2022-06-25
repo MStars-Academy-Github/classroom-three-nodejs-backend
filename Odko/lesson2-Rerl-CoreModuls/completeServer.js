@@ -84,19 +84,19 @@ http
             );
 
             const dlt = delete [result];
-            [data].push(dlt);
-            file.writeFile(
-              "../lesson3-Read-Write/assignment/data/foods.json",
-              data,
-              (err) => {
-                if (err) {
-                  console.error(err);
-                  return;
-                } else {
-                  console.log(data);
-                }
-              }
-            );
+            // [data].push(dlt);
+            // file.writeFile(
+            //   "../lesson3-Read-Write/assignment/data/foods.json",
+            //   data,
+            //   (err) => {
+            //     if (err) {
+            //       console.error(err);
+            //       return;
+            //     } else {
+            //       console.log(data);
+            //     }
+            //   }
+            // );
           }
         }
       );
