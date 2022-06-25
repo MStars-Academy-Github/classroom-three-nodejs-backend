@@ -1,6 +1,11 @@
 const file = require("fs");
 var http = require("http");
 
+// dynamic path
+
+const querystring = require("querystring");
+const url = require("url");
+
 const jsonfile = `${__dirname}/data/test.json`;
 const audiofile = `${__dirname}/data/song.mp3`;
 const imagesfile = `${__dirname}/data/image.jpeg`;
@@ -58,6 +63,49 @@ http
           console.log("end");
         });
       }
+    } else if (request.url.match(/^\/delete/)) {
+      //   path ? or / modul
+      querystring.parse(request.url.split("?").slice(1).join(""));
+      // console.log(querystring.parse(request.url.split("?").slice(1).join("")));
+
+      console.log();
+
+      file.readFile(
+        "../lesson3-Read-Write/assignment/data/foods.json",
+        "utf-8",
+        (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          } else {
+            const result = JSON.parse(data).filter(
+              (id) =>
+                `id=${id._id}` === request.url.split("?").slice(1).join("")
+            );
+
+            const dlt = delete [result];
+            [data].push(dlt);
+            file.writeFile(
+              "../lesson3-Read-Write/assignment/data/foods.json",
+              data,
+              (err) => {
+                if (err) {
+                  console.error(err);
+                  return;
+                } else {
+                  console.log(data);
+                }
+              }
+            );
+          }
+        }
+      );
+
+      response.end("delete");
+    } else if (request.url.match(/^\/update/)) {
+      const parsedURL = url.parse(request.url, true);
+      console.log(parsedURL);
+      response.end("update");
     } else {
       response.end("Not Found");
     }
