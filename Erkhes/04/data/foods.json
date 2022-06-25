@@ -1,1 +1,26 @@
-[{"name":"update test12","price":"5000","stock":"10","discount":"10","image":"/test/food.png","_id":"4567890","sales":true,"ingredients":"ing1 . ing2 . ing3","portion":10,"tumb_img":"3_tumb.png"},{"name":"update test12","price":"5000","stock":"10","discount":"10","image":"/test/food.png","_id":"4567890","sales":true,"ingredients":"ing1 . ing2 . ing3","portion":10,"tumb_img":"3_tumb.png"},{"name":"update test12","price":"5000","stock":"10","discount":"10","image":"/test/food.png","_id":"4567890","sales":true,"ingredients":"ing1 . ing2 . ing3","portion":10,"tumb_img":"3_tumb.png"},null]
+[
+  {
+    "name": "update test12",
+    "price": "5000",
+    "stock": "10",
+    "discount": "10",
+    "image": "/test/food.png",
+    "_id": "23",
+    "sales": true,
+    "ingredients": "ing1 . ing2 . ing3",
+    "portion": 10,
+    "tumb_img": "3_tumb.png"
+  },
+  {
+    "name": "update test12",
+    "price": "2000",
+    "stock": "10",
+    "discount": "10",
+    "image": "/test/food.png",
+    "_id": "23",
+    "sales": true,
+    "ingredients": "ing1 . ing2 . ing3",
+    "portion": 10,
+    "tumb_img": "3_tumb.png"
+  }
+]
