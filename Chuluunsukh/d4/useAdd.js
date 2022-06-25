@@ -1,0 +1,17 @@
+const add = require("./add");
+
+const a = Number(process.argv[2]);
+const b = Number(process.argv[3]);
+
+console.log(a);
+console.log(b);
+
+console.log(add(a, b));
+
+// OS Module
+
+const os = require("os");
+
+os.type();
+
+os.arch();

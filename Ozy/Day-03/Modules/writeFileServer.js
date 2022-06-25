@@ -3,7 +3,7 @@ const fs = require("fs");
 const change = {
   name: "test",
   gender: "female",
-  interest: "nobody",
+  interest: "nothing",
 };
 
 fs.writeFile("./data/test.json", JSON.stringify(change), (err) => {

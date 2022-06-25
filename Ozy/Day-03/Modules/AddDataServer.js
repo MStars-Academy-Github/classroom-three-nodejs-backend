@@ -22,7 +22,7 @@ http
               arr.push(newData);
               fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
                 if (err) {
-                  console.log(err);
+                  console.error(err);
                 } else {
                   console.log("success");
                 }
