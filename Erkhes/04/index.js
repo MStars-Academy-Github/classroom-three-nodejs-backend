@@ -3,6 +3,7 @@ const http = require("http");
 const serveJson = require("./jsonModule");
 const querystring = require("querystring");
 const url = require("url");
+const serveFile = require("./serveFile");
 
 http
   .createServer((request, response) => {
@@ -28,8 +29,10 @@ http
       const parseUrl = url.parse(request.url, true);
       console.log(parseUrl);
       response.end("categories");
+    } else if (request.url.match(/^\/public/)) {
+      return serveFile(request, response);
     } else {
       response.end("Not Found");
     }
   })
-  .listen(3000);
+  .listen(3001);
