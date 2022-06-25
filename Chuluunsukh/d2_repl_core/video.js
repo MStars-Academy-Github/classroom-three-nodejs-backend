@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 
-const filename = `${__dirname}/video/video.mp4`;
+const videofile = `${__dirname}/video/video.mp4`;
 console.log(filename);
 
 http
