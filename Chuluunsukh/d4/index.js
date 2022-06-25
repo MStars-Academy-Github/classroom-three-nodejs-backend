@@ -2,7 +2,7 @@ const fs = require("fs");
 const http = require("http");
 const querystring = require("querystring");
 const url = require("url");
-
+const servingFile = require("./serveFile");
 const information = `${__dirname}/data/test.json`;
 console.log();
 
@@ -27,6 +27,8 @@ http
       const parsedURL = url.parse(request.url, true);
       console.log(parsedURL);
       response.end("categories");
+    } else if (request.url.match(/^\/public/)) {
+      return servingFile(request, response);
     } else {
       response.end("Not Found");
     }
