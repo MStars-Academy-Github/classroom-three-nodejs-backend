@@ -1,5 +1,6 @@
 var http = require("http");
 const fs = require("fs");
+const AudioServerFile = require("./AudioServer")
 
 const JsonFile = `${__dirname}/data/test.json`;
 const VideoFile = `${__dirname}/data/Penguin.mp4`;
@@ -47,15 +48,7 @@ function ImageServerFile(req, res) {
     })
     .pipe(res);
 }
-// server audio file
-function AudioServerFile(req, res) {
-  res.setHeader("Content-Type", "audio/mpeg");
-  fs.createReadStream(AudioFile)
-    .on("error", () => {
-      console.log("error");
-    })
-    .pipe(res);
-}
+
 // server video file
 function VideoServerFile(req, res) {
   res.setHeader("Content-Type", "video/mp4");

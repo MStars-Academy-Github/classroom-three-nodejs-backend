@@ -22,6 +22,7 @@ http
     } else if (request.url === "/video") {
       return serverVideoFile(request, response);
     } else if (request.url === "/add/food") {
+      // ene bol incomiagar request ywulad POST methodtoi
       console.log("add food");
       if (request.method === "POST") {
         console.log("POST");
