@@ -68,8 +68,6 @@ http
       querystring.parse(request.url.split("?").slice(1).join(""));
       // console.log(querystring.parse(request.url.split("?").slice(1).join("")));
 
-      console.log();
-
       file.readFile(
         "../lesson3-Read-Write/assignment/data/foods.json",
         "utf-8",
@@ -80,23 +78,21 @@ http
           } else {
             const result = JSON.parse(data).filter(
               (id) =>
-                `id=${id._id}` === request.url.split("?").slice(1).join("")
+                `id=${id._id}` !== request.url.split("?").slice(1).join("")
             );
 
-            const dlt = delete [result];
-            // [data].push(dlt);
-            // file.writeFile(
-            //   "../lesson3-Read-Write/assignment/data/foods.json",
-            //   data,
-            //   (err) => {
-            //     if (err) {
-            //       console.error(err);
-            //       return;
-            //     } else {
-            //       console.log(data);
-            //     }
-            //   }
-            // );
+            file.writeFile(
+              "../lesson3-Read-Write/assignment/data/foods.json",
+              JSON.stringify(result),
+              (err) => {
+                if (err) {
+                  console.error(err);
+                  return;
+                } else {
+                  console.log(result);
+                }
+              }
+            );
           }
         }
       );
