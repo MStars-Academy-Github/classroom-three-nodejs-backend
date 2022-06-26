@@ -2,29 +2,6 @@
   {
     "discount": 0,
     "sales": false,
-    "_id": "02",
-    "category_id": "01",
-    "name": "dadadadad"
-  },
-
-  {
-    "discount": 0,
-    "sales": false,
-    "_id": "02",
-    "category_id": "01",
-    "name": "dadadadad"
-  },
-
-  {
-    "discount": 0,
-    "sales": false,
-    "_id": "02",
-    "category_id": "01",
-    "name": "dadadadad"
-  },
-  {
-    "discount": 0,
-    "sales": false,
     "_id": "01",
     "category_id": "01",
     "name": "dadadadad"
