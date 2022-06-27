@@ -1,6 +1,11 @@
 const file = require("fs");
 var http = require("http");
 
+// dynamic path
+
+const querystring = require("querystring");
+const url = require("url");
+
 const jsonfile = `${__dirname}/data/test.json`;
 const audiofile = `${__dirname}/data/song.mp3`;
 const imagesfile = `${__dirname}/data/image.jpeg`;
@@ -54,6 +59,85 @@ http
           );
         });
         response.end("Not Found");
+        request.on("end", () => {
+          console.log("end");
+        });
+      }
+    } else if (request.url.match(/^\/delete/)) {
+      //   path ? or / modul
+      querystring.parse(request.url.split("?").slice(1).join(""));
+      file.readFile(
+        "../lesson3-Read-Write/assignment/data/foods.json",
+        "utf-8",
+        (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          } else {
+            const result = JSON.parse(data).filter(
+              (id) =>
+                `id=${id._id}` !== request.url.split("?").slice(1).join("")
+            );
+
+            file.writeFile(
+              "../lesson3-Read-Write/assignment/data/foods.json",
+              JSON.stringify(result),
+              (err) => {
+                if (err) {
+                  console.error(err);
+                  return;
+                } else {
+                  console.log(result);
+                }
+              }
+            );
+          }
+        }
+      );
+
+      response.end("delete");
+    } else if (request.url.match(/^\/update/)) {
+      const parsedURL = url.parse(request.url, true);
+      console.log(parsedURL.path);
+      if (request.method === "PUT") {
+        console.log("PUT");
+        request.on("data", (chunk) => {
+          // console.log(`data ${chunk}`);
+          file.readFile(
+            "../lesson3-Read-Write/assignment/data/foods.json",
+            "utf-8",
+            (err, data) => {
+              if (err) {
+                console.log(err);
+              } else {
+                let arr = JSON.parse(data);
+                let chunkData = JSON.parse(chunk);
+                const result = arr.map((food) => {
+                  if (`/update/${food._id}` !== parsedURL.path) {
+                    const asd = (arr = chunkData);
+                    return asd;
+                  } else {
+                    return food;
+                  }
+                });
+
+                file.writeFile(
+                  "../lesson3-Read-Write/assignment/data/foods.json",
+                  JSON.stringify(result),
+                  (err) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      console.log("success");
+                      console.log(result);
+                    }
+                  }
+                );
+              }
+            }
+          );
+        });
+        response.end("update");
         request.on("end", () => {
           console.log("end");
         });
