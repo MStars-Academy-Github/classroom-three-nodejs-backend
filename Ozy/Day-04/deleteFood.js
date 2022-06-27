@@ -20,15 +20,19 @@ http
               return;
             } else {
               let arr = JSON.parse(data);
-              arr = arr.map((e) => (e._id !== foodID ? e : {}));
-
-              fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
-                if (err) {
-                  console.error(err);
-                } else {
-                  console.log("success");
+              arr = arr.map((e) => (e._id !== foodID ? e : null));
+              filterdArr = arr.filter((item) => item !== null);
+              fs.writeFile(
+                "./data/foods.json",
+                JSON.stringify(filterdArr),
+                (err) => {
+                  if (err) {
+                    console.error(err);
+                  } else {
+                    console.log("success");
+                  }
                 }
-              });
+              );
             }
           });
         });
