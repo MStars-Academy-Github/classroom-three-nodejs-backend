@@ -66,10 +66,6 @@ http
     } else if (request.url.match(/^\/delete/)) {
       //   path ? or / modul
       querystring.parse(request.url.split("?").slice(1).join(""));
-      // console.log(querystring.parse(request.url.split("?").slice(1).join("")));
-
-      console.log();
-
       file.readFile(
         "../lesson3-Read-Write/assignment/data/foods.json",
         "utf-8",
@@ -80,23 +76,21 @@ http
           } else {
             const result = JSON.parse(data).filter(
               (id) =>
-                `id=${id._id}` === request.url.split("?").slice(1).join("")
+                `id=${id._id}` !== request.url.split("?").slice(1).join("")
             );
 
-            const dlt = delete [result];
-            // [data].push(dlt);
-            // file.writeFile(
-            //   "../lesson3-Read-Write/assignment/data/foods.json",
-            //   data,
-            //   (err) => {
-            //     if (err) {
-            //       console.error(err);
-            //       return;
-            //     } else {
-            //       console.log(data);
-            //     }
-            //   }
-            // );
+            file.writeFile(
+              "../lesson3-Read-Write/assignment/data/foods.json",
+              JSON.stringify(result),
+              (err) => {
+                if (err) {
+                  console.error(err);
+                  return;
+                } else {
+                  console.log(result);
+                }
+              }
+            );
           }
         }
       );
@@ -104,8 +98,50 @@ http
       response.end("delete");
     } else if (request.url.match(/^\/update/)) {
       const parsedURL = url.parse(request.url, true);
-      console.log(parsedURL);
-      response.end("update");
+      console.log(parsedURL.path);
+      if (request.method === "PUT") {
+        console.log("PUT");
+        request.on("data", (chunk) => {
+          // console.log(`data ${chunk}`);
+          file.readFile(
+            "../lesson3-Read-Write/assignment/data/foods.json",
+            "utf-8",
+            (err, data) => {
+              if (err) {
+                console.log(err);
+              } else {
+                let arr = JSON.parse(data);
+                let chunkData = JSON.parse(chunk);
+                const result = arr.map((food) => {
+                  if (`/update/${food._id}` !== parsedURL.path) {
+                    const asd = (arr = chunkData);
+                    return asd;
+                  } else {
+                    return food;
+                  }
+                });
+
+                file.writeFile(
+                  "../lesson3-Read-Write/assignment/data/foods.json",
+                  JSON.stringify(result),
+                  (err) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      console.log("success");
+                      console.log(result);
+                    }
+                  }
+                );
+              }
+            }
+          );
+        });
+        response.end("update");
+        request.on("end", () => {
+          console.log("end");
+        });
+      }
     } else {
       response.end("Not Found");
     }

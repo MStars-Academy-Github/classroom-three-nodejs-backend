@@ -2,38 +2,29 @@
   {
     "discount": 0,
     "sales": false,
-    "_id": "02",
+    "_id": "01",
     "category_id": "01",
-    "name": "dadadadad"
-  },
-
-  {
-    "discount": 0,
-    "sales": false,
-    "_id": "02",
-    "category_id": "01",
-    "name": "dadadadad"
-  },
-
-  {
-    "discount": 0,
-    "sales": false,
-    "_id": "02",
-    "category_id": "01",
-    "name": "dadadadad"
+    "name": "odkoKOKOKOKO"
   },
   {
     "discount": 0,
     "sales": false,
     "_id": "01",
     "category_id": "01",
+    "name": "odkoKOKOKOKO"
+  },
+  {
+    "discount": 0,
+    "sales": false,
+    "_id": "02",
+    "category_id": "02",
     "name": "dadadadad"
   },
   {
     "discount": 0,
     "sales": false,
-    "_id": "01",
-    "category_id": "01",
+    "_id": "02",
+    "category_id": "02",
     "name": "dadadadad"
   }
 ]
