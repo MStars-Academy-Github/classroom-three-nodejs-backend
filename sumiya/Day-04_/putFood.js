@@ -7,10 +7,11 @@ http
     console.log(`Request Method is : ${request.method}`);
 
     if (request.url.match(/^\/update/)) {
-      console.log("Update food");
+      console.log("add food");
+      console.log("1", request.url.slice(8));
       let foodID = request.url.slice(8);
       if (request.method === "PUT") {
-        console.log("it is update food PUT method");
+        console.log("it is add food Post method");
         request.on("data", (chunk) => {
           console.log(`Data chunk avaible : ${chunk}`);
           fs.readFile("./data/foods.json", "utf-8", (err, data) => {
@@ -19,10 +20,12 @@ http
               return;
             } else {
               let arr = JSON.parse(data);
+              console.log(data);
               let newData = JSON.parse(chunk);
-              arr = arr.map((e) => {
-                return e._id !== foodID ? e : newData;
-              });
+              arr = arr.map((e) =>
+                e._id === foodID ? arr.splice(e, 1) : newData
+              );
+              arr.push(newData);
               fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
                 if (err) {
                   console.error(err);
@@ -38,6 +41,6 @@ http
         });
       }
     }
-    response.end("<h1>Updated</h1>");
+    response.end("<h1>hello</h1>");
   })
   .listen(3000);

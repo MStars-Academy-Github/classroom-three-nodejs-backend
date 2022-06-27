@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": [
+    {
+      "discount": 0,
+      "sales": false,
+      "_id": "8765432",
+      "category_id": "8765432345",
+      "name": "Чикен бургер",
+      "price": 6000,
+      "portion": 1,
+      "stock": 10,
+      "image": "/data/camrin.png"
+    }
+  ]
+}
