@@ -17,13 +17,12 @@ http
             console.error(err);
             return;
           } else {
-            arr.map((food) => {
-              if (food._id == newData._id) {
-                arr.splice(food, 1);
-              } else {
-                newFood = true;
+            for (let i = 0; i < arr.length; i++) {
+              if (arr[i]._id === newData._id) {
+                arr.splice(i, 1);
+                i--;
               }
-            });
+            }
           }
 
           arr.push(newData);
