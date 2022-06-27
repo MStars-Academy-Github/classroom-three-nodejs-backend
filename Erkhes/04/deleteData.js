@@ -1,0 +1,34 @@
+const http = require("http");
+const fs = require("fs");
+const url = require("url");
+const foodFile = `/Users/mstars_lab3_02/Desktop/classroom-three-nodejs-backend/Erkhes/03/data/food.json`;
+http
+  .createServer((request, response) => {
+    if (request.url.match(/^\/delete/) && request.method === "DELETE") {
+      const parseUrl = url.parse(request.url, true);
+      console.log(parseUrl.query.id);
+      fs.readFile("./data/foods.json", "utf-8", (err, data) => {
+        const arr = JSON.parse(data);
+        if (err) {
+          console.error(err);
+          return;
+        } else {
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i]._id === parseUrl.query.id) {
+              arr.splice(i, 1);
+              i--;
+            }
+          }
+        }
+        fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log("success !!!");
+          }
+        });
+      });
+    }
+    response.end("delete");
+  })
+  .listen(3000);
