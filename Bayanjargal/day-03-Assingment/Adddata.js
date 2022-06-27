@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+const url = require("url");
 const http = require("http");
 const { json } = require("node:stream/consumers");
 
@@ -7,6 +7,8 @@ http
   .createServer((request, response) => {
     console.log(`Request URL is : ${request.url}`);
     console.log(`Request URL is : ${request.method}`);
+    const parseURL = url.parse(request.url, true);
+    const foodID = parseURL.search.split("?")[1];
     if (request.url == "/add/food") {
       console.log("add food");
       if (request.method === "POST") {
@@ -37,23 +39,40 @@ http
           console.log("end of data");
         });
       }
-    } else if (request.method == "PUT") {
+    } else if (request.method === "PUT") {
       request.on("data", (chunk) => {
         fs.readFile("./data/foods.json", "utf-8", (err, data) => {
           if (err) {
             console.log(err);
           } else {
-            const id = request.url;
-            const foodId = id.slice(8);
             const arr = JSON.parse(data);
             const chunkObj = JSON.parse(chunk);
-            const a = arr.map((arr) => (arr._id !== foodId ? chunkObj : ""));
+            const a = arr.map((arr) => (arr._id == foodID ? chunkObj : ""));
             console.log(a);
             arr.push(a);
             fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
               if (err) {
                 console.log(err);
               } else console.log(arr);
+            });
+          }
+        });
+      });
+    } else if (request.method === "DELETE") {
+      request.on("data", (chunk) => {
+        fs.readFile("./data/foods.json", "utf-8", (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            const arr = JSON.parse(data);
+            // const chunkObj = JSON.parse(chunk);
+            const a = arr.filter((food) => food._id != foodID);
+            console.log(a);
+            // arr.push(a);
+            fs.writeFile("./data/foods.json", JSON.stringify(a), (err) => {
+              if (err) {
+                console.log(err);
+              } else console.log("success");
             });
           }
         });
