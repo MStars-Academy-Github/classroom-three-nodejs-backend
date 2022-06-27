@@ -16,10 +16,18 @@ http
             } else {
               let chunkData = JSON.parse(chunk);
               let dataJson = JSON.parse(data);
-              dataJson.data.push(chunkData);
-              console.log(dataJson);
+
+              dataJson.data
+                ? dataJson.data.push(chunkData)
+                : dataJson.data.map((cate) => {
+                    if (cate.id !== chunkData.id) {
+                      return chunkData;
+                    }
+                  });
+
               // dataJson.data.push(chunkData);
 
+              console.log(dataJson);
               fs.writeFile(
                 "./data/category.json",
                 JSON.stringify(dataJson),
@@ -28,7 +36,7 @@ http
                     console.log(err);
                   } else {
                     console.log("success");
-                    console.log(dataJson);
+                    // console.log(dataJson);
                   }
                 }
               );
