@@ -1,12 +1,12 @@
-const addCategories = require("./postCat");
+// const addCategories = require("./postCat");
 const getCategories = require("./getCat");
 const http = require("http");
 const fs = require("fs");
 
 http
   .createServer((req, res) => {
-    if (req.method === "POST") {
-      return addCategories(req, res);
+    if (req.url === "/api/categories") {
+      // return addCategories(req, res);
     } else if (req.url === "/categories") {
       return getCategories(req, res);
     } else {
