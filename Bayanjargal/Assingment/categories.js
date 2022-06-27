@@ -7,15 +7,16 @@ http
     console.log(`Request URL is : ${request.url}`);
     console.log(`Request URL is : ${request.method}`);
     const parseURL = url.parse(request.url, true);
-    const foodID = parseURL.search.split("?")[1];
-    console.log(foodID);
-    if (request.url == "/add/food") {
+    console.log(parseURL);
+    const catID = parseURL.path.split("id=")[1];
+    console.log(catID);
+    if (request.url == "/add/categories") {
       console.log("add food");
       if (request.method === "POST") {
         console.log("it is add food Post method");
         console.log(request.body);
         request.on("data", (chunk) => {
-          fs.readFile("./data/foods.json", "utf-8", (err, data) => {
+          fs.readFile("./data/cate.json", "utf-8", (err, data) => {
             if (err) {
               console.error(err);
             } else {
@@ -23,11 +24,11 @@ http
               const chunkObj = JSON.parse(chunk);
               arr.push(chunkObj);
               console.log(data);
-              fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
+              fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
                 if (err) {
                   console.log(err);
                 } else {
-                  console(arr);
+                  console.log(arr);
                 }
               });
             }
@@ -41,16 +42,14 @@ http
       }
     } else if (request.method === "PUT") {
       request.on("data", (chunk) => {
-        fs.readFile("./data/foods.json", "utf-8", (err, data) => {
+        fs.readFile("./data/cate.json", "utf-8", (err, data) => {
           if (err) {
             console.log(err);
           } else {
-            const arr = JSON.parse(data);
-            const chunkObj = JSON.parse(chunk);
-            const a = arr.map((arr) => (arr._id == foodID ? "" : chunkObj));
-            console.log(a);
-            arr.push(a);
-            fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
+            let arr = JSON.parse(data);
+            let chunkObj = JSON.parse(chunk);
+            arr = arr.map((cate) => (cate._id == catID ? chunkObj : cate));
+            fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
               if (err) {
                 console.log(err);
               } else console.log(arr);
@@ -60,21 +59,28 @@ http
       });
     } else if (request.method === "DELETE") {
       request.on("data", () => {
-        fs.readFile("./data/foods.json", "utf-8", (err, data) => {
+        fs.readFile("./data/cate.json", "utf-8", (err, data) => {
           if (err) {
             console.log(err);
           } else {
             let arr = JSON.parse(data);
-            arr = arr.filter((food) => food._id !== foodID);
-            fs.writeFile("./data/foods.json", JSON.stringify(arr), (err) => {
-              if (err) {
-                console.log(err);
-              } else console.log("success");
-            });
+            console.log(catID);
+            let remarr = arr.filter((cate) => cate._id !== catID);
+            if (remarr) {
+              fs.writeFile(
+                "./data/cate.json",
+                JSON.stringify(remarr),
+                (err) => {
+                  if (err) {
+                    console.log(err);
+                  } else console.log("success");
+                }
+              );
+            } else console.log("ID not defined");
           }
         });
       });
     }
     response.end("<h1>Helloo</h1>");
   })
-  .listen(3004);
+  .listen(3005);
