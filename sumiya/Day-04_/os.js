@@ -1,10 +1,10 @@
 const os = require("os");
 
 const local = {
-  "Home D": os.homedir(),
-  "ope sys": os.type(),
+  "Home Directory": os.homedir(),
+  "operation system": os.type(),
   "Last reboot": os.uptime(),
-  arch: os.arch(),
+  archtehture: os.arch(),
 };
 
 console.log(local);
