@@ -23,5 +23,6 @@
   "homepage": "https://github.com/MStars-Academy-Github/classroom-three-nodejs-backend#readme",
   "dependencies": {
     "react": "^18.2.0"
-  }
+  },
+  "devDependencies": {}
 }
