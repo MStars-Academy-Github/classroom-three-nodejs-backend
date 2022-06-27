@@ -10,29 +10,28 @@ http
       if (request.method === "POST") {
         console.log("POST");
         request.on("data", (chunk) => {
-          // console.log(`data ${chunk}`);
           fs.readFile("./data/category.json", "utf-8", (err, data) => {
             if (err) {
               console.log(err);
             } else {
               let chunkData = JSON.parse(chunk);
               let dataJson = JSON.parse(data);
-              let data1 = dataJson.data.push(chunkData);
-              console.log(data1);
+              dataJson.data.push(chunkData);
+              console.log(dataJson);
               // dataJson.data.push(chunkData);
 
-              // fs.writeFile(
-              //   "./data/category.json",
-              //   JSON.stringify(arr),
-              //   (err) => {
-              //     if (err) {
-              //       console.log(err);
-              //     } else {
-              //       console.log("success");
-              //       console.log(arr);
-              //     }
-              //   }
-              // );
+              fs.writeFile(
+                "./data/category.json",
+                JSON.stringify(dataJson),
+                (err) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log("success");
+                    console.log(dataJson);
+                  }
+                }
+              );
             }
           });
         });
