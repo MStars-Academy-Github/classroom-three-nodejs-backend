@@ -14,7 +14,6 @@ http
           console.log(`Data chunk available: ${chunk}`);
         });
         request.on("end", () => {
-          // end of data
           console.log("end of data");
         });
       }
