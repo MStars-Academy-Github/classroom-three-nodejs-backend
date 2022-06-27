@@ -25,20 +25,21 @@ http
             } else {
               let arr = JSON.parse(data);
 
-              let newData = JSON.parse(chunk);
-              arr.data.push(newData);
-
-              fs.writeFile(
-                "./data/categories.json",
-                JSON.stringify(arr),
-                (err) => {
-                  if (err) {
-                    console.error(err);
-                  } else {
-                    console.log("success");
+              if (arr.data.map((e) => e._id !== chunk._id)) {
+                let newData = JSON.parse(chunk);
+                arr.data.push(newData);
+                fs.writeFile(
+                  "./data/categories.json",
+                  JSON.stringify(arr),
+                  (err) => {
+                    if (err) {
+                      console.error(err);
+                    } else {
+                      console.log("success");
+                    }
                   }
-                }
-              );
+                );
+              }
             }
           });
         });
