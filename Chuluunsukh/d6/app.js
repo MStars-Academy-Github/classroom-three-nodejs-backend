@@ -1,5 +1,5 @@
 const https = require("https");
-function printFilms(e) {
+function printFilms(e, callback) {
   https.get("https://ghibliapi.herokuapp.com/films", (res) => {
     let data = [];
 
@@ -9,6 +9,7 @@ function printFilms(e) {
     res.on("end", () => {
       const convertedData = JSON.parse(Buffer.concat(data).toString());
       console.log(e);
+      callback();
     });
   });
 }
