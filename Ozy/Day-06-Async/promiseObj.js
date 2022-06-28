@@ -1,18 +1,19 @@
 const https = require("https");
 function printFilms(e, callback) {
-  https
-    .get("https://ghibliapi.herokuapp.com/films", (res) => {
+  return new Promise((resolve, reject) => {
+    https.get("https://ghibliapi.herokuapp.com/films", (res) => {
+      res.on("error", () => {
+        return reject();
+      });
       let data = [];
       res.on("data", (chunk) => {
         data.push(chunk);
       });
       res.on("end", () => {
         console.log(e);
-        callback();
+        return resolve();
       });
-    })
-    .on("error", (err) => {
-      console.error("Error %s"), err.message;
     });
+  });
 }
 module.exports = printFilms;
