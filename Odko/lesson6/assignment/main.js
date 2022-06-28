@@ -7,9 +7,11 @@ const input1 = process.argv[3];
 // const ccc = Celsius(input);
 // console.log(ccc);
 // console.log(Fahrenheit(ccc));
-
-if (input1.match(`/f`)) {
-  console.log(Celsius(input));
+let C = Celsius(input);
+if (input1 === "f") {
+  console.log(C);
 } else {
-  console.log(Fahrenheit(input));
+  console.log(Fahrenheit(C));
 }
+
+// running 'node main.js 101,5 f'

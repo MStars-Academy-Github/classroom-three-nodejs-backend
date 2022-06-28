@@ -16,8 +16,8 @@ http
             } else {
               let chunkData = JSON.parse(chunk);
               let dataJson = JSON.parse(data);
-              let index = dataJson.indexOf(chunkData);
-              index ? "boldon" : dataJson.push(chunkData);
+              dataJson.push(chunkData);
+
               fs.writeFile(
                 "./data/category.json",
                 JSON.stringify(dataJson),
@@ -38,9 +38,27 @@ http
           console.log("end");
         });
       }
-    } else if (request.url === "/animal") {
-      return serverAnimal(request, response);
-    } else {
+    }
+    // else if (request.url === "/add/category") {
+    //   if (request.method === "GET") {
+    //     http
+    //       .get("./data/category.json", (data) => {
+    //         response.on("data", (chunk) => {
+    //           // data.push(chunk);
+    //         });
+    //         response.on("end", () => {
+    //           console.log(JSON.parse(data));
+    //         });
+    //       })
+    //       .on("error", (err) => {
+    //         console.error("error %s", err.message);
+    //       });
+    //     request.on("end", () => {
+    //       console.log("end");
+    //     });
+    //   }
+    // }
+    else {
       response.end("server");
     }
     response.end();

@@ -7,8 +7,8 @@ function Celsius(input) {
 }
 
 // (C * 1.8) + 32 = F
-function Fahrenheit(c) {
-  return c * 1.8 + 32;
+function Fahrenheit(C) {
+  return C * 1.8 + 32;
 }
 
 module.exports = Fahrenheit;
