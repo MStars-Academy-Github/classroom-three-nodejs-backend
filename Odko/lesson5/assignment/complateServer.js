@@ -16,18 +16,8 @@ http
             } else {
               let chunkData = JSON.parse(chunk);
               let dataJson = JSON.parse(data);
-
-              dataJson.data
-                ? dataJson.data.push(chunkData)
-                : dataJson.data.map((cate) => {
-                    if (cate.id !== chunkData.id) {
-                      return chunkData;
-                    }
-                  });
-
-              // dataJson.data.push(chunkData);
-
-              console.log(dataJson);
+              let index = dataJson.indexOf(chunkData);
+              index ? "boldon" : dataJson.push(chunkData);
               fs.writeFile(
                 "./data/category.json",
                 JSON.stringify(dataJson),
