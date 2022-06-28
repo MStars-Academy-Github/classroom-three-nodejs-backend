@@ -5,10 +5,7 @@ function printFilms(e, callback) {
       res.on("error", () => {
         return reject();
       });
-      let data = [];
-      res.on("data", (chunk) => {
-        data.push(chunk);
-      });
+      res.on("data", (chunk) => {});
       res.on("end", () => {
         console.log(e);
         return resolve();
