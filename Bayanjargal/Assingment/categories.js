@@ -22,19 +22,20 @@ http
             } else {
               const arr = JSON.parse(data);
               const chunkObj = JSON.parse(chunk);
-              const catIds = arr.map((cat) => {
+              let catIds = arr.map((cat) => {
                 return cat._id;
               });
-              console.log(catIds);
-              catIds.map((id) => id !== chunkObj._id);
-              arr.push(chunkObj);
-              fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log(arr);
-                }
-              });
+              if (catIds.filter((category) => category !== chunkObj._id)) {
+                arr.push(chunkObj);
+                fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log(arr);
+                  }
+                });
+              }
+
               console.log(data);
             }
           });
