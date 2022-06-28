@@ -9,7 +9,7 @@ http
     const parseURL = url.parse(request.url, true);
     console.log(parseURL);
     const catID = parseURL.path.split("id=")[1];
-    console.log(catID);
+    const catIdUpdate = parseURL.path.split("/update/")[1];
     if (request.url == "/add/categories") {
       console.log("add food");
       if (request.method === "POST") {
@@ -22,15 +22,21 @@ http
             } else {
               const arr = JSON.parse(data);
               const chunkObj = JSON.parse(chunk);
-              arr.push(chunkObj);
-              console.log(data);
-              fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log(arr);
-                }
+              let catIds = arr.map((cat) => {
+                return cat._id;
               });
+              if (catIds.filter((category) => category !== chunkObj._id)) {
+                arr.push(chunkObj);
+                fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log(arr);
+                  }
+                });
+              }
+
+              console.log(data);
             }
           });
 
@@ -48,7 +54,10 @@ http
           } else {
             let arr = JSON.parse(data);
             let chunkObj = JSON.parse(chunk);
-            arr = arr.map((cate) => (cate._id == catID ? chunkObj : cate));
+            console.log(catIdUpdate);
+            arr = arr.map((cate) =>
+              cate._id == catIdUpdate ? chunkObj : cate
+            );
             fs.writeFile("./data/cate.json", JSON.stringify(arr), (err) => {
               if (err) {
                 console.log(err);
@@ -76,7 +85,7 @@ http
                   } else console.log("success");
                 }
               );
-            } else console.log("ID not defined");
+            } else console.log("Categoreis ID is not found");
           }
         });
       });
