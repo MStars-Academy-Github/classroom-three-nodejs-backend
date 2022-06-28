@@ -113,7 +113,7 @@ http
                 let arr = JSON.parse(data);
                 let chunkData = JSON.parse(chunk);
                 const result = arr.map((food) => {
-                  if (`/update/${food._id}` !== parsedURL.path) {
+                  if (`/update/${food._id}` === parsedURL.path) {
                     const asd = (arr = chunkData);
                     return asd;
                   } else {
