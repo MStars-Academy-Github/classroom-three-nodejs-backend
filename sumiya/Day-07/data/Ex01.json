@@ -1,0 +1,53 @@
+{
+    "Platform": "win32",
+    "Architecture": "x64",
+    "Release": "10.0.19044",
+    "Total Memory": 17034338304,
+    "Total Cpus": [
+        {
+            "model": "Intel(R) Core(TM) i3-9100 CPU @ 3.60GHz",
+            "speed": 3600,
+            "times": {
+                "user": 66750328,
+                "nice": 0,
+                "sys": 23229171,
+                "idle": 64050171,
+                "irq": 996500
+            }
+        },
+        {
+            "model": "Intel(R) Core(TM) i3-9100 CPU @ 3.60GHz",
+            "speed": 3600,
+            "times": {
+                "user": 20410187,
+                "nice": 0,
+                "sys": 10440031,
+                "idle": 123179328,
+                "irq": 813671
+            }
+        },
+        {
+            "model": "Intel(R) Core(TM) i3-9100 CPU @ 3.60GHz",
+            "speed": 3600,
+            "times": {
+                "user": 18736671,
+                "nice": 0,
+                "sys": 8689359,
+                "idle": 126603515,
+                "irq": 608234
+            }
+        },
+        {
+            "model": "Intel(R) Core(TM) i3-9100 CPU @ 3.60GHz",
+            "speed": 3600,
+            "times": {
+                "user": 17883187,
+                "nice": 0,
+                "sys": 7346109,
+                "idle": 128800281,
+                "irq": 401375
+            }
+        }
+    ],
+    "Free Memory": 7678476288
+}
