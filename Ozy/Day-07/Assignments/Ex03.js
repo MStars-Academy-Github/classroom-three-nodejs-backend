@@ -37,7 +37,7 @@ http
         console.error(err);
         return;
       } else {
-        let data1 = JSON.parse(data);
+        let films = JSON.parse(data);
         response.write(
           ` <table>
             <tr>
@@ -48,12 +48,10 @@ http
             
             <tr>
             <tr>
-            <th >${data1.map((e, i) => i)}</th>
-            
-            
-
-            <th > ${data1.map((e) => e.title)}</th>
-            <th > ${data1.map((e) => e.image)}</th>
+            <th >${films.map((e, i) => i + 1)}</th>
+          
+            <th > ${films.map((e) => e.title)}</th>
+            <th > ${films.map((e) => e.image)}</th>
              
             </tr>
           </table>`
