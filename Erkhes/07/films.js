@@ -1,12 +1,17 @@
-function serveFilm(req, res){
-    const films = JSON.parse(data)
-    films.shift()
-    res.write(
-    films.map(film=>{
-        return(
-            `<tr>${film.title}</tr>`
-            )
+const jsonFile = `C:/Users/user/Desktop/classroom-three-nodejs-backend/Erkhes/07/data/film.json`;
+const fs = require("fs");
+function serveFilms(req, res) {
+//   res.setHeader("Content-type", "text/html");
+  const content = JSON.parse(res?.map((film)=>{
+      return `<div>${film.title}</div>`
+  }))
+  content != undefined ?  fs.createReadStream(jsonFile)
+    .on("error", () => {
+      console.error("err");
     })
-    )
+    .pipe(res?.map((film)=>{
+        return `<div>${film.title}</div>`
+    })) : ''
 }
-module.exports = serveFilm
+serveFilms()
+module.exports = serveAnimalJson;

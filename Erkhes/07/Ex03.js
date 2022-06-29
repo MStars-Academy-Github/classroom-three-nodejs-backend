@@ -1,10 +1,9 @@
-const https = require('https')
 const http = require('http')
-const fs = require('fs')
-const serveFilm = require('./films')
+const fs = require('fs');
+const { table } = require('console');
 http.createServer((request, response) => {
     // response.writeHead(200);
-    // response.setHeader("Content-type", "text/html");
+    response.setHeader("Content-type", "text/html");
 
     fs.readFile('./data/film.json', 'utf-8', (err, data) => {
         if (err) {
@@ -12,14 +11,44 @@ http.createServer((request, response) => {
         } else {
             const films = JSON.parse(data)
             films.shift()
-            console.log(films[0].title);
-            
-            fs.createReadStream(films)
-                .on("error", () => {
-                    console.error("err");
-                })
-                .pipe(`hello world`);
+            // response.write(
+            //    ` <table>
+            //         ${films.map((film, i) => {
+            //             return (<td>
+
+            //                 <tr>{i + 1}</tr>
+            //                 <tr>{film.title}</tr>
+            //                 <tr><img src={film.image} alt="" /></tr>
+            //             </td>
+
+            //             )
+            //         }
+            //         )}
+            //     </table>`
+
+            // )
+
         }
+        fs.createReadStream(data)
+             .on("error", () => {
+                 console.error("err");
+             })
+             .pipe(
+         //          ` <table>
+         //     ${films.map((film, i) => {
+         //         return (<td>
+
+         //             <tr>{i + 1}</tr>
+         //             <tr>{film.title}</tr>
+         //             <tr><img src={film.image} alt="" /></tr>
+         //         </td>
+
+         //         )
+         //     }
+         //     )}
+         // </table>`
+         data
+         );
     })
 
 
