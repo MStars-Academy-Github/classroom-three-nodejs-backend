@@ -1,8 +1,8 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
-const eventEmitter = require("events");
-const chatEmitter = new eventEmitter();
+const EventEmitter = require("events");
+const chatEmitter = new EventEmitter();
 
 http
   .createServer((request, response) => {
@@ -18,7 +18,7 @@ http
       response.end("Not Found");
     }
   })
-  .listen(3000);
+  .listen(3004);
 
 function respondChat(req, res) {
   const reqParam = url.parse(req.url, true);
@@ -27,10 +27,9 @@ function respondChat(req, res) {
   chatEmitter.emit("message", chatMessage);
   res.end();
 }
-
 function respondSSE(req, res) {
   res.writeHead(200, {
-    "Content-type": "text/event-stream",
+    "Content-Type": "text/event-stream",
     Connection: "keep-alive",
   });
 
@@ -42,11 +41,11 @@ function respondSSE(req, res) {
   });
 }
 
-// this function serves all files inside public folder in dynamic way
+/// this function serves all files inside public folder in dynamic way
 function respondStatic(req, res) {
   const reqParam = req.url.slice(8);
-  const fileName = `${__dirname}/public/${reqParam}`;
-  fs.createReadStream(fileName)
+  const filename = `${__dirname}/public/${reqParam}`;
+  fs.createReadStream(filename)
     .on("error", () => {
       res.end("Not Found");
     })

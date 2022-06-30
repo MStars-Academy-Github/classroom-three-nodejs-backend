@@ -1,52 +1,52 @@
+// back-end heseg
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
-const eventEmitter = require("events");
-const chatEmitter = new eventEmitter();
+const EventEmitter = require("events");
+const chatEmmitter = new EventEmitter();
 
 http
-  .createServer((request, response) => {
+  .createServer(function (request, response) {
     if (request.url === "/") {
-      response.end("<h1>It is root</h1>");
+      response.end("<h1>it is</h1>");
     } else if (request.url.match(/^\/chat/)) {
       return respondChat(request, response);
-    } else if (request.url === "/sse") {
-      return respondSSE(request, response);
     } else if (request.url.match(/^\/static/)) {
       return respondStatic(request, response);
+    } else if (request.url === "/sse") {
+      return respondSSE(request, response);
     } else {
-      response.end("Not Found");
+      response.end("Not found");
     }
   })
   .listen(3000);
+console.log("local host 3000 running");
 
 function respondChat(req, res) {
   const reqParam = url.parse(req.url, true);
   const chatMessage = reqParam.query.message;
-
-  chatEmitter.emit("message", chatMessage);
+  console.log(chatMessage);
+  chatEmmitter.emit("message", chatMessage);
   res.end();
 }
-
 function respondSSE(req, res) {
   res.writeHead(200, {
-    "Content-type": "text/event-stream",
+    "Content-Type": "text/event-stream",
     Connection: "keep-alive",
   });
-
   const onMessage = (msg) => res.write(`data: ${msg}\n\n`);
-  chatEmitter.on("message", onMessage);
+  chatEmmitter.on("message", onMessage);
 
   res.on("close", function () {
-    chatEmitter.off("message", onMessage);
+    chatEmmitter.off("message", onMessage);
   });
 }
 
-// this function serves all files inside public folder in dynamic way
+//   this function serves all files inside public folder in dynamic way
 function respondStatic(req, res) {
   const reqParam = req.url.slice(8);
-  const fileName = `${__dirname}/public/${reqParam}`;
-  fs.createReadStream(fileName)
+  const filename = `${__dirname}/public/${reqParam}`;
+  fs.createReadStream(filename)
     .on("error", () => {
       res.end("Not Found");
     })
