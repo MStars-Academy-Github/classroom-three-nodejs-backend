@@ -1,0 +1,19 @@
+{
+  "id": "790e0028-a31c-4626-a694-86b7a8cada40",
+  "title": "Earwig and the Witch",
+  "original_title": "アーヤと魔女",
+  "original_title_romanised": "Āya to Majo",
+  "image": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/sJhFtY3eHuvvACaPpxpzdCLQqpQ.jpg",
+  "movie_banner": "https://www.themoviedb.org/t/p/original/qMxpGzmmnY1jLd4p7EhhoW43wWF.jpg",
+  "description": "An orphan girl, Earwig, is adopted by a witch and comes home to a spooky house filled with mystery and magic.",
+  "director": "Gorō Miyazaki",
+  "producer": "Toshio Suzuki",
+  "release_date": "2021",
+  "running_time": "82",
+  "rt_score": "30",
+  "people": ["https://ghibliapi.herokuapp.com/people/"],
+  "species": ["https://ghibliapi.herokuapp.com/species/"],
+  "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+  "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
+  "url": "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+}

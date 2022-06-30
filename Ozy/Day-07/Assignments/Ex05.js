@@ -4,23 +4,26 @@ const https = require("https");
 
 function getImage(url) {
   https
-    .get(url, (res) => {
-      res.on("data", (chunk) => {
-        fs.writeFile("./data/image.json", chunk, (err) => {
-          if (err) {
-            console.error(err);
-          } else {
-            console.log("success");
-          }
+    .get(
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40",
+      (res) => {
+        res.on("data", (chunk) => {
+          fs.writeFile("./data/image.json", chunk, (err) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log("success");
+            }
+          });
         });
-      });
-      res.on("end", () => {});
-    })
+        res.on("end", () => {});
+      }
+    )
     .on("error", (err) => {
       console.error(err);
     });
 }
-
+getImage();
 http
   .createServer(function (request, response) {
     if (request.url === "/ghibli=people") {
