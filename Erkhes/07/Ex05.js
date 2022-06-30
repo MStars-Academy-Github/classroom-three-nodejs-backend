@@ -89,18 +89,27 @@ https
     console.error(err);
   });
 http
-  .createServer(async (request, response) => {
+  .createServer((request, response) => {
+    let linkData;
     const tableStart = "<table>";
     const tableEnd = "</table>";
     let endResult = "";
     let result = "";
     if (request.url === "/ghibli=people") {
-      fs.readFile("./data/people.json", "utf-8", (err, data) => {
+      fs.readFile("./data/people.json", "utf-8", async (err, data) => {
         if (err) {
           console.log("error");
         } else {
           const people = JSON.parse(data);
-          people.map((person, i) => {
+          getLink();
+          fs.readFile("./data/link.json", "utf-8", (err, data) => {
+            if (err) {
+              console.log("error on link read");
+            } else {
+              linkData = JSON.parse(data);
+            }
+          });
+          await people.map((person, i) => {
             result += `<tr>
                 <td>${person.name}</td>
                 <td>
