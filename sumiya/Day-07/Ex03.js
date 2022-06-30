@@ -2,10 +2,10 @@ const https = require("https");
 const fs = require("fs");
 const http = require("http");
 const serveFilms = require("./serve");
-
+const filmsUrl = "https://ghibliapi.herokuapp.com/films";
 http
   .createServer((request, response) => {
-    serveFilms();
+    serveFilms(filmsUrl);
     fs.readFile("./data/Ex03.json", "utf-8", (err, data) => {
       response.writeHead(200, { "Content-Type": "text/html" });
       if (err) {
@@ -14,37 +14,24 @@ http
         console.log(data);
         let filmsJson = JSON.parse(data);
         console.log(filmsJson);
-        fs.writeFile(
-          "mynewfile3.html",
-          `<!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="UTF-8" />
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Document</title>
-          </head>
-          <body><table>
-        <tr>
-          <td scope="col">No</td>
-          <td scope="col">Garchig</td>
-          <td scope="col">zurag</td>
-        </tr>
-        <tr>
-        <td > ${filmsJson.map((e, i) => i + 1)}\n</td>
-        <td > ${filmsJson.map((e) => e.title)}\n</td>
-        <td > ${filmsJson.map((e) => e.image)}\n</td>
-        </tr>
-      </table></body>
-      </html>`,
+        response.write(
+          `<table>
+        ${filmsJson.map(
+          (e, i) =>
+            `<tr style={border:1px solid black}>
+            <td>${i + 1}</td>
+            <td>${e.title}</td>
+            <td><img src=${e.image} alt="Girl in a jacket"/></td>
+          </tr>`
+        )}
+      </table>`,
           (err) => {
             if (err) throw err;
             console.log("Saved!");
           }
         );
       }
+      response.end();
     });
-    response.write(`<a href=${"./mynewfile3.html"}>dar</a>`);
-    response.end(console.log("error"));
   })
   .listen(3002);

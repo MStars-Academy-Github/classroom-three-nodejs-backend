@@ -1,7 +1,6 @@
 const https = require("https");
 const http = require("http");
 const fs = require("fs");
-const objectToTable = require("object-to-table");
 
 let convertedData;
 
@@ -46,14 +45,14 @@ http
               <th scope="col">Images</th>
             </tr>
             
-            <tr>
-            <tr>
-            <th >${films.map((e, i) => i + 1)}</th>
-          
-            <th > ${films.map((e) => e.title)}</th>
-            <th > ${films.map((e) => e.image)}</th>
-             
-            </tr>
+           
+            ${films.map(
+              (e, i) =>
+                ` <tr><td>${i + 1}</td><td>${e.title}</td><td><img src=${
+                  e.image
+                }></td> </tr>`
+            )}
+           
           </table>`
         );
         response.end();
