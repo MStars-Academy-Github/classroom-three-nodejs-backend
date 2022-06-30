@@ -1,21 +1,12 @@
 const http = require("http");
 const fs = require("fs");
+const filmsServer = require("./filmsServer");
 
 http
   .createServer((req, res) => {
     if (req.url === "/data/films") {
       if (req.method === "GET") {
-        fs.readFile(
-          "https://ghibliapi.herokuapp.com/films",
-          "utf-8",
-          (err, data) => {
-            if (err) {
-              console.error(err);
-            } else {
-              console.log(data);
-            }
-          }
-        );
+        filmsServer();
       }
     }
     res.end("server");
