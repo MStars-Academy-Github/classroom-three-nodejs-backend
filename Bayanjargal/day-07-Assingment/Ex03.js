@@ -1,46 +1,35 @@
 const http = require("http");
 const films = require("./getFilms");
+const fs = require("fs");
 const https = require("https");
 
 http
   .createServer((req, res) => {
     if (req.url == "/") {
-      https
-        .get("https://ghibliapi.herokuapp.com/films", (res) => {
-          console.log(res.statusCode);
-          let data = [];
-          res.on("data", (chunk) => {
-            data.push(chunk);
-          });
-          res.on("end", () => {
-            const convertdata = JSON.parse(Buffer.concat(data).toString());
-            let datanameandimage = [];
-            let title = convertdata.map((a) => {
-              return a.title;
-            });
-            let imageData = convertdata.map((i) => {
-              return i.image;
-            });
-            console.log(title);
-            console.log(imageData);
-
-            // fs.writeFile(
-            //   "./data/film.json",
-            //   JSON.stringify(convertdata),
-            //   (err) => {
-            //     if (err) {
-            //       console.log(err);
-            //     } else {
-            //       console.log("success");
-            //     }
-            //   }
-            // );
-          });
-        })
-        .on("error", (err) => {
-          console.error("Error %s", err.message);
-        });
-      res.end(`<table><tr><th>Title</th><th>Image</th></tr></table>`);
+      fs.readFile("./data/film.json", "utf-8", (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data);
+          let imageAndTitle = JSON.parse(data);
+          res.end(`<table>
+          <tr>
+          <td>Title</td>
+          <td>Image</td>
+          </tr>
+         
+        ${imageAndTitle.map((name, i) => {
+          return `<tr><td>${i + 1}</td><td>${
+            name.title
+          }</td><td><img width="200px" src=${
+            name.image
+          } alt="title"></td></tr>`;
+        })}
+        
+        
+          </table>`);
+        }
+      });
     }
   })
   .listen(3002);
