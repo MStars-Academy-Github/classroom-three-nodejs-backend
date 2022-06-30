@@ -1,6 +1,29 @@
 const http = require("http");
 const fs = require("fs");
+const https = require("https");
 
+function getImage(url) {
+  https
+    .get(
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40",
+      (res) => {
+        res.on("data", (chunk) => {
+          fs.writeFile("./data/image.json", chunk, (err) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log("success");
+            }
+          });
+        });
+        res.on("end", () => {});
+      }
+    )
+    .on("error", (err) => {
+      console.error(err);
+    });
+}
+getImage();
 http
   .createServer(function (request, response) {
     if (request.url === "/ghibli=people") {
@@ -10,21 +33,21 @@ http
           return;
         } else {
           let people = JSON.parse(data);
-          console.log(people[0].films);
+
           response.write(
             ` <table>
                 <tr>
                   <th scope="col">Numbers</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Images</th>
-                  <th scope="col">Eye color</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Age</th>
                 </tr>
               
                 ${people.map(
                   (e, i) =>
                     ` <tr><td>${i + 1}</td><td>${e.name}</td><td>${
                       e.gender
-                    }</td><td>${e.eye_color}</td> </tr>`
+                    }</td><td>${e.age}</td> <td>${getImage(e.films)}</td> </tr>`
                 )}
                
               </table>`
@@ -35,3 +58,4 @@ http
     }
   })
   .listen(3000);
+console.log("Running");

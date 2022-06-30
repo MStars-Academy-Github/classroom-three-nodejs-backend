@@ -1,11 +1,6 @@
-// front-end heseg
-
-// sse deer event sonsoj baigaa gesen ug
 new window.EventSource("/sse").onmessage = function (event) {
-  // window.messages ged ni messages id-g awch baigaa ni
   window.messages.innerHTML += `<p>${event.data}</p>`;
 };
-
 window.form.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
