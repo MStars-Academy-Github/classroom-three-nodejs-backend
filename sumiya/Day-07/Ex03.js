@@ -2,10 +2,10 @@ const https = require("https");
 const fs = require("fs");
 const http = require("http");
 const serveFilms = require("./serve");
-
+const filmsUrl = "https://ghibliapi.herokuapp.com/films";
 http
   .createServer((request, response) => {
-    serveFilms();
+    serveFilms(filmsUrl);
     fs.readFile("./data/Ex03.json", "utf-8", (err, data) => {
       response.writeHead(200, { "Content-Type": "text/html" });
       if (err) {
