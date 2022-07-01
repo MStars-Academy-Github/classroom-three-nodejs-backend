@@ -1,61 +1,36 @@
-const http = require('http')
-const fs = require('fs');
-const { table } = require('console');
-http.createServer((request, response) => {
+const http = require("http");
+const fs = require("fs");
+const { table } = require("console");
+http
+  .createServer((request, response) => {
     // response.writeHead(200);
-    response.setHeader("Content-type", "text/html");
+    // response.setHeader("Content-type", "text/html");
+    const tableStart = "<table>";
+    const tableEnd = "</table>";
+    let endResult = "";
+    let result = "";
+    fs.readFile("./data/film.json", "utf-8", (err, data) => {
+      if (err) {
+        console.log("error");
+      } else {
+        const films = JSON.parse(data);
+        films.shift();
 
-    fs.readFile('./data/film.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.log('error');
-        } else {
-            const films = JSON.parse(data)
-            films.shift()
-            // response.write(
-            //    ` <table>
-            //         ${films.map((film, i) => {
-            //             return (<td>
+        films.map((film, i) => {
+          result += `<tr>
+                        <td>${i + 1}</td>
+                        <td>${film.title}</td>
+                        <td>
+                        <img src=${film.image} alt="img" />
+                        </td>
+                    </tr>`;
+        });
+      }
 
-            //                 <tr>{i + 1}</tr>
-            //                 <tr>{film.title}</tr>
-            //                 <tr><img src={film.image} alt="" /></tr>
-            //             </td>
-
-            //             )
-            //         }
-            //         )}
-            //     </table>`
-
-            // )
-
-        }
-        fs.createReadStream(data)
-             .on("error", () => {
-                 console.error("err");
-             })
-             .pipe(
-         //          ` <table>
-         //     ${films.map((film, i) => {
-         //         return (<td>
-
-         //             <tr>{i + 1}</tr>
-         //             <tr>{film.title}</tr>
-         //             <tr><img src={film.image} alt="" /></tr>
-         //         </td>
-
-         //         )
-         //     }
-         //     )}
-         // </table>`
-         data
-         );
-    })
-
-
-
-    response.end()
-
-
-
-
-}).listen(3002)
+      endResult = tableStart + result + tableEnd;
+      console.log(endResult);
+      response.write(endResult);
+      response.end();
+    });
+  })
+  .listen(3002);

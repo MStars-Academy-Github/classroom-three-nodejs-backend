@@ -24,9 +24,7 @@
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
     "vehicles": [
       "https://ghibliapi.herokuapp.com/vehicles/4e09b023-f650-4747-9ab9-eacf14540cfb"
     ],
@@ -45,18 +43,12 @@
     "release_date": "1988",
     "running_time": "89",
     "rt_score": "97",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/12cfb892-aac0-4c5b-94af-521852e46d6a"
   },
   {
@@ -89,12 +81,8 @@
       "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3",
       "https://ghibliapi.herokuapp.com/species/74b7f547-1577-4430-806c-c358c8b6bcf5"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49"
   },
   {
@@ -122,12 +110,8 @@
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
       "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e"
   },
   {
@@ -143,18 +127,12 @@
     "release_date": "1991",
     "running_time": "118",
     "rt_score": "100",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/4e236f34-b981-41c3-8c65-f8c9000b94e7"
   },
   {
@@ -170,18 +148,12 @@
     "release_date": "1992",
     "running_time": "93",
     "rt_score": "94",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/ebbb6b7c-945c-41ee-a792-de0e43191bd8"
   },
   {
@@ -197,18 +169,12 @@
     "release_date": "1994",
     "running_time": "119",
     "rt_score": "78",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/1b67aa9a-2e4a-45af-ac98-64d6ad15b16c"
   },
   {
@@ -224,18 +190,12 @@
     "release_date": "1995",
     "running_time": "111",
     "rt_score": "91",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/ff24da26-a969-4f0e-ba1e-a122ead6c6e3"
   },
   {
@@ -268,12 +228,8 @@
       "https://ghibliapi.herokuapp.com/species/6bc92fdd-b0f4-4286-ad71-1f99fb4a0d1e",
       "https://ghibliapi.herokuapp.com/species/f25fa661-3073-414d-968a-ab062e3065f7"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6"
   },
   {
@@ -289,18 +245,12 @@
     "release_date": "1999",
     "running_time": "104",
     "rt_score": "75",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/45204234-adfd-45cb-a505-a8e7a676b114"
   },
   {
@@ -322,12 +272,8 @@
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/dc2e6bd1-8156-4886-adff-b39e6043af0c"
   },
   {
@@ -343,18 +289,12 @@
     "release_date": "2002",
     "running_time": "75",
     "rt_score": "89",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81"
   },
   {
@@ -370,18 +310,12 @@
     "release_date": "2004",
     "running_time": "119",
     "rt_score": "87",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/cd3d059c-09f4-4ff3-8d63-bc765a5184fa"
   },
   {
@@ -397,18 +331,12 @@
     "release_date": "2006",
     "running_time": "116",
     "rt_score": "41",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/112c1e67-726f-40b1-ac17-6974127bb9b9"
   },
   {
@@ -424,18 +352,12 @@
     "release_date": "2008",
     "running_time": "100",
     "rt_score": "92",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/758bf02e-3122-46e0-884e-67cf83df1786"
   },
   {
@@ -451,18 +373,12 @@
     "release_date": "2010",
     "running_time": "94",
     "rt_score": "95",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/2de9426b-914a-4a06-a3a0-5e6d9d3886f6"
   },
   {
@@ -478,18 +394,12 @@
     "release_date": "2011",
     "running_time": "91",
     "rt_score": "83",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/45db04e4-304a-4933-9823-33f389e8d74d"
   },
   {
@@ -505,18 +415,12 @@
     "release_date": "2013",
     "running_time": "126",
     "rt_score": "89",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/67405111-37a5-438f-81cc-4666af60c800"
   },
   {
@@ -532,18 +436,12 @@
     "release_date": "2013",
     "running_time": "137",
     "rt_score": "100",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/578ae244-7750-4d9f-867b-f3cd3d6fecf4"
   },
   {
@@ -559,18 +457,12 @@
     "release_date": "2014",
     "running_time": "103",
     "rt_score": "92",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
     "species": [
       "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2"
     ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/5fdfb320-2a02-49a7-94ff-5ca418cae602"
   },
   {
@@ -586,18 +478,10 @@
     "release_date": "2016",
     "running_time": "80",
     "rt_score": "93",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
-    "species": [
-      "https://ghibliapi.herokuapp.com/species/"
-    ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
+    "species": ["https://ghibliapi.herokuapp.com/species/"],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/d868e6ec-c44a-405b-8fa6-f7f0f8cfb500"
   },
   {
@@ -613,18 +497,10 @@
     "release_date": "2021",
     "running_time": "82",
     "rt_score": "30",
-    "people": [
-      "https://ghibliapi.herokuapp.com/people/"
-    ],
-    "species": [
-      "https://ghibliapi.herokuapp.com/species/"
-    ],
-    "locations": [
-      "https://ghibliapi.herokuapp.com/locations/"
-    ],
-    "vehicles": [
-      "https://ghibliapi.herokuapp.com/vehicles/"
-    ],
+    "people": ["https://ghibliapi.herokuapp.com/people/"],
+    "species": ["https://ghibliapi.herokuapp.com/species/"],
+    "locations": ["https://ghibliapi.herokuapp.com/locations/"],
+    "vehicles": ["https://ghibliapi.herokuapp.com/vehicles/"],
     "url": "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
   }
 ]

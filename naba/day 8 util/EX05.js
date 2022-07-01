@@ -5,6 +5,7 @@ const util = require("util");
 const getPeople = util.promisify(https.get);
 getPeople("https://ghibliapi.herokuapp.com/people").then((res) => {
   let data = [];
+  const peoples =await readFile("./data/people.json")
   res.on("data", (chunk) => {
     data.push(chunk);
   });

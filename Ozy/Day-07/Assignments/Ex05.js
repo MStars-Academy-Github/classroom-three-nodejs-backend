@@ -1,37 +1,43 @@
 const http = require("http");
 const fs = require("fs");
+const https = require("https");
+const util = require("util");
+
+let convertedData;
+let people;
+
+const readFile = util.promisify(fs.readFile);
+const httpsGet = util.promisify(https.get);
+
+readFile("./data/people.json", "utf-8")
+  .then((text) => (people = JSON.parse(text)))
+  .catch((err) => console.error(err));
 
 http
-  .createServer(function (request, response) {
-    if (request.url === "/ghibli=people") {
-      fs.readFile("./data/people.json", "utf-8", (err, data) => {
-        if (err) {
-          console.error(err);
-          return;
-        } else {
-          let people = JSON.parse(data);
-          console.log(people[0].films);
-          response.write(
-            ` <table>
-                <tr>
-                  <th scope="col">Numbers</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Images</th>
-                  <th scope="col">Eye color</th>
-                </tr>
-              
-                ${people.map(
-                  (e, i) =>
-                    ` <tr><td>${i + 1}</td><td>${e.name}</td><td>${
-                      e.gender
-                    }</td><td>${e.eye_color}</td> </tr>`
-                )}
-               
-              </table>`
-          );
-          response.end();
-        }
-      });
-    }
+  .createServer((request, response) => {
+    response.write(` <table>
+      <tr>
+        <th scope="col">Numbers</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+      </tr>
+
+      ${people.map(
+        (e, i) =>
+          ` <tr><td>${i + 1}</td><td>${e.name}</td><td>${
+            e.gender
+          }</td><td><img src=${httpsGet(`${e.films}`, (res) => {
+            res.on("data", (chunk) => {
+              debugger;
+              return `${chunk.image}`;
+            });
+          }).catch((err) => {
+            console.error(err);
+          })}></td> </tr>`
+      )}
+
+    </table>`);
+    response.end("End");
   })
   .listen(3000);
+console.log("Running");
