@@ -1,65 +1,64 @@
-const http = require("http");
 const fs = require("fs");
 const https = require("https");
 const util = require("util");
+const http = require("http");
 const { resolve } = require("path");
+const { rejects } = require("assert");
 
 let people;
-const films = [];
 
-const readFile = util.promisify(fs.readFile);
-const httpsGet = util.promisify(https.get);
+const getPeople = util.promisify(https.get);
+const write = util.promisify(fs.writeFile);
+const read = util.promisify(fs.readFile);
 
-function createServer() {
+function createServers() {
   return new Promise((resolve, rejects) => {
     http
-      .createServer((request, response) => {
-        response.on("error", (err) => {
+      .createServer((req, res) => {
+        res.on("error", (err) => {
           console.error(err);
           return rejects;
         });
-        response.write(` <table>
+        res.write(` <table>
             <tr>
               <th scope="col">Numbers</th>
               <th scope="col">Name</th>
               <th scope="col">Gender</th>
-              <th scope="col">Images</th>
             </tr>
-            
             ${people.map((e, i) => {
               return `<tr><td>${i + 1}</td><td>${e.name}</td><td>${
                 e.gender
               }</td><td><img src=${e.images}></td></tr>`;
             })}
-            
-      
-            
           </table>`);
-        response.end(resolve());
+        res.end(resolve());
       })
-      .listen(3000);
-    console.log("Running");
+      .listen(3004);
+    console.log("running");
   });
 }
 
-async function some() {
-  await readFile("./data/people.json", "utf-8")
-    .then((text) => (people = JSON.parse(text)))
+async function dada() {
+  await read("./data/Ex04.json", "utf-8")
+    .then((data) => (people = JSON.parse(data)))
     .catch((err) => console.error(err));
   await people.map((e) => {
-    httpsGet(e.films[0], (res) => {
-      let arr = [];
+    getPeople(e.films[0], (res) => {
+      let array = [];
       res.on("data", (chunk) => {
-        arr.push(chunk);
+        array.push(chunk);
       });
       res.on("end", () => {
-        const convertedData = JSON.parse(Buffer.concat(arr).toString());
+        const convertedData = JSON.parse(Buffer.concat(array).toString());
+        // console.log(convertedData);
         e.images = convertedData.image;
         console.log(e);
       });
-    }).catch((err) => console.error(err));
+    }).catch((err) => {
+      console.error(err);
+    });
   });
-  await createServer();
+  await createServers();
 }
 
-some();
+dada();
