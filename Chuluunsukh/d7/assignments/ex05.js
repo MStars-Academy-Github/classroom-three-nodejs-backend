@@ -18,6 +18,9 @@ https
         });
         res.on("end", () => {
           const convertData = JSON.parse(Buffer.concat(data).toString());
+          filmObject.images = convertData.image;
+          people.push(filmObject);
+          return people;
         });
       });
     });
