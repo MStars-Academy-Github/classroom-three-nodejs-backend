@@ -72,6 +72,7 @@ http
                           <td>${a.name} </td>
                           <td>${a.gender}</td>
                           <td>${a.age}</td>
+                          <td><a href=${a.films[0]} >${a.films[0]}</a></td>
                         </tr>`;
                     })}
                   </table>`
