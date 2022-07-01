@@ -25,11 +25,10 @@ function peopleServer() {
                 data2.push(chunk);
               });
               res.on("end", () => {
-                return (a.image = JSON.parse(Buffer.concat(data2).toString()));
-                // console.log(JSON.parse(data2));
+                const covertData1 = JSON.parse(Buffer.concat(data2).toString());
+                a.images = covertData1.image;
+                console.log(a);
               });
-
-              console.log(a);
             });
           });
         })
