@@ -1,24 +1,29 @@
-let http = require("http");
-let time = require("time");
+const fs = require("fs");
+const http = require("http");
 
 http
   .createServer((request, response) => {
-    console.log(`real time chat : ${time}`);
-    console.log(`Request Method is : ${realtime}`);
-
-    if (request.url === "/cost/category") {
+    if (request.url === "/post") {
       console.log("add food");
       console.log(request);
       if (request.method === "POST") {
         console.log("It is add food Post method");
         request.on("data", (chunk) => {
           console.log(`Data chunk available: ${chunk}`);
+          fs.writeFile("./data/message.json", data, (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("success");
+            }
+          });
         });
         request.on("end", () => {
           // end of data
           console.log("end of data");
         });
       }
+      response.end();
     }
   })
-  .lisen(3000);
+  .listen(3000);
