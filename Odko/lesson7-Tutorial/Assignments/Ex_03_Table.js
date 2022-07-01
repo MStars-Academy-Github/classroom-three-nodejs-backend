@@ -6,12 +6,11 @@ http
   .createServer((req, res) => {
     if (req.url.match(/^\/table/)) {
       fs.readFile("./data/films.json", "utf-8", (err, data) => {
-        res.writeHead(200, { "Content-Type": "text/html" });
+        // res.writeHead(200, { "Content-Type": "text/html" });
         if (err) {
           console.error(err);
         } else {
           let dataJson = JSON.parse(data);
-
           res.write(
             `<table style= "border-collapse: collapse;border: 1px solid;width: 100%">
             ${dataJson.map((a, i) => {
@@ -72,7 +71,7 @@ http
                           <td>${a.name} </td>
                           <td>${a.gender}</td>
                           <td>${a.age}</td>
-                          <td><a href=${a.films[0]} >${a.films[0]}</a></td>
+                       
                         </tr>`;
                     })}
                   </table>`
