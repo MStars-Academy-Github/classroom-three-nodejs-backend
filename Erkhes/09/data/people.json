@@ -502,4 +502,244 @@
     "eye_color": "Brown",
     "hair_color": "Brown",
     "films": [
-      "https://ghibliapi.
+      "https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3",
+    "url": "https://ghibliapi.herokuapp.com/people/a3d8e70f-46a0-4e5a-b850-db01620d6b92"
+  },
+  {
+    "id": "fc196c4f-0201-4ed2-9add-c6403f7c4d32",
+    "name": "Baron Humbert von Gikkingen",
+    "gender": "Male",
+    "age": "NA",
+    "eye_color": "Green",
+    "hair_color": "Yellow",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ff24da26-a969-4f0e-ba1e-a122ead6c6e3",
+      "https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3",
+    "url": "https://ghibliapi.herokuapp.com/people/fc196c4f-0201-4ed2-9add-c6403f7c4d32"
+  },
+  {
+    "id": "466bc926-2024-4653-ac63-fe52f2dc8c7b",
+    "name": "Natori",
+    "gender": "Male",
+    "age": "NA",
+    "eye_color": "Blue",
+    "hair_color": "Grey",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3",
+    "url": "https://ghibliapi.herokuapp.com/people/466bc926-2024-4653-ac63-fe52f2dc8c7b"
+  },
+  {
+    "id": "40c005ce-3725-4f15-8409-3e1b1b14b583",
+    "name": "Colonel Muska",
+    "gender": "Male",
+    "age": "33",
+    "eye_color": "Grey",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/40c005ce-3725-4f15-8409-3e1b1b14b583"
+  },
+  {
+    "id": "6523068d-f5a9-4150-bf5b-76abe6fb42c3",
+    "name": "Porco Rosso",
+    "gender": "Male",
+    "age": "47",
+    "eye_color": "Black",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ebbb6b7c-945c-41ee-a792-de0e43191bd8"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/6523068d-f5a9-4150-bf5b-76abe6fb42c3"
+  },
+  {
+    "id": "a10f64f3-e0b6-4a94-bf30-87ad8bc51607",
+    "name": "Sosuke",
+    "gender": "Male",
+    "age": "5",
+    "eye_color": "Brown",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/758bf02e-3122-46e0-884e-67cf83df1786"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/a10f64f3-e0b6-4a94-bf30-87ad8bc51607"
+  },
+  {
+    "id": "2409052a-9029-4e8d-bfaf-70fd82c8e48d",
+    "name": "Kiki",
+    "gander": "Female",
+    "age": "13",
+    "eye_color": "Black",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/2409052a-9029-4e8d-bfaf-70fd82c8e48d"
+  },
+  {
+    "id": "2a1dad70-802a-459d-8cc2-4ebd8821248b",
+    "name": "Laputian Robot",
+    "gender": "NA",
+    "age": "Really Old",
+    "eye_color": "Black",
+    "hair_color": "NA",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/",
+    "url": "https://ghibliapi.herokuapp.com/people/2a1dad70-802a-459d-8cc2-4ebd8821248b"
+  },
+  {
+    "id": "8228751c-bdc1-4b8d-a6eb-ca0eb909568f",
+    "name": "Chihiro Ogino",
+    "gender": "Female",
+    "age": "10",
+    "eye_color": "Black",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/dc2e6bd1-8156-4886-adff-b39e6043af0c"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/8228751c-bdc1-4b8d-a6eb-ca0eb909568f"
+  },
+  {
+    "id": "1c1a8054-3a34-4185-bfcf-e8011506f09a",
+    "name": "Osono",
+    "gender": "Female",
+    "age": "26",
+    "eye_color": "Black",
+    "hair_color": "Red",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/1c1a8054-3a34-4185-bfcf-e8011506f09a"
+  },
+  {
+    "id": "bc838920-7849-43ea-bfb8-7d5e98dc20b6",
+    "name": "Ursula",
+    "gender": "Female",
+    "age": "18",
+    "eye_color": "Black",
+    "hair_color": "Reddish brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/bc838920-7849-43ea-bfb8-7d5e98dc20b6"
+  },
+  {
+    "id": "33f5fea9-c21b-490b-90e0-c4051c372826",
+    "name": "Tombo",
+    "gender": "Male",
+    "age": "13",
+    "eye_color": "Black",
+    "hair_color": "Dirty Blond",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/33f5fea9-c21b-490b-90e0-c4051c372826"
+  },
+  {
+    "id": "d1de1c0e-3fcd-4cef-94eb-bb95cc2314aa",
+    "name": "Madame",
+    "gender": "Female",
+    "age": "60",
+    "eye_color": "Cyan",
+    "hair_color": "Light Gray",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/d1de1c0e-3fcd-4cef-94eb-bb95cc2314aa"
+  },
+  {
+    "id": "2d66e2eb-5a74-4721-a5b3-c556497bdb66",
+    "name": "Earwig",
+    "gender": "Female",
+    "age": "10",
+    "eye_color": "Brown",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/2d66e2eb-5a74-4721-a5b3-c556497bdb66"
+  },
+  {
+    "id": "56c94dae-3290-472f-ad2e-0a6444956b51",
+    "name": "Bella Yaga",
+    "gender": "Female",
+    "age": "NA",
+    "eye_color": "Brown",
+    "hair_color": "Blue",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/56c94dae-3290-472f-ad2e-0a6444956b51"
+  },
+  {
+    "id": "5caa6a3c-7d44-47d1-afc6-12fffad28889",
+    "name": "Mandrake",
+    "gender": "Male",
+    "age": "NA",
+    "eye_color": "NA",
+    "hair_color": "Brown",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/5caa6a3c-7d44-47d1-afc6-12fffad28889"
+  },
+  {
+    "id": "374561e6-aa8e-4d20-8579-806e589c0f31",
+    "name": "Scarlet Rose",
+    "gender": "Female",
+    "age": "NA",
+    "eye_color": "Brown",
+    "hair_color": "Red",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/374561e6-aa8e-4d20-8579-806e589c0f31"
+  },
+  {
+    "id": "e9177769-9b6b-49c2-9820-d24f50b83ad9",
+    "name": "Thomas",
+    "gender": "Male",
+    "age": "NA",
+    "eye_color": "Green",
+    "hair_color": "Black",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3",
+    "url": "https://ghibliapi.herokuapp.com/people/e9177769-9b6b-49c2-9820-d24f50b83ad9"
+  },
+  {
+    "id": "835f8c7c-2fc6-4f54-b545-c02ab066cd69",
+    "name": "Custard",
+    "gender": "Male",
+    "age": "NA",
+    "eye_color": "Blue",
+    "hair_color": "Blonde",
+    "films": [
+      "https://ghibliapi.herokuapp.com/films/790e0028-a31c-4626-a694-86b7a8cada40"
+    ],
+    "species": "https://ghibliapi.herokuapp.com/species/af3910a6-429f-4c74-9ad5-dfe1c4aa04f2",
+    "url": "https://ghibliapi.herokuapp.com/people/835f8c7c-2fc6-4f54-b545-c02ab066cd69"
+  }
+]

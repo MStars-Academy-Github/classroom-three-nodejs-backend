@@ -25,43 +25,23 @@ get("https://ghibliapi.herokuapp.com/people", (res) => {
     );
   });
   res.on("end", () => {
-    convertedData = Buffer.concat(data).toString();
+    const convertedData = Buffer.concat(data).toString();
   });
 })
   .then(
-    readFile("./data/people.json", "utf-8", (err, data) => {
+    readFile("./data/people.json", "utf-8", async (err, data) => {
       if (err) {
         console.log("error on reading");
       } else {
-        ddata = JSON.parse(data);
-        ddata &&
-          ddata.map(async (movie) => {
+         ddata = JSON.parse(data);
+        await ddata.map(async (movie) => {
             get(movie.films[0], (res) => {
               let newArray = [];
               res.on("data", (chunk) => {
-                fs.readFile("./data/link.json", "utf-8", (err, datas) => {
-                  if (err) {
-                    console.log("error on reading link json");
-                  } else {
-                    newArray = [JSON.parse(datas)];
-                    newArray.push(chunk);
-                    fs.writeFile(
-                      "./data/link.json",
-                      Buffer.concat(newArray).toString(),
-                      (err) => {
-                        if (err) {
-                          console.error(err);
-                        } else {
-                          console.log("success");
-                        }
-                      }
-                    );
-                  }
-                });
+                newArray.push(chunk)
+                const convertedData = Buffer.concat(newArray).toString();
+                movie.image = convertedData.image
               });
-              // res.on("end", () => {
-              //   convertedData = Buffer.concat(data).toString();
-              // });
             }).catch((err) => {
               console.log("error on link");
             });
@@ -78,7 +58,7 @@ get("https://ghibliapi.herokuapp.com/people", (res) => {
         let endResult = "";
         let result = "";
         if (request.url === "/ghibli=people") {
-          fs.readFile("./data/people.json", "utf-8", (err, data) => {
+          fs.readFile("./data/people.json", "utf-8", async (err, data) => {
             if (err) {
               console.log("error");
             } else {
@@ -90,7 +70,7 @@ get("https://ghibliapi.herokuapp.com/people", (res) => {
                   linkData = JSON.parse(data);
                 }
               });
-              people.map((person, i) => {
+             await  people.map((person, i) => {
                 result += `<tr>
                     <td>${person.name}</td>
                     <td>
@@ -99,11 +79,16 @@ get("https://ghibliapi.herokuapp.com/people", (res) => {
                     <td>
                     ${person.gender}
                     </td>
+                    <td>
+                    ${person.image}
+                    </td>
+
                     </tr>`;
               });
 
               endResult = tableStart + result + tableEnd;
               response.write(endResult);
+              response.end()
             }
           });
         }
