@@ -41,11 +41,12 @@ async function dada() {
               <th scope="col">No</th>
               <th scope="col">name</th>
               <th scope="col">gender</th>
+              <th scope="col">image</th>
             </tr>
             ${ people.map((e, i) => {
               return `<tr><td>${i + 1}.</td><td>Name: ${e.name}</td><td>Gender: ${
                 e.gender
-              }</td><td> <img src=${e.images} style={width="150px", height = "100px"}></td></tr>`;
+              }</td><td>image: <a href=${e.images} style={width="150px", height = "100px"}>${e.images}</a></td></tr>`;
             })}
           </table>`);
         res.end(resolve());
