@@ -8,35 +8,7 @@ const { rejects } = require("assert");
 let people;
 
 const getPeople = util.promisify(https.get);
-const write = util.promisify(fs.writeFile);
 const read = util.promisify(fs.readFile);
-
-function createServers() {
-  return new Promise((resolve, rejects) => {
-    http
-      .createServer((req, res) => {
-        res.on("error", (err) => {
-          console.error(err);
-          return rejects;
-        });
-        res.write(` <table>
-            <tr>
-              <th scope="col">Numbers</th>
-              <th scope="col">Name</th>
-              <th scope="col">Gender</th>
-            </tr>
-            ${people.map((e, i) => {
-              return `<tr><td>${i + 1}</td><td>${e.name}</td><td>${
-                e.gender
-              }</td><td><img src=${e.images}></td></tr>`;
-            })}
-          </table>`);
-        res.end(resolve());
-      })
-      .listen(3004);
-    console.log("running");
-  });
-}
 
 async function dada() {
   await read("./data/Ex04.json", "utf-8")
@@ -52,13 +24,35 @@ async function dada() {
         const convertedData = JSON.parse(Buffer.concat(array).toString());
         // console.log(convertedData);
         e.images = convertedData.image;
-        console.log(e);
+        // console.log(e);
       });
     }).catch((err) => {
       console.error(err);
     });
   });
-  await createServers();
+  await http
+      .createServer((req, res) => {
+        res.on("error", (err) => {
+          console.error(err);
+          return rejects;
+        });
+        res.write(`<table>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">name</th>
+              <th scope="col">gender</th>
+            </tr>
+            ${ people.map((e, i) => {
+              return `<tr><td>${i + 1}.</td><td>Name: ${e.name}</td><td>Gender: ${
+                e.gender
+              }</td><td> <img src=${e.images} style={width="150px", height = "100px"}></td></tr>`;
+            })}
+          </table>`);
+        res.end(resolve());
+      })
+      .listen(3004);
+    console.log("running");
 }
 
-dada();
+
+dada()
