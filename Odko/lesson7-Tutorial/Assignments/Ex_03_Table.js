@@ -11,7 +11,6 @@ http
           console.error(err);
         } else {
           let dataJson = JSON.parse(data);
-
           res.write(
             `<table style= "border-collapse: collapse;border: 1px solid;width: 100%">
             ${dataJson.map((a, i) => {
