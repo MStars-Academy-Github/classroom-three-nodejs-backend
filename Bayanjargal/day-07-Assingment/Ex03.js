@@ -25,8 +25,6 @@ http
             name.image
           } alt="title"></td></tr>`;
         })}
-        
-        
           </table>`);
         }
       });

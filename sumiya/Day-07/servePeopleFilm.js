@@ -54,5 +54,7 @@ function serveFilms() {
     });
   });
 }
+
+servePeople();
 module.exports = serveFilms;
 module.exports = servePeople;
