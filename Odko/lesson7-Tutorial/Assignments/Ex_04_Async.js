@@ -1,10 +1,31 @@
-const https = require("https");
+const http = require("http");
 const fs = require("fs");
+const https = require("https");
 const util = require("util");
 
 const readFile = util.promisify(fs.readFile);
 const httpsGet = util.promisify(https.get);
 let people;
+
+new Promise((resolve, rejects) => {
+  personServer();
+  http
+    .createServer((req, res) => {
+      res.on("error", () => {
+        return rejects();
+      });
+      res.write(`<table>
+        ${people.map((e, i) => {
+          return `<tr><td>${i + 1}</td><td>${e.name}</td><td>${
+            e.gender
+          }</td><td><img src=${e.images}></td></tr>`;
+        })}
+      </table>`);
+      res.end(resolve());
+    })
+    .listen(3000);
+  console.log("running server localhost:3000");
+});
 
 async function personServer() {
   await readFile("./data/people.json", "utf-8")
@@ -21,16 +42,6 @@ async function personServer() {
         const covertData = JSON.parse(Buffer.concat(data).toString());
         image.images = covertData.image;
       });
-      fs.writeFile("./data/peopleHttps.json", JSON.stringify(people), (err) => {
-        if (err) {
-          console.error(err);
-          return;
-        } else {
-          console.log("success");
-        }
-      });
     }).catch((err) => console.error(err));
   });
 }
-
-module.exports = personServer;

@@ -4,17 +4,6 @@ const peopleServer = require("./filmsPeople");
 
 http
   .createServer((req, res) => {
-<<<<<<< HEAD
-    if (req.url.match(/^\/table/)) {
-      fs.readFile("./data/films.json", "utf-8", (err, data) => {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        if (err) {
-          console.error(err);
-        } else {
-          let dataJson = JSON.parse(data);
-          res.write(
-            `<table style= "border-collapse: collapse;border: 1px solid;width: 100%">
-=======
     return new Promise((resolve, rejects) => {
       if (req.url.match(/^\/table/)) {
         fs.readFile("./data/films.json", "utf-8", (err, data) => {
@@ -25,7 +14,6 @@ http
             let dataJson = JSON.parse(data);
             res.write(
               `<table style= "border-collapse: collapse;border: 1px solid;width: 100%">
->>>>>>> f7b7c57124a14c745fc001350e8afcd13d12528e
             ${dataJson.map((a, i) => {
               return ` <tr>
                 <td >${1} </td>
@@ -70,6 +58,7 @@ http
         });
       } else if (req.url.match(/^\/ghibli=people/)) {
         if (req.method === "GET") {
+          console.log(req.method);
           peopleServer();
           fs.readFile("./data/people.json", "utf-8", (err, data) => {
             res.writeHead(200, { "Content-Type": "text/html" });
@@ -85,7 +74,7 @@ http
                           <td>${a.name} </td>
                           <td>${a.gender}</td>
                           <td>${a.age}</td>
-                       
+
                         </tr>`;
                     })}
                   </table>`
