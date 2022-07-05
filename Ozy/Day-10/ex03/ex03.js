@@ -6,6 +6,7 @@ const eventEmitter = new EventEmitter();
 const onMessage = () => {
   fs.readFile("../data/films.json", "utf-8", (err, data) => {
     const films = JSON.parse(data);
+    console.log(films);
     if (err) {
       console.error(err);
     } else {
@@ -19,6 +20,7 @@ const onMessage = () => {
   });
 };
 eventEmitter.on("message", onMessage);
+eventEmitter.off("message", onMessage);
 
 http
   .createServer((request, response) => {
