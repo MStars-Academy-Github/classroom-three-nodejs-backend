@@ -1,8 +1,8 @@
 {
-  "name": "day-10",
+  "name": "lesson",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "express.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
