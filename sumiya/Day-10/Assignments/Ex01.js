@@ -2,14 +2,14 @@ const http = require("http");
 const EventEmitter = require("events");
 const eventEmitter = new EventEmitter();
 
+eventEmitter.on("submit", () => {
+  console.log("Хүсэлтыг амжиллттай хүлээж авлаа");
+});
 http
   .createServer((req, res) => {
     if (req.url === "/") {
-      eventEmitter.on("submit", () => {
-        console.log("Хүсэлтыг амжиллттай хүлээж авлаа");
-      });
+      eventEmitter.emit("submit");
+      res.end();
     }
-
-    eventEmitter.emit("submit");
   })
   .listen(3000);
