@@ -58,6 +58,7 @@ http
         });
       } else if (req.url.match(/^\/ghibli=people/)) {
         if (req.method === "GET") {
+          console.log(req.method);
           peopleServer();
           fs.readFile("./data/people.json", "utf-8", (err, data) => {
             res.writeHead(200, { "Content-Type": "text/html" });
@@ -73,7 +74,7 @@ http
                           <td>${a.name} </td>
                           <td>${a.gender}</td>
                           <td>${a.age}</td>
-                       
+
                         </tr>`;
                     })}
                   </table>`

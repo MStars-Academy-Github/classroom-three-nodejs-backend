@@ -1,2 +1,5 @@
 {
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
+  "typescript.inlayHints.enumMemberValues.enabled": false
 }
