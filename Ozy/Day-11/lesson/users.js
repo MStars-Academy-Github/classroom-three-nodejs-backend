@@ -1,5 +1,3 @@
-const e = require("express");
-const { json } = require("express");
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -13,8 +11,9 @@ app.get("/users/:userId", (req, res) => {
       let value = JSON.parse(req.params.userId);
       let result = users.find((e) => e.userId === value);
       console.log(result);
+      res.write(JSON.stringify(result));
+      res.end();
     }
   });
-  res.end();
 });
 app.listen(3000);
