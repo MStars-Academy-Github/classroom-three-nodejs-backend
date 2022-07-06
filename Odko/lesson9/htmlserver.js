@@ -15,7 +15,7 @@ const films = `${__dirname}/data/people.html`;
 // console.log("runnnig 3000");
 
 const serverHTML = (req, res) => {
-  res.setHeader([200], { "Content-Type": "text/html" });
+  res.setHeader(200, { "Content-Type": "text/html" });
   fs.createReadStream(films)
     .on("error", () => {
       console.log("error");
