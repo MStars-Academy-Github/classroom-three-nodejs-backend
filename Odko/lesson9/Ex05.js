@@ -3,37 +3,27 @@ const util = require("util");
 const https = require("https");
 const httpsGet = util.promisify(https.get);
 const EventEmitter = require("events");
+const serverEvents = new EventEmitter();
 const fs = require("fs");
 const readFile = util.promisify(fs.readFile);
-const serverEvents = new EventEmitter();
 let people;
 let films;
-
+const serverHTML = require("./htmlserver");
 http
   .createServer((req, res) => {
-    res.setHeader(200, "Content-Type", "text/html");
     if (req.url === "/ghibli=people") {
-      peopleServer();
       serverEvents.emit("people");
+      peopleServer();
+      //  serverHTML(req, res);
     } else if (req.url === "/ghibli=films") {
-      filmsServer();
       serverEvents.emit("films");
+      filmsServer();
+      // serverHTML(req, res);
     }
-
-    // fs.readFile(`${__dirname}/data/people.html`)
-    //   .then((contents) => {
-    //     res.setHeader("Content-Type", "text/html");
-    //     res.writeHead(200);
-    //     res.end(contents);
-    //   })
-    //   .catch((err) => {
-    //     res.writeHead(500);
-    //     res.end(err);
-    //     return;
-    //   });
+    res.end();
   })
   .listen(3001);
-console.log("running 3000");
+console.log("running 3001");
 
 // runnning html
 
