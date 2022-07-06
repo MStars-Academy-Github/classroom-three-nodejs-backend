@@ -1,52 +1,67 @@
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-const serveFilms = require("./Films");
 const EventEmitter = require("events");
 const eventEmitter = new EventEmitter();
-const port = 3002;
+const port = 3000;
+let html = "";
+let endHtml = "";
+const htmlBeg = "<table>";
+const htmlEnd = "</table>";
 
-http
-  .createServer((req, res) => {
-    const bodyT = `<!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Document</title>
-      </head>
-      <body>`;
-    const bodyEnd = `</body>
-      </html>`;
-
-    if (req.url === "/films/show") {
-      eventEmitter.on("submit", () => {
-        fs.readFile("./data/films.json", "utf-8", (err, data) => {
+eventEmitter.on("films", async () => {
+  https.get("https://ghibliapi.herokuapp.com/films ", async (res) => {
+    let data = [];
+    res.on("data", (chunk) => {
+      data.push(chunk);
+      fs.writeFile(
+        "./data/films.json",
+        Buffer.concat(data).toString(),
+        (err) => {
           if (err) {
             console.error(err);
           } else {
-            let film = JSON.parse(data);
+            console.log("success");
+          }
+        }
+      );
+    });
+    res.on("end", () => {
+      convertedData = Buffer.concat(data).toString();
+    });
+  });
+});
 
-            fs.writeFile(
-              "films.html",
-              `<table>
-        ${film.map(
-          (e, i) =>
-            `<tr style="border:1px solid black">
+eventEmitter.on("films-show", () => {
+  fs.readFile("./data/films.json", "utf-8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      let film = JSON.parse(data);
+
+      film.map((e, i) => {
+        html += `<tr style="border:1px solid black">
             <td>${i + 1}</td>
             <td>${e.title}</td>
-          </tr>`
-        )}
-      </table>`,
-              (err) => {
-                console.log(err);
-              }
-            );
-          }
-        });
+            <td>
+            <img src=${e.image} alt="img"  style="width:100px; height:100px" />
+            </td>
+          </tr>`;
       });
-      eventEmitter.emit("submit");
+      endHtml = htmlBeg + html + htmlEnd;
+      fs.writeFile("films.html", endHtml, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+  });
+});
+
+http
+  .createServer((req, res) => {
+    if (req.url === "/films/show") {
+      eventEmitter.emit("films-show");
     }
     res.end();
   })
