@@ -67,6 +67,13 @@ app.post(
   }
 );
 
+// middleware validator
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+  }
+};
+
 app.listen(PORT, () => {
   "Express server is starting";
 });
