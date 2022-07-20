@@ -13,7 +13,10 @@ app.post(
   "/users",
   body("email").isEmail(),
   body("register").isLength({ min: 10, max: 10 }),
-  body("phone").isNumeric().isLength({ min: 8, max: 8 }),
+  body("phone")
+    .isNumeric()
+    .isLength({ min: 8, max: 8 })
+    .withMessage("only phone number"),
   check("password")
     .isLength({ min: 8 })
     .matches(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/)
@@ -28,10 +31,45 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    res.send("users");
+    res.send("Success");
   }
 );
 
+app.get(
+  "/user/:id",
+  (req, res, next) => {
+    const user_id = req.params.id;
+    if (user_id > 2000) next("route");
+    if (user_id < 50) next();
+    res.send("I will send user information #1");
+  },
+  (req, res, next) => {
+    res.send("I will send user information #1.1");
+  }
+);
+app.get("/user/:id", (req, res) => {
+  res.send("I will send user information #2");
+});
+
+app.post("/user", (req, res) => {
+  res.send("I will save information");
+});
+
 app.listen(PORT, () => {
   console.log("Running");
+});
+
+function logOriginalUrl(req, res, next) {
+  console.log("Request URL:", req.originalUrl);
+  next();
+}
+
+function logMethod(req, res, next) {
+  console.log("Request Type:", req.method);
+  next();
+}
+
+var logStuff = [logOriginalUrl, logMethod];
+app.get("/arrayuser/:id", logStuff, (req, res, next) => {
+  res.send("User Info");
 });
