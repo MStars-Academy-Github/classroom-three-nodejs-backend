@@ -1,5 +1,5 @@
 {
-  "name": "bayanjargal",
+  "name": "validator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "request": "^2.88.2"
+    "express-validator": "^6.14.2"
   }
 }
