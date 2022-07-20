@@ -3,7 +3,7 @@ const file = require("fs");
 
 const animaljson = `${__dirname}/data/animal.json`;
 const foodsjson = `${__dirname}/data/foods.json`;
-
+console.log(animaljson);
 const animal = require("./serverAnimal");
 const food = require("./serverFoods");
 
@@ -25,5 +25,5 @@ http
       response.end("SERVER");
     }
   })
-  .listen(3000);
+  .listen(3002);
 console.log("server running at http://localhost:3000");
