@@ -1,5 +1,6 @@
 const express = require("express");
-const { body, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
+const { userValidationRules, validate } = require("./validatorMiddleWare");
 const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
@@ -10,24 +11,9 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
   res.send("hello");
 });
-app.post(
-  "/users",
-  body("name").isAlpha(),
-  body("register").isLength({ min: 10, max: 10 }),
-  body("phone").isLength({ min: 8, max: 8 }),
-  body("password").isStrongPassword(),
-  (req, res) => {
-    const body = req.body;
-    console.log(body);
-    const { name, email, phone } = body;
-    console.log(email);
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    res.send("burtgel amjilttai bolloo");
-  }
-);
+app.post("/users", userValidationRules(), validate, (req, res) => {
+  res.send("burtgel amjilttai bolloo");
+});
 app.get("/user/:id", (req, res, next) => {
   const user_id = req.params.id;
   if (user_id > 2000) next("route");
