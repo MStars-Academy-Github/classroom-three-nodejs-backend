@@ -35,6 +35,26 @@ app.post(
   }
 );
 
+app.get(
+  "/user/:id",
+  (req, res, next) => {
+    const user_id = req.params.id;
+    if (user_id > 2000) next("route");
+    if (user_id < 50) next();
+    res.send("I will send user information #1");
+  },
+  (req, res, next) => {
+    res.send("I will send user information #1.1");
+  }
+);
+app.get("/user/:id", (req, res) => {
+  res.send("I will send user information #2");
+});
+
+app.post("/user", (req, res) => {
+  res.send("I will save information");
+});
+
 app.listen(PORT, () => {
   console.log("Running");
 });
