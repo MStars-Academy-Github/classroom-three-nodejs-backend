@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const { body, validationResult } = require("express-validator");
+const { userValid, validate } = require("./valid");
 require("dotenv").config();
 const PORT = process.env.PORT;
 
@@ -9,37 +10,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("this is working");
 });
-app.post(
-  "/users",
-  body("email").isEmail(),
-  body("registerID").isLength({ min: 10, max: 10 }),
-  body("phone").isInt().isLength({ min: 8, max: 8 }),
-  body("name").isString().matches(/(\w)/).withMessage("name must be letters"),
-  body("password")
-    .isLength({ min: 5 })
-    .matches(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/)
-    .withMessage(
-      "password must contain minimum of 6 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number with no spaces."
-    ),
-  body("passValid").custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error("Password must be matched ");
-    }
-    return true;
-  }),
-  (req, res) => {
-    console.log(req.body.password);
-    const body = req.body;
-    console.log(body);
-    const { name, email, phone } = body;
-    console.log(name);
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    res.send(body);
-  }
-);
+app.post("/users", userValid(), validate, (req, res) => {
+  const body = req.body;
+
+  res.send(body);
+});
 app.get("/user", (req, res) => {
   res.send("I will send user info");
 });
