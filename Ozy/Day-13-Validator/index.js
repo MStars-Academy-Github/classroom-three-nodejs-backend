@@ -13,7 +13,10 @@ app.post(
   "/users",
   body("email").isEmail(),
   body("register").isLength({ min: 10, max: 10 }),
-  body("phone").isNumeric().isLength({ min: 8, max: 8 }),
+  body("phone")
+    .isNumeric()
+    .isLength({ min: 8, max: 8 })
+    .withMessage("only phone number"),
   check("password")
     .isLength({ min: 8 })
     .matches(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/)
@@ -28,7 +31,7 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    res.send("users");
+    res.send("Success");
   }
 );
 
