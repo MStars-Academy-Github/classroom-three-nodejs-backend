@@ -183,7 +183,7 @@ router.get("/search", (req, res, next) => {
         console.log("err");
       } else {
         const result = [];
-        const ddata = JSON.parse(data);
+        const ddata = JSON.parse(data.toLowerCase());
         ddata.books.map((e) => {
           if (e.title.match(url)) {
             result.push(e);
