@@ -1,36 +1,33 @@
 const fs = require("fs");
 const https = require("https");
 const util = require("util");
-const {resolve}= require('path');
+const { resolve } = require("path");
+
+let people;
 
 
-let people
-const films = []
+const readFile = util.promisify(fs.readFile);
+const httpsGet = util.promisify(https.get);
 
-const readFile = util.promisify(fs.readFile)
-const httpsGet = util.promisify(https.get)
-
-function createServer(){
-    return new Promise((resolve, rejects)=>{
-        http
-        .createServer((request, response)=>{
-            response.on ('error', (err)=>{
-                console.error(err)
-                return rejects
-            })
-            response.write(`<table>
+function createServer() {
+  return new Promise((resolve, rejects) => {
+    https.createServer((request, response) => {
+      response.on("error", (err) => {
+        console.error(err);
+        return rejects;
+      });
+      response.write(`<table>
             <tr>
             <th scope="col">Numbers</th>
             <th scope="col">Name</th>
             <th scope="col">gender</th>
             <th scope="col">age</th>
-            `)
-        })
-    })
+            `);
+    });
+  });
 }
-
 const getPeople = util.promisify(https.get);
-getPeople("https://ghibliapi.herokuapp.com/people").then((res) => {
+getPeople("https://ghibliapi.herokuapp.com/films ").then((res) => {
   let data = [];
   const peoples =await readFile("./data/people.json")
   res.on("data", (chunk) => {
@@ -54,5 +51,5 @@ getPeople("https://ghibliapi.herokuapp.com/people").then((res) => {
       return people;
     });
   });
-});
+}).listen(3002)
 
