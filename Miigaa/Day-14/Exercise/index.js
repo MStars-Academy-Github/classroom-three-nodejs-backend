@@ -39,16 +39,32 @@ router.post("/add", (req, res, next) => {
   });
   res.send("api");
 });
+//// Buh nomiin medeelel
 
-app.get("/api", (req, res) => {
+app.get("/books", (req, res) => {
   fs.readFile("./models/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log("error on reading");
     } else {
-      res.send(JSON.parse(data));
+    const ddata = (JSON.parse(data))
+      res.send(ddata.books);
     }
   });
 });
+/// Random 3 nom
+app.get("/book", (req, res) => {
+    fs.readFile("./models/book.json" , "utf-8" ,(err, data) => {
+    if(err){
+        console.log("error on reading");
+    } else {
+        const ddata = (JSON.parse(data))
+        const newData = [ddata.books[Math.floor(Math.random() * ddata.books.length)],ddata.books[Math.floor(Math.random() * ddata.books.length)],ddata.books[Math.floor(Math.random() * ddata.books.length)]]
+        res.render("book", {data: newData})
+        console.log(...newData);
+    }
+    })
+})
+
 
 app.get("/api/:id", (req, res, next) => {
   let maps = [];
