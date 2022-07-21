@@ -49,11 +49,19 @@ router.get("/book", (req, res, next) => {
   const author = data.books.map((title) => {
     return title.author;
   });
+
+  // DASGAL-4
+
   res.render("index", {
     randomBook1: randomBook1,
     author: author,
     publishedDay: publishedDay,
   });
+});
+
+app.use(router);
+app.listen(PORT, () => {
+  console.log("my app");
 });
 
 // router.get("/ramBook", (req, res, next) => {
@@ -68,20 +76,6 @@ router.get("/book", (req, res, next) => {
 //   const randomBook1 = threeBookRandom(ranBook, 3);
 //   res.send(randomBook1);
 // });
-
-/* Exa-2 */
-router.get("/author", (req, res, next) => {
-  let data = bookJson;
-  const author = data.books.map((author) => {
-    return author.author;
-  });
-  res.send(author);
-});
-
-app.use(router);
-app.listen(PORT, () => {
-  console.log("my app");
-});
 
 /* 
   RAMDOM BOOK ONE
