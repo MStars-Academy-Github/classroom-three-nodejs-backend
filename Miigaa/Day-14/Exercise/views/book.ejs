@@ -8,6 +8,33 @@
   </head>
   <body>
     <div>
+<<<<<<< HEAD
+        <% data.map((e) => {%>
+            <ul>
+                <h2 style="list-style: none;">
+                  <b>Title:</b>
+                  <%=e.title%>
+                </h2>
+                <li style="list-style: none;">
+                  <b>Subtitle:</b>
+                  <%=e.subtitle%>
+                </li>
+                <li style="list-style: none;">
+                  <b>Author:</b>
+                  <%=e.author%>
+                </li>
+                <li style="list-style: none;">
+                  <b>Pages:</b>
+                  <%=e.page%>
+                </li>
+                <li style="list-style: none;">
+                  <b>Description:</b>
+                  <%=e.description%>
+                </li>
+              </ul>
+            <%});%>
+
+=======
       <ul>
         <h2 style="list-style: none"><b>Title:</b><%=data[0].title%></h2>
         <li style="list-style: none"><b>Subtitle:</b><%=data[0].subtitle%></li>
@@ -39,5 +66,6 @@
         </li>
       </ul>
     </div>
+>>>>>>> 8e6c2f97b2e0582dadfe6957b82eb6aa23fc9479
   </body>
 </html>
