@@ -1,22 +1,20 @@
 const { body, validationResult } = require("express-validator");
 
 const userValidationRules = () => {
-  return [
-    body("email").isEmail(),
-    body("register").isLength({ min: 10, max: 10 }),
-  ];
+  return [body("phone").isLength({ min: 8, max: 8 })];
 };
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
+  if (errors.isEmpty()) {
     next();
   }
 
-  const exractedErrors = [];
-  errors.array().map((err) => exractedErrors.push({ [err.param]: err.msg }));
-
-  return res.status(400).json({ errors: exractedErrors });
+  const extracteErrors = [];
+  errors.array().map((err) => extracteErrors.push({ [err.param]: err.msg }));
+  return res.status(400).json({
+    errors: extracteErrors,
+  });
 };
 
 module.exports = { userValidationRules, validate };

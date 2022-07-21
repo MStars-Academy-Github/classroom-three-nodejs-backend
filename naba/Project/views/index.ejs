@@ -7,12 +7,10 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="POST">
-      <input type="text" />
-      <select>
-        <option>1</option>
-        <option>2</option>
-      </select>
-    </form>
+    <ul>
+      <% data.for(var i=0;((item,i)=>{%>
+      <li><%=item.title%></li>
+      <%});%>
+    </ul>
   </body>
 </html>
