@@ -91,6 +91,17 @@ bookRouter.get("/publishers", (req, res, next) => {
   res.send(count);
 });
 
+router.get('/search',(req,res)=>{
+  let title = req.query.title
+  const result = books.books.filter((book) => {
+    return Object.values(book.title)
+      .join("")
+      .toLowerCase()
+      .includes(title.toLowerCase());
+  });
+  res.send(result)
+})
+
 router.get("/add", (req, res, next) => {
   res.render("addBook");
 });
