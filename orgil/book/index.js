@@ -12,13 +12,15 @@ app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 
 router.get("/", (req, res, next) => {
-  let temp = books;
-  const shuffled = books.sort(() => 0.5 - Math.random());
-  let selected = shuffled.slice(0, 3);
-  console.log(selected);
-
-  res.render("index", { data: books });
+  let books3 = [];
+  for (i = 0; i < 3; i++) {
+    books3.push(books.books[Math.floor(Math.random() * books.books.length)]);
+  }
+  res.render("index", { data: books3 });
 });
+router.get("/books",(req,res,next)=>{
+    res.render("books")
+})
 router.get("/add", (req, res, next) => {
   res.render("addBook");
 });

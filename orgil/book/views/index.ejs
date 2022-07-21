@@ -9,9 +9,11 @@
   </head>
   <body>
     <div id="books">
-      <% for(i=0 ; i<3; i++){%>
-      <div><%=data.books3%></div>
-      <%}; %>
+      <ul>
+        <% data.forEach((item)=>{%>
+        <li><%=item.title%></li>
+        <%});%>
+      </ul>
     </div>
   </body>
 </html>
