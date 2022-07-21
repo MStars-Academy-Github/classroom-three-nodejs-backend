@@ -2,6 +2,7 @@ const http = require("http");
 const https = require("https");
 const fs = require("fs");
 let link = [];
+const testArray = [];
 https
   .get("https://ghibliapi.herokuapp.com/people", (res) => {
     let data = [];
@@ -14,7 +15,7 @@ https
           if (err) {
             console.error(err);
           } else {
-            console.log("success");
+            // console.log("success");
           }
         }
       );
@@ -42,21 +43,24 @@ function getLink() {
       .get(e, (res) => {
         let ddata = JSON.parse(data);
         res.on("data", (chunk) => {
+          console.log(chunk.image);
           ddata.push(chunk);
+          testArray.push(chunk);
           fs.writeFile(
             "./data/link.json",
-            Buffer.concat(data).toString(),
+            Buffer.concat(ddata).toString(),
             (err) => {
               if (err) {
                 console.error(err);
               } else {
-                console.log("success");
+                // console.log("success");
               }
             }
           );
         });
         res.on("end", () => {
-          convertedData = Buffer.concat(data).toString();
+          convertedData = Buffer.concat(ddata).toString();
+          console.log(convertedData);
         });
       })
       .on("error", (err) => {
@@ -64,30 +68,7 @@ function getLink() {
       });
   });
 }
-https
-  .get("https://ghibliapi.herokuapp.com/people", (res) => {
-    let data = [];
-    res.on("data", (chunk) => {
-      data.push(chunk);
-      fs.writeFile(
-        "./data/people.json",
-        Buffer.concat(data).toString(),
-        (err) => {
-          if (err) {
-            console.error(err);
-          } else {
-            console.log("success");
-          }
-        }
-      );
-    });
-    res.on("end", () => {
-      convertedData = Buffer.concat(data).toString();
-    });
-  })
-  .on("error", (err) => {
-    console.error(err);
-  });
+console.log(Buffer.concat(testArray).toString());
 http
   .createServer((request, response) => {
     let linkData;

@@ -1,0 +1,6 @@
+[
+  { "userId": 10, "bookId": 678 },
+  { "userId": 12, "bookId": 679 },
+  { "userId": 11, "bookId": 670 },
+  { "userId": "120", "bookId": "20001" }
+]
