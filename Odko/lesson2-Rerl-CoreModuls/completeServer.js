@@ -10,13 +10,13 @@ const jsonfile = `${__dirname}/data/test.json`;
 const audiofile = `${__dirname}/data/song.mp3`;
 const imagesfile = `${__dirname}/data/image.jpeg`;
 const videofile = `${__dirname}/data/videoplayback .mp4`;
-
+console.log(jsonfile);
 http
   .createServer(function (request, response) {
-    // response.setHeader('Access-Control-Allow-Origin', '*');
-    // response.setHeader('Access-Control-Request-Method', '*');
-    // response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-    // response.setHeader('Access-Control-Allow-Headers', '*');
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Request-Method", "*");
+    response.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
+    response.setHeader("Access-Control-Allow-Headers", "*");
 
     if (request.url === "/json") {
       return serverJsonFile(request, response);
@@ -146,7 +146,7 @@ http
       response.end("Not Found");
     }
   })
-  .listen(3000);
+  .listen(3002);
 console.log("server running at http://localhost:3000");
 
 function serverJsonFile(request, response) {
