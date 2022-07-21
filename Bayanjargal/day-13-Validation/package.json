@@ -1,8 +1,8 @@
 {
-  "name": "bayanjargal",
+  "name": "day-13-validation",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "validition.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "request": "^2.88.2"
+    "express-validator": "^6.14.2",
+    "nodemon": "^2.0.19"
   }
 }

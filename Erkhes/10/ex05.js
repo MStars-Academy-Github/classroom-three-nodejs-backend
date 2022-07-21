@@ -112,12 +112,11 @@ eventEmitter.on("people", async () => {
   });
 });
 http
-  .createServer((request, response) => {
+  .createServer(async (request, response) => {
     console.log(request.url.slice(8));
     if (request.url.slice(8) == "films") {
       eventEmitter.emit("films");
       response.write(endResult);
-      //   response.end("check films.html");
     } else if (request.url.slice(8) == "people") {
       eventEmitter.emit("people");
       response.write(endResult);
