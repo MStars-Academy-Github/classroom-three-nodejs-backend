@@ -4,15 +4,16 @@ const router = express.Router();
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
+const bookRouter = express.Router();
+const fs = require("fs");
 
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(router);
+app.use("/books", bookRouter);
 
-router.get("/", (req, res, next) => {
-  res.send("Hey Hey!");
-});
+bookRouter.get("/", (req, res, next) => {});
 
 router.get("/add", (req, res, next) => {
   res.render("addBook");
