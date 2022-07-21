@@ -11,8 +11,6 @@ app.get("/users/:userId", (req, res) => {
   users.filter((user) => {
     if (user.userId === temp.userId) {
       return console.log(`User Found ${user.userId}`);
-    } else {
-      return console.log("User not found");
     }
   });
 });
