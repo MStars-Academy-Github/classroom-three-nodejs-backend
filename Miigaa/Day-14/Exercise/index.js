@@ -39,13 +39,93 @@ router.post("/add", (req, res, next) => {
   });
   res.send("api");
 });
+//// Buh nomiin medeelel
 
-app.get("/api", (req, res) => {
+app.get("/books", (req, res) => {
   fs.readFile("./models/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log("error on reading");
     } else {
-      res.send(JSON.parse(data));
+      const ddata = JSON.parse(data);
+      res.send(ddata.books);
+    }
+  });
+});
+/// Random 3 nom
+app.get("/book", (req, res) => {
+  fs.readFile("./models/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log("error on reading");
+    } else {
+      const ddata = JSON.parse(data);
+      const newData = [
+        ddata.books[Math.floor(Math.random() * ddata.books.length)],
+        ddata.books[Math.floor(Math.random() * ddata.books.length)],
+        ddata.books[Math.floor(Math.random() * ddata.books.length)],
+      ];
+      res.render("book", { data: newData });
+      console.log(...newData);
+    }
+  });
+});
+/// Hevlegdsen daraalal
+
+app.get("/book/date", (req, res, next) => {
+  let dates = [];
+  fs.readFile("./models/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log("error on reading");
+    } else {
+      const ddata = JSON.parse(data);
+      ddata.books.map((book) => {
+        dates.push(`${book.published} ${book.title}\n`);
+        dates.sort();
+        return dates;
+      });
+      next(dates);
+    }
+  });
+});
+//// Auhort name
+app.get("/book/author", (req, res) => {
+  fs.readFile("./models/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log("error on reading");
+    } else {
+      const ddata = JSON.parse(data);
+      const newData = ddata.books;
+      res.render("author", { data: newData });
+      console.log(...newData);
+    }
+  });
+});
+//// Id check
+app.get("/book/:id", (req, res, next) => {
+  let book;
+  const bookName = req.params.id;
+  fs.readFile("./models/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log("error on reading");
+    } else {
+      const ddata = JSON.parse(data);
+      ddata.books.filter((e) => {
+        e.isbn = bookName;
+        book = e.title;
+        return book;
+      });
+      res.send(book);
+    }
+  });
+});
+/// Hamgiin ih huudastai nomin medeelel
+app.get("/book/maxpage", (req, res, next) => {
+  fs.readFile("./models/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log("error on reading");
+    } else {
+      const ddata = JSON.parse(data);
+      ddata.books.filter((e) => {});
+      res.send(book);
     }
   });
 });
