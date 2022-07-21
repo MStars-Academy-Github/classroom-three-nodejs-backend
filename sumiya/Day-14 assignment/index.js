@@ -13,11 +13,11 @@ app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(router);
 
-readFile("./public/book.json", "utf-8", (err, booksData) => {
+readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
     console.error(err);
   } else {
-    books = JSON.parse(booksData);
+    books = JSON.parse(Data);
   }
 });
 
@@ -29,14 +29,14 @@ function getMultipleRandom(arr, num) {
 router.get("/", (req, res, next) => {
   res.send("Hey Hey!");
 });
-
+//-----------------------------------------------------------------------------------------
 // 1. Хэрэглэгч номын систем рүү нэвтрэх бүрт санамсаргүй байдлаар 3 номыг хардаг байна
 router.get("/books", (req, res, next) => {
   const filterData = getMultipleRandom(books.books, 3);
   //   console.log(typeof filterData);
   res.render("index", { data: filterData });
 });
-
+//-----------------------------------------------------------------------------------------
 // 2. Хасгийн сүүлээс эхэн хүртэл хэвлэгдсэн дарааллаар номын мэдээллийг авна.
 router.get("/books/sort", (req, res, next) => {
   let sortby = books.books;
@@ -49,7 +49,7 @@ router.get("/books/sort", (req, res, next) => {
   //   console.log(typeof sorted);
   res.send(sorted);
 });
-
+//-----------------------------------------------------------------------------------------
 //3. манай номын сан дахь бүх зохиолчдын нэрийг авмаар байна.
 router.get("/books/authors", (req, res) => {
   const authors = [];
@@ -58,7 +58,7 @@ router.get("/books/authors", (req, res) => {
   });
   res.send(authors);
 });
-
+//-----------------------------------------------------------------------------------------
 //5. ISBN дугаараар ноPIн Pэдээлэл буцаах (localhost/book/isbn_id).
 router.get("/books/isbn/:id", (req, res) => {
   const isbn = JSON.parse(req.params.id);
@@ -71,12 +71,12 @@ router.get("/books/isbn/:id", (req, res) => {
   console.log(newBook);
   res.send(newBook);
 });
-
+//-----------------------------------------------------------------------------------------
 //4. Бүх номын мэдээллийг авах api.
 router.get("/all", (req, res, next) => {
   res.render("allbook", { data: books.books });
 });
-
+//-----------------------------------------------------------------------------------------
 //6. номын нэрээр хайлт хийх api (localhost/search?title=”js”)
 router.get("/books/search/:title", (req, res) => {
   const searchTitle = JSON.stringify(req.params.title);
@@ -95,37 +95,34 @@ router.get("/books/search/:title", (req, res) => {
   console.log(newBook);
   res.send(newBook);
 });
-
+//-----------------------------------------------------------------------------------------
+//7. Хамгийн их хуудастай номын мэдээлэл авах.
 function maxValue(...args) {
   const max = args.reduce((acc, val) => {
-    return acc > val ? acc : val;
+    return acc.pages > val.pages ? acc : val;
   });
   return max;
 }
-//7. Хамгийн их хуудастай номын мэдээлэл авах.
 router.get("/maximiumPageNumber", (req, res) => {
-  const arr = books.books.map((book, i) => {
-    return book[i];
-  });
-  //   console.log(JSON.stringify(arr));
+  let arr = books.books
   const max = maxValue(...arr);
   res.send(max);
 });
+//-----------------------------------------------------------------------------------------
+//7. Хамгийн бага хуудастай номын мэдээлэл авах.
 function minValue(...args) {
   const min = args.reduce((acc, val) => {
-    return acc < val ? acc : val;
+    return acc.pages < val.pages ? acc : val;
   });
   return min;
 }
-
-//7. Хамгийн бага хуудастай номын мэдээлэл авах.
 router.get("/minimiumPageNumber", (req, res) => {
-  const arr = books.books.pages;
+  const arr = books.books;
+  console.log(typeof arr);
   const minimium = minValue(...arr);
-  //   console.log(newBook);
   res.send(minimium);
 });
-
+//-----------------------------------------------------------------------------------------
 router.get("/add", (req, res, next) => {
   res.render("addBook");
 });
