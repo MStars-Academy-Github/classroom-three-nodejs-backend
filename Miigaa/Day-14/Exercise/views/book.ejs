@@ -8,6 +8,7 @@
   </head>
   <body>
     <div>
+<<<<<<< HEAD
         <% data.map((e) => {%>
             <ul>
                 <h2 style="list-style: none;">
@@ -33,5 +34,38 @@
               </ul>
             <%});%>
 
+=======
+      <ul>
+        <h2 style="list-style: none"><b>Title:</b><%=data[0].title%></h2>
+        <li style="list-style: none"><b>Subtitle:</b><%=data[0].subtitle%></li>
+        <li style="list-style: none"><b>Author:</b><%=data[0].author%></li>
+        <li style="list-style: none"><b>Pages:</b><%=data[0].pages%></li>
+        <li style="list-style: none">
+          <b>Description:</b>
+          <%=data[0].description%>
+        </li>
+      </ul>
+      <ul>
+        <h2 style="list-style: none"><b>Title:</b><%=data[1].title%></h2>
+        <li style="list-style: none"><b>Subtitle:</b><%=data[1].subtitle%></li>
+        <li style="list-style: none"><b>Author:</b><%=data[1].author%></li>
+        <li style="list-style: none"><b>Pages:</b><%=data[1].pages%></li>
+        <li style="list-style: none">
+          <b>Description:</b>
+          <%=data[1].description%>
+        </li>
+      </ul>
+
+      <ul>
+        <h2 style="list-style: none"><b>Title:</b><%=data[2].title%></h2>
+        <li style="list-style: none"><b>Subtitle:</b><%=data[2].subtitle%></li>
+        <li style="list-style: none"><b>Author:</b><%=data[2].author%></li>
+        <li style="list-style: none"><b>Pages:</b><%=data[2].pages%></li>
+        <li style="list-style: none">
+          <b>Description:</b><%=data[2].description%>
+        </li>
+      </ul>
+    </div>
+>>>>>>> 8e6c2f97b2e0582dadfe6957b82eb6aa23fc9479
   </body>
 </html>
