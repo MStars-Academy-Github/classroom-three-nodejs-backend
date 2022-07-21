@@ -5,7 +5,7 @@ const PORT = process.env.PORT;
 const router = express.Router();
 const bookJson = require("./data/book.json");
 const moment = require("moment");
-const { parse } = require("dotenv");
+
 /*
 EJS HTML
 */
@@ -51,31 +51,31 @@ router.get("/book", (req, res, next) => {
   });
 
   // DASGAL-4
-
+  const allBook = bookJson;
   res.render("index", {
     randomBook1: randomBook1,
     author: author,
     publishedDay: publishedDay,
+    allBook: allBook,
   });
+});
+
+/*  
+    EJS ashigaagui 
+    DASGAL-5
+*/
+router.post("/book/:name", (req, res, next) => {
+  if ((req.params.name = "isbn_id")) {
+    console.log(req.body);
+  }
+
+  res.send("hi");
 });
 
 app.use(router);
 app.listen(PORT, () => {
   console.log("my app");
 });
-
-// router.get("/ramBook", (req, res, next) => {
-//   let data = bookJson;
-//   const ranBook = data.books.map((title) => {
-//     return title.title;
-//   });
-//   function threeBookRandom(arr, num) {
-//     const shuffled = [...arr].sort(() => 0.5 - Math.random());
-//     return shuffled.slice(0, num);
-//   }
-//   const randomBook1 = threeBookRandom(ranBook, 3);
-//   res.send(randomBook1);
-// });
 
 /* 
   RAMDOM BOOK ONE
