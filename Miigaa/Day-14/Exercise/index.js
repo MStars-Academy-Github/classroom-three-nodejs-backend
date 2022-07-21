@@ -124,11 +124,7 @@ app.get("/book/maxpage", (req, res, next) => {
       console.log("error on reading");
     } else {
       const ddata = JSON.parse(data);
-      ddata.books.filter((e) => {
-        e.isbn = bookName;
-        book = e.title;
-        return book;
-      });
+      ddata.books.filter((e) => {});
       res.send(book);
     }
   });
