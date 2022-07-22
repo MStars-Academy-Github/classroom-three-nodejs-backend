@@ -5,21 +5,16 @@ const PORT = process.env.PORT;
 const router = express.Router();
 const bookJson = require("./data/book.json");
 const moment = require("moment");
+var parseUrl = require("body-parser");
+const fs = require("fs");
 
 /*
 EJS HTML
 */
+
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
-
-router.get("/", (req, res, next) => {
-  res.send("hey");
-});
-
-router.get("/add", (req, res, next) => {
-  res.render("addBook");
-});
 
 /* EJS */
 router.get("/book", (req, res, next) => {
@@ -66,7 +61,7 @@ router.get("/book", (req, res, next) => {
 */
 app.use(express.json());
 router.post("/book/:name", (req, res, next) => {
-  if ((req.params.name = "isbn_id")) {
+  if (req.params.name === "isbn_id") {
     // console.log(req.body.isbn);
     let data = bookJson;
     const dd = data.books.map((a) => {
@@ -76,10 +71,95 @@ router.post("/book/:name", (req, res, next) => {
     });
     // console.log(dd);
     // DASGAL-6
-  } else if (req.params.name == "aa") {
-    console.log(req.params.name);
+  } else if (req.params.name === "search") {
+    // console.log(req.params.name);
   }
   res.send("hi");
+});
+
+router.get("/book1/:name", (req, res, next) => {
+  /* DASGAL-7  MAX pages */
+  if (req.params.name === "max") {
+    let data = bookJson;
+    const element = data.books.map((a) => {
+      return a.pages;
+    });
+    const element1 = Math.max(...element);
+    const max = data.books.filter((a) => {
+      if (a.pages >= element1) {
+        return a;
+      }
+    });
+    // console.log(max);
+    /* DASGAL-8 MIN pages */
+  } else if (req.params.name === "min") {
+    let data = bookJson;
+    const element = data.books.map((a) => {
+      return a.pages;
+    });
+    const element1 = Math.min(...element);
+    const min = data.books.filter((a) => {
+      if (a.pages <= element1) {
+        return a;
+      }
+    });
+
+    // console.log(min);
+    /* DASGAL-9  */
+  } else if (req.params.name === "publisher") {
+    let data = bookJson;
+    let mf = 1;
+    let m = 0;
+    let item;
+    for (let i = 0; i < data.books.length; i++) {
+      for (let j = i; j < data.books.length; j++) {
+        if (data.books[i] == data.books[j]) {
+          m++;
+          if (m > mf) {
+            mf = m;
+            item = arr[i];
+          }
+        }
+      }
+      m = 0;
+    }
+    console.log(mf);
+    console.log(m);
+    console.log(item);
+  }
+  res.send("hi");
+});
+
+/* ADD BOOK EJS */
+router.get("/addBook", (req, res, next) => {
+  let data1 = bookJson.books;
+  res.render("addBook", { data1: data1 });
+});
+
+let encodeUrl = parseUrl.urlencoded({ extended: false });
+router.post("/form", encodeUrl, (req, res, next) => {
+  let data = bookJson.books;
+  const dataa = req.body;
+
+  fs.readFile("./data/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const readData = JSON.parse(data);
+      readData.books.push(dataa);
+      fs.writeFile("./data/book.json", JSON.stringify(readData), (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("success");
+        }
+      });
+    }
+  });
+
+  data.push(dataa);
+
+  res.render("form", { dataa: dataa, data: data });
 });
 
 app.use(router);
