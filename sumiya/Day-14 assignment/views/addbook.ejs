@@ -5,14 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/form.css" />
   </head>
   <body>
-    <form action="POST">
-      <input type="text" />
-      <select>
-        <option>1</option>
-        <option>2</option>
-      </select>
+    <form action="/add" method="post" class="form">
+      <h1>Submit Form</h1>
+      <div class="form-example">
+        <label for="name">Enter your isbn: </label>
+        <input type="text" class="input" name="isbn" id="name" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your title: </label>
+        <input type="title" class="input" name="title" id="text" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your subtitle: </label>
+        <input type="text" class="input" name="subtitle" id="text" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your author: </label>
+        <input type="text" class="input" name="author" id="text" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your published: </label>
+        <input type="text" class="input" name="published" id="text" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your publisher: </label>
+        <input type="text" class="input" name="publisher" id="text" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your pages: </label>
+        <input type="text" class="input" name="pages" id="text" required />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your description: </label>
+        <input
+          type="text"
+          class="input"
+          name="description"
+          id="text"
+          required
+        />
+      </div>
+      <div class="form-example">
+        <label for="text">Enter your website: </label>
+        <input type="text" class="input" name="website" id="text" required />
+      </div>
+      <div class="form-example">
+        <input type="submit" value="Submit!" />
+      </div>
     </form>
   </body>
 </html>
