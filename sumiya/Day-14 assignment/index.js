@@ -147,7 +147,8 @@ router.get("/publisher", (req, res) => {
   }
   res.send(count);
 });
-
+//-----------------------------------------------------------------------------------------
+//1. ejs ашиглан9 a. Шинэ ном нэмэх форм
 router.get("/add", (req, res, next) => {
   res.render("addBook");
 });
@@ -172,6 +173,6 @@ router.post("/add", (req, res, next) => {
   res.end("success");
 });
 
-app.listen(PORT, () => {
+app.listen(PORT || 3000, () => {
   console.log("My app is running");
 });
