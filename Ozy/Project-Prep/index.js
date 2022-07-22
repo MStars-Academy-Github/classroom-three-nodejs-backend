@@ -111,16 +111,26 @@ router.get("/add", (req, res) => {
 });
 
 router.post("/add/book", (req, res) => {
-  let isbn = req.body.isbn
-  let title = req.body.title
-  let subtitle = req.body.subtitle
-  let author = req.body.author
-  let published = req.body.published
-  let publisher = req.body.publisher
-  let pages = req.body.pages
-  let description = req.body.description
-  let website = req.body.website
-  console.log(isbn + title + subtitle + author + published + publisher + pages +description +website);
+  let isbn = req.body.isbn;
+  let title = req.body.title;
+  let subtitle = req.body.subtitle;
+  let author = req.body.author;
+  let published = req.body.published;
+  let publisher = req.body.publisher;
+  let pages = req.body.pages;
+  let description = req.body.description;
+  let website = req.body.website;
+  console.log(
+    isbn +
+      title +
+      subtitle +
+      author +
+      published +
+      publisher +
+      pages +
+      description +
+      website
+  );
   res.send("Амжилттай хадгалагдлаа");
 });
 
