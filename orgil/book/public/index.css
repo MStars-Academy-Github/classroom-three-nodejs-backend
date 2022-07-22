@@ -14,10 +14,10 @@
 #random3 li {
   list-style: none;
   width: 80vw;
-  padding: 3rem;
+  padding: 2rem;
   border: 1px solid black;
   margin: 1rem;
-  background-color: lightslategrey;
+  background-color: lightblue;
 }
 #addButton {
   display: flex;
@@ -30,4 +30,13 @@
   border: 1px solid;
   border-radius: 15px;
   color: white;
+}
+
+.header ul {
+  list-style: none;
+  display: flex;
+  margin: 2rem 3rem 0 3rem;
+}
+.header ul li {
+  margin: 0 2rem 0 0;
 }

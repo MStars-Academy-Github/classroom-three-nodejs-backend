@@ -7,15 +7,28 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css" />
   </head>
+  <header class="header">
+    <ul>
+      <li>Номнууд</li>
+      <li>Шинэ ном нэмэх</li>
+    </ul>
+  </header>
   <body>
-    <div id="top">Шинэ ном нэмэх</div>
     <div id="books">
       <ul id="random3">
         <% data.forEach((item)=>{%>
-        <li><%=item.title%></li>
+        <li>
+          <p>Title: <%=item.title%></p>
+          <p>Subtitle: <%=item.subtitle%></p>
+          <p>Author: <%=item.author%></p>
+          <p>Description: <%=item.description%></p>
+          <p>Publisher: <%=item.publisher%></p>
+          <p>Published: <%=item.published%></p>
+          <p>Pages: <%=item.pages%></p>
+        </li>
         <%});%>
       </ul>
     </div>
-    <button id="addButton">нэмэх</button>
+    <a href="./add"><button id="addButton">нэмэх</button></a>
   </body>
 </html>
