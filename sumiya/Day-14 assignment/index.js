@@ -1,4 +1,6 @@
+const { count } = require("console");
 const express = require("express");
+const { body } = require("express-validator");
 const validator = require("express-validator");
 const fs = require("fs");
 const moment = require("moment");
@@ -6,12 +8,16 @@ const router = express.Router();
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 app.use(router);
+app.use(bodyParser.json());
 
 readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
@@ -104,7 +110,7 @@ function maxValue(...args) {
   return max;
 }
 router.get("/maximiumPageNumber", (req, res) => {
-  let arr = books.books
+  let arr = books.books;
   const max = maxValue(...arr);
   res.send(max);
 });
@@ -123,10 +129,50 @@ router.get("/minimiumPageNumber", (req, res) => {
   res.send(minimium);
 });
 //-----------------------------------------------------------------------------------------
+//9. Хэвлэлийн компаниудыг жагсаан дор бүрнээ хэдэн ном бидэнд нийлүүлсэн талаарх мэдээлэл авах
+router.get("/publisher", (req, res) => {
+  const publisher = [];
+  const count = {};
+  books.books.map((a) => {
+    return publisher.push(a.publisher);
+  });
+  for (let i = 0; i <= publisher.length; i++) {
+    let counted = publisher[i];
+    console.log(counted);
+    if (count[counted] == null) {
+      count[counted] = 1;
+    } else {
+      count[counted]++;
+    }
+  }
+  res.send(count);
+});
+//-----------------------------------------------------------------------------------------
+//1. ejs ашиглан9 a. Шинэ ном нэмэх форм
 router.get("/add", (req, res, next) => {
   res.render("addBook");
 });
+router.post("/add", (req, res, next) => {
+  readFile("./public/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      let book = JSON.parse(data);
+      let newData = req.body;
+      book.books.push(newData);
+      console.log(newData);
+      fs.writeFile("./public/book.json", JSON.stringify(book), (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("success");
+        }
+      });
+    }
+  });
+  res.end("success");
+});
 
-app.listen(PORT, () => {
+app.listen(PORT || 3000, () => {
   console.log("My app is running");
 });

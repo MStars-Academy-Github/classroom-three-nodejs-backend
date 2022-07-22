@@ -4,13 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/allbook.css" />
     <title>Document</title>
   </head>
   <body>
-    <ul>
+    <div class="gadna">
       <%data.forEach((date)=>{%>
-      <li><%= date.title %></li>
+      <div class="card">
+        <div class="container">
+          <h4>Isbn : <b><%= date.isbn %></b></h4>
+          <p>Title : <%= date.title %></p>
+          <p>Subtitle : <%= date.subtitle %></p>
+          <p>Author : <%= date.author %></p>
+          <p>Published : <%= date.published %></p>
+          <p>Publisher : <%= date.publisher %></p>
+          <p>Pages : <%= date.pages %></p>
+          <p>Description : <%= date.description %></p>
+          <p>Website : <%= date.website %></p>
+        </div>
+      </div>
       <%});%>
-    </ul>
+    </div>
   </body>
 </html>

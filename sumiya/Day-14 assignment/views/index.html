@@ -4,19 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="../public/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <div class="gadna">
-      <%data.forEach((date)=>{%>
-      <div class="card">
-        <div class="container">
-          <h4>Title : <b><%= date.title %></b></h4>
-          <p>Publisher : <%= date.publisher %></p>
-        </div>
+    <div class="card">
+      <img src="img_avatar.png" alt="Avatar" style="width: 100%" />
+      <div class="container">
+        <h4><b>John Doe</b></h4>
+        <p>Architect & Engineer</p>
       </div>
-      <%});%>
     </div>
   </body>
 </html>

@@ -1,0 +1,17 @@
+.input {
+  width: 50vw;
+}
+.form-example {
+  width: 50vw;
+  height: 5vh;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.form-example input {
+  font-size: xx-large;
+}
