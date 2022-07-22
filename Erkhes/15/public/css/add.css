@@ -1,0 +1,32 @@
+body {
+  background: black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+p {
+  color: black;
+}
+.title {
+  margin-top: 5%;
+  /* display: none; */
+  text-align: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  justify-content: center;
+  text-align: center;
+}
+form input {
+  padding-bottom: 5%;
+  margin: 3%;
+}
+form button {
+  margin: 3%;
+  background-color: darkcyan;
+  border: none;
+  border-radius: 10px;
+  padding: 3%;
+}
