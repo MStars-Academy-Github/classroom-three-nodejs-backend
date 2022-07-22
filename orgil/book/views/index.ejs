@@ -9,12 +9,13 @@
   </head>
   <header class="header">
     <ul>
-      <li>Номнууд</li>
-      <li>Шинэ ном нэмэх</li>
+      <li><a href="/">Нүүр</a></li>
+      <li><a href="/books">Номнууд</a></li>
+      <li><a href="/add">Шинэ ном нэмэх</a></li>
     </ul>
   </header>
   <body>
-    <div id="books">
+    <div id="booksMain">
       <ul id="random3">
         <% data.forEach((item)=>{%>
         <li>
@@ -29,6 +30,5 @@
         <%});%>
       </ul>
     </div>
-    <a href="./add"><button id="addButton">нэмэх</button></a>
   </body>
 </html>

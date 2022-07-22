@@ -5,10 +5,15 @@ const router = express.Router();
 const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
+app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+const { body, validationResult } = require("express-validator");
 
 router.get("/books", (req, res, next) => {
   fs.readFile(
@@ -198,11 +203,52 @@ router.get("/search", (req, res, next) => {
   //   res.send("test");
 });
 router.get("/", (req, res, next) => {
-  res.send("this is working");
-});
+  fs.readFile(
+    "/Users/mstars_lab3_02/Desktop/classroom-three-nodejs-backend/Erkhes/14-express-router/public/book.json",
+    "utf-8",
+    (err, data) => {
+      if (err) {
+        console.log("err");
+      } else {
+        const ddata = JSON.parse(data);
 
+        // res.send(ddata);
+        res.render("index", { data: ddata.books });
+      }
+    }
+  );
+});
+const userValid = () => {
+  return [
+    body("ISBN").isLength({ min: 10, max: 13 }),
+    body("title").isString().matches(/(\w)/).withMessage("name must be letters"),
+    body("pages").isInt(),
+    body("name").isString().matches(/(\w)/).withMessage("name must be letters"),
+    body('published').matches(/\^(0[1-9]|1[012])[- /.] (0[1-9]|[12][0-9]|3[01])[- /.] (19|20)\d\d$./)
+  ];
+};
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    next();
+  }
+  const extractedErrors = [];
+  errors
+    .array()
+    .forEach((err) => extractedErrors.push({ [err.param]: err.msg }));
+  //   console.log(errors);
+  if (errors.length !== 0) {
+    return res.status(400).json({
+      errors: extractedErrors,
+    });
+  }
+};
 router.get("/add", (req, res, next) => {
   res.render("addBooks");
+});
+router.post("/add/book", userValid()  , (req, res) => {
+  console.log(req.body.title);
+  res.send(req.body);
 });
 app.use(router);
 app.listen(PORT);

@@ -4,30 +4,81 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/add.css" type="text/css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
     <title>Document</title>
   </head>
   <body>
-    <!-- submit hiiheer yvuuldag form -->
-    <% const infos = ["ISBN" , "title" ,'subtitle' , 'author' , 'published' ,
-    'publisher' , 'pages' , 'description' , 'website' ] %>
+    <form action="/add/book" method="post" id="form">
+      <div style="margin: auto; width: 50vw">
+        <h3 style="text-align: center">Шинэ ном нэмэх</h3>
+        <label for="isbn">Isbn</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="isbn"
+        />
+        <label for="title">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="title"
+        />
+        <label for="subtitle">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="subtitle"
+        />
+        <label for="author">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="author"
+        />
+        <label for="published">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="published"
+        />
+        <label for="publisher">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="publisher"
+        />
+        <label for="pages">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="pages"
+        />
+        <label for="description">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="description"
+        />
+        <label for="website">Title</label>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+          name="website"
+        />
 
-    <div>
-      <p class="title">Шинэ ном нэмэх</p>
-      <form action="POST">
-        <% for (item of infos) { %>
-        <!-- <li><%= item %></li> -->
-        <input type="text" placeholder="<%= item %>" />
-        <% } %>
-
-        <button>НЭМЭХ</button>
-      </form>
-    </div>
+        <button
+          type="submit"
+          style="
+            width: 100%;
+            background-color: green;
+            border: none;
+            border-radius: 10px;
+            height: 30px;
+            color: white;
+          "
+        >
+          Нэмэх
+        </button>
+      </div>
+    </form>
   </body>
 </html>

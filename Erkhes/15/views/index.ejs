@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/index.css" type="text/css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% for (item of data) { %>
+    <!-- <li><%= item %></li> -->
+    <div>
+      <h5><%= item.title%></h5>
+      <p>SUBTITLE : <%= item.subtitle%></p>
+      <p>AUTHOR : <%= item.author%></p>
+      <p>ISBN : <%= item.isbn%></p>
+      <p>PUBLISHER : <%= item.publisher%></p>
+      <p>DESCRIPTION<%= item.description%></p>
+      <p>
+        WEBSITE
+        <a href="<%= item.website%>"><%= item.website%></a>
+      </p>
+      <hr />
+    </div>
+
+    <% } %>
+  </body>
+</html>
