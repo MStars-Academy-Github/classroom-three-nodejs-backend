@@ -102,6 +102,18 @@ router.get("/search", (req, res) => {
   res.send(result);
 });
 
+router.get("/add", (req, res) => {
+  res.render("addBook");
+});
+
+router.post("/add/book", (req, res) => {
+  res.send("Амжилттай хадгалагдлаа");
+});
+
+router.get("/booksdetails", (req, res) => {
+  console.log(books.books);
+  res.render("index", { books: books.books });
+});
 app.listen(PORT, () => {
   console.log("Running");
 });
