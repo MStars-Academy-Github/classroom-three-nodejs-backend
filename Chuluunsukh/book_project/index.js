@@ -24,9 +24,7 @@ app.set("view engine", "ejs");
 
 app.use(router);
 
-router.get("/", (req, res, next) => {
-  res.send("Hey Hey!");
-});
+
 
 // router.get("/add", (req, res, next) => {
 //   res.render("addBook");
@@ -59,34 +57,17 @@ router.post("/add", (req, res, next) => {
 // reading book file section
 
 app.get("/books", (req, res) => {
-  fs.readFile("./public/book.json", "utf-8", (err, data) => {
-    if (err) {
-      console.log("So sad, Error has occured to loading this page");
-    } else {
-      const ddata = JSON.parse(data);
-      res.send(ddata.books);
+      res.send(books.books);
     }
-  });
-});
+);
 
 // selecting 3 books randomly
 
-app.get("/book", (req, res) => {
-  fs.readFile("./public/book.json", "utf-8", (err, data) => {
-    if (err) {
-      console.log("So sad, Error has occured to loading this page");
-    } else {
-      const ddata = JSON.parse(data);
-      const newData = [
-        ddata.books[Math.floor(Math.random() * ddata.books.length)],
-        ddata.books[Math.floor(Math.random() * ddata.books.length)],
-        ddata.books[Math.floor(Math.random() * ddata.books.length)],
-      ];
-      res.render("index", { data: newData });
-      console.log(...newData);
-    }
+app.get("/", (req, res) => {
+      res.send( books.books[Math.floor(Math.random() * books.books.length)],
+      books.books[Math.floor(Math.random() * books.books.length)],
+      books.books[Math.floor(Math.random() * books.books.length)],);
   });
-});
 
 // Publisher section
 

@@ -8,14 +8,26 @@
   <body>
     <div>
       <ul>
-        <h2 style="list-style: none"><b>Title:</b><%=data[0].title%></h2>
-        <li style="list-style: none"><b>Subtitle:</b><%=data[0].subtitle%></li>
-        <li style="list-style: none"><b>Author:</b><%=data[0].author%></li>
-        <li style="list-style: none"><b>Pages:</b><%=data[0].pages%></li>
-        <li style="list-style: none">
-          <b>Description:</b>
-          <%=data[0].description%>
-        </li>
+        <%data.forEach((item)=>{%>
+        <p style="font-weight: bold">Title</p>
+        <li><%=item.title%></li>
+        <p style="font-weight: bold">Subtitle</p>
+        <li><%=item.subtitle%></li>
+        <p style="font-weight: bold">Author</p>
+        <li><%=item.author%></li>
+        <p style="font-weight: bold">Published</p>
+        <li><%=item.published%></li>
+        <p style="font-weight: bold">Publisher</p>
+        <li><%=item.publisher%></li>
+        <p style="font-weight: bold">Pages</p>
+        <li><%=item.pages%></li>
+        <p style="font-weight: bold">Description</p>
+        <li><%=item.description%></li>
+        <p style="font-weight: bold">Isbn</p>
+        <li><%=item.isbn%></li>
+        <p style="font-weight: bold">Website</p>
+        <li><%=item.website%></li>
+        <%});%>
       </ul>
     </div>
   </body>
