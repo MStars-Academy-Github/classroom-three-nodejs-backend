@@ -52,12 +52,12 @@ bookRouter.get("/byDate", (req, res, next) => {
   // res.send(sorted);
 });
 
-bookRouter.get("/isbn_id", (req, res) => {
-  let isbn = [];
-  books.books.map((book) => {
-    return isbn.push(book.isbn);
+bookRouter.get("/isbn/:id", (req, res) => {
+  let isbnID = req.params.id;
+  let result = books.books.filter((book) => {
+    return book.isbn === isbnID;
   });
-  res.send(isbn);
+  res.send(result);
 });
 
 bookRouter.get("/maxPage", (req, res) => {
@@ -91,10 +91,29 @@ bookRouter.get("/publishers", (req, res, next) => {
   res.send(count);
 });
 
-router.get("/add", (req, res, next) => {
+router.get("/search", (req, res) => {
+  let title = req.query.title;
+  const result = books.books.filter((book) => {
+    return Object.values(book.title)
+      .join("")
+      .toLowerCase()
+      .includes(title.toLowerCase());
+  });
+  res.send(result);
+});
+
+router.get("/add", (req, res) => {
   res.render("addBook");
 });
 
+router.post("/add/book", (req, res) => {
+  res.send("Амжилттай хадгалагдлаа");
+});
+
+router.get("/booksdetails", (req, res) => {
+  console.log(books.books);
+  res.render("index", { books: books.books });
+});
 app.listen(PORT, () => {
   console.log("Running");
 });

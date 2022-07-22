@@ -7,12 +7,35 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="POST">
-      <input type="text" />
-      <select name="" id="">
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
+    <form action="/add/book" method="post">
+      <div style="margin: auto; width: 50vw">
+        <h3 style="text-align: center">Шинэ ном нэмэх</h3>
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+        />
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+        />
+        <input
+          type="text"
+          style="display: block; width: 100%; margin-bottom: 20px"
+        />
+        <button
+          type="submit"
+          style="
+            width: 100%;
+            background-color: green;
+            border: none;
+            border-radius: 10px;
+            height: 30px;
+            color: white;
+          "
+        >
+          Нэмэх
+        </button>
+      </div>
     </form>
   </body>
 </html>

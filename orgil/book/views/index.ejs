@@ -5,15 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="index.css" />
   </head>
+  <header class="header">
+    <ul>
+      <li>Номнууд</li>
+      <li>Шинэ ном нэмэх</li>
+    </ul>
+  </header>
   <body>
     <div id="books">
-      <ul>
+      <ul id="random3">
         <% data.forEach((item)=>{%>
-        <li><%=item.title%></li>
+        <li>
+          <p>Title: <%=item.title%></p>
+          <p>Subtitle: <%=item.subtitle%></p>
+          <p>Author: <%=item.author%></p>
+          <p>Description: <%=item.description%></p>
+          <p>Publisher: <%=item.publisher%></p>
+          <p>Published: <%=item.published%></p>
+          <p>Pages: <%=item.pages%></p>
+        </li>
         <%});%>
       </ul>
     </div>
+    <a href="./add"><button id="addButton">нэмэх</button></a>
   </body>
 </html>
