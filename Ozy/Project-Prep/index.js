@@ -19,6 +19,9 @@ app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(router);
 app.use("/books", bookRouter);
+app.listen(PORT, () => {
+  console.log("Running");
+});
 
 readFile("./public/book.json", "utf-8", (err, booksData) => {
   if (err) {
@@ -28,6 +31,9 @@ readFile("./public/book.json", "utf-8", (err, booksData) => {
   }
 });
 
+//******/ APIs \******\\
+
+//<--------> 1. Random 3 books <-------->\\
 router.get("/", (req, res, next) => {
   res.send([
     books.books[Math.floor(Math.random() * books.books.length)],
@@ -36,6 +42,16 @@ router.get("/", (req, res, next) => {
   ]);
 });
 
+//<--------> 2. Sort by date <-------->\\
+bookRouter.get("/byDate", (req, res, next) => {
+  let byDate = books.books;
+  let sorted = byDate.sort((a, b) => {
+    JSON.stringify(a.published) - JSON.stringify(b.published);
+  });
+  console.log(sorted);
+});
+
+//<--------> 3. Authors <-------->\\
 router.get("/authors", (req, res) => {
   let authors = [];
   books.books.map((book) => {
@@ -44,18 +60,12 @@ router.get("/authors", (req, res) => {
   res.send(authors);
 });
 
+//<--------> 4. All books <-------->\\
 bookRouter.get("/", (req, res, next) => {
   res.send(books.books);
 });
-bookRouter.get("/byDate", (req, res, next) => {
-  let byDate = books.books;
-  let sorted = byDate.sort((a, b) => {
-    JSON.stringify(a.published) - JSON.stringify(b.published);
-  });
-  console.log(sorted);
-  // res.send(sorted);
-});
 
+//<--------> 5. Search by isbn <-------->\\
 bookRouter.get("/isbn/:id", (req, res) => {
   let isbnID = req.params.id;
   let result = books.books.filter((book) => {
@@ -64,12 +74,27 @@ bookRouter.get("/isbn/:id", (req, res) => {
   res.send(result);
 });
 
+//<--------> 6. Search by Title(query param) <-------->\\
+router.get("/search", (req, res) => {
+  let title = req.query.title;
+  const result = books.books.filter((book) => {
+    return Object.values(book.title)
+      .join("")
+      .toLowerCase()
+      .includes(title.toLowerCase());
+  });
+  res.send(result);
+});
+
+//<--------> 7. Search by page(max) <-------->\\
 bookRouter.get("/maxPage", (req, res) => {
   let maxPage = books.books.reduce((prev, current) =>
     prev.pages > current.pages ? prev : current
   );
   res.send(maxPage);
 });
+
+//<--------> 8. Search by page(min) <-------->\\
 bookRouter.get("/minPage", (req, res) => {
   let minPage = books.books.reduce((prev, current) =>
     prev.pages < current.pages ? prev : current
@@ -77,6 +102,7 @@ bookRouter.get("/minPage", (req, res) => {
   res.send(minPage);
 });
 
+//<--------> 9. Publishers <-------->\\
 bookRouter.get("/publishers", (req, res, next) => {
   let publishers = [];
   let count = {};
@@ -95,17 +121,9 @@ bookRouter.get("/publishers", (req, res, next) => {
   res.send(count);
 });
 
-router.get("/search", (req, res) => {
-  let title = req.query.title;
-  const result = books.books.filter((book) => {
-    return Object.values(book.title)
-      .join("")
-      .toLowerCase()
-      .includes(title.toLowerCase());
-  });
-  res.send(result);
-});
+//******/ Server side rendering \******\\
 
+//<--------> 1. Add new book <-------->\\
 router.get("/add", (req, res) => {
   res.render("addBook");
 });
@@ -134,9 +152,7 @@ router.post("/add/book", (req, res) => {
   res.send("Амжилттай хадгалагдлаа");
 });
 
+//<--------> 2. Details of books <-------->\\
 router.get("/booksdetails", (req, res, next) => {
   res.render("index", { books: books.books });
-});
-app.listen(PORT, () => {
-  console.log("Running");
 });
