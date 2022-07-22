@@ -47,7 +47,6 @@ router.post("/add", (req, res, next) => {
       }
     });
     res.end("amjilttai nemegdlee")
-   
 });
 app.use(express.static("public"));
 router.get("/home/:name", (req, res, next) => {
@@ -83,8 +82,9 @@ router.get("/home/:name", (req, res, next) => {
     const oReillyMedia = books.books.filter(
       (book) => book.publisher == "O'Reilly Media"
     ).length;
-    console.log(noStarchPressBooks);
-    console.log(oReillyMedia);
+    const apress  = books.books.filter(book=>book.publisher.includes("Apress")).length
+    const Independently= books.books.filter(book=>book.publisher == "Independently published").length
+    res.send(`No Starch Press : ${noStarchPressBooks} ,O'Reilly Media :${oReillyMedia} , Apress:${apress} , Independently published:${Independently}`)
   }
 });
 router.get("/search/:title", (req, res, next) => {
