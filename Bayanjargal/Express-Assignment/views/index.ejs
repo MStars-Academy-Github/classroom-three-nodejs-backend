@@ -5,12 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="http://localhost:3000/css/main.css" />
   </head>
   <body>
-    <ul>
-      <% data.forEach((item)=>{%>
-      <li><%=item.title%></li>
-      <%});%>
-      </ul>
+    <div class="content">
+      <div class="book-name">
+        <% data.forEach((item)=>{%>
+        <div class="book-info">
+          <div class="title">Title:<%=item.title%></div>
+          <div><span class="author">Author:</span><%=item.author%></div>
+          <div><span class="desc">Description:</span><%=item.description%></div>
+          <div><span class="number"> number:</span><%=item.pages%></div>
+        </div>
+        <%});%>
+      </div>
+      <div class="content-button">
+        <button onclick="location.href='http://localhost:3000/add'">
+          Шинэ ном нэмэх
+        </button>
+      </div>
+    </div>
   </body>
 </html>
