@@ -1,0 +1,33 @@
+#top {
+  margin: 3vh 3.1vw;
+  display: flex;
+  justify-content: center;
+}
+#books {
+  display: flex;
+  justify-content: center;
+}
+#random3 {
+  margin: 2vh 2vw 5vh 2vw;
+  padding: 0;
+}
+#random3 li {
+  list-style: none;
+  width: 80vw;
+  padding: 3rem;
+  border: 1px solid black;
+  margin: 1rem;
+  background-color: lightslategrey;
+}
+#addButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 30px;
+  width: 100px;
+  background-color: green;
+  border: 1px solid;
+  border-radius: 15px;
+  color: white;
+}
