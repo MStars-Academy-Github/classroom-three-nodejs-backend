@@ -28,9 +28,9 @@ router.get("/", (req, res, next) => {
   res.send("Hey Hey!");
 });
 
-router.get("/add", (req, res, next) => {
-  res.render("addBook");
-});
+// router.get("/add", (req, res, next) => {
+//   res.render("addBook");
+// });
 router.post("/add", (req, res, next) => {
   req.on("data", (chunk) => {
     console.log(`Data chunk available: ${chunk}`);

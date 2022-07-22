@@ -1,0 +1,42 @@
+#top {
+  margin: 3vh 3.1vw;
+  display: flex;
+  justify-content: center;
+}
+#books {
+  display: flex;
+  justify-content: center;
+}
+#random3 {
+  margin: 2vh 2vw 5vh 2vw;
+  padding: 0;
+}
+#random3 li {
+  list-style: none;
+  width: 80vw;
+  padding: 2rem;
+  border: 1px solid black;
+  margin: 1rem;
+  background-color: lightblue;
+}
+#addButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 30px;
+  width: 100px;
+  background-color: green;
+  border: 1px solid;
+  border-radius: 15px;
+  color: white;
+}
+
+.header ul {
+  list-style: none;
+  display: flex;
+  margin: 2rem 3rem 0 3rem;
+}
+.header ul li {
+  margin: 0 2rem 0 0;
+}
