@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <% books.forEach((item)=>{%>
+      <p style="font-weight: bold">Title</p>
+      <li><%=item.title%></li>
+      <p style="font-weight: bold">Subtitle</p>
+      <li><%=item.subtitle%></li>
+      <p style="font-weight: bold">Author</p>
+      <li><%=item.author%></li>
+      <p style="font-weight: bold">Published</p>
+      <li><%=item.published%></li>
+      <p style="font-weight: bold">Publisher</p>
+      <li><%=item.publisher%></li>
+      <p style="font-weight: bold">Pages</p>
+      <li><%=item.pages%></li>
+      <p style="font-weight: bold">Description</p>
+      <li><%=item.description%></li>
+      <p style="font-weight: bold">Isbn</p>
+      <li><%=item.isbn%></li>
+      <p style="font-weight: bold">Website</p>
+      <li><%=item.website%></li>
+      <%});%>
+    </ul>
+  </body>
+</html>

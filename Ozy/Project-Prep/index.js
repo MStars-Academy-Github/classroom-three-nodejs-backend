@@ -8,8 +8,12 @@ const bookRouter = express.Router();
 const fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
+const bodyParser = require("body-parser");
 let books;
 
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
@@ -102,6 +106,27 @@ router.get("/search", (req, res) => {
   res.send(result);
 });
 
+router.get("/add", (req, res) => {
+  res.render("addBook");
+});
+
+router.post("/add/book", (req, res) => {
+  let isbn = req.body.isbn
+  let title = req.body.title
+  let subtitle = req.body.subtitle
+  let author = req.body.author
+  let published = req.body.published
+  let publisher = req.body.publisher
+  let pages = req.body.pages
+  let description = req.body.description
+  let website = req.body.website
+  console.log(isbn + title + subtitle + author + published + publisher + pages +description +website);
+  res.send("Амжилттай хадгалагдлаа");
+});
+
+router.get("/booksdetails", (req, res, next) => {
+  res.render("index", { books: books.books });
+});
 app.listen(PORT, () => {
   console.log("Running");
 });
