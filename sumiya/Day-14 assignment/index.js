@@ -13,11 +13,11 @@ app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(router);
 
-readFile("./public/book.json", "utf-8", (err, booksData) => {
+readFile("./public/book.json", "utf-8", (err, book) => {
   if (err) {
     console.error(err);
   } else {
-    books = JSON.parse(booksData);
+    books = JSON.parse(book);
   }
 });
 
@@ -95,35 +95,41 @@ router.get("/books/search/:title", (req, res) => {
   console.log(newBook);
   res.send(newBook);
 });
-
+//7. Хамгийн их хуудастай номын мэдээлэл авах.
 function maxValue(...args) {
   const max = args.reduce((acc, val) => {
-    return acc > val ? acc : val;
+    return acc.pages > val.pages ? acc : val;
   });
   return max;
 }
-//7. Хамгийн их хуудастай номын мэдээлэл авах.
 router.get("/maximiumPageNumber", (req, res) => {
-  const arr = books.books.map((book, i) => {
-    return book[i];
-  });
+  const arr = books.books;
   //   console.log(JSON.stringify(arr));
   const max = maxValue(...arr);
   res.send(max);
 });
+
+//7. Хамгийн бага хуудастай номын мэдээлэл авах.
 function minValue(...args) {
   const min = args.reduce((acc, val) => {
-    return acc < val ? acc : val;
+    return acc.pages < val.pages ? acc : val;
   });
   return min;
 }
-
-//7. Хамгийн бага хуудастай номын мэдээлэл авах.
 router.get("/minimiumPageNumber", (req, res) => {
-  const arr = books.books.pages;
+  const arr = books.books;
   const minimium = minValue(...arr);
   //   console.log(newBook);
   res.send(minimium);
+});
+//9. Хэвлэлийн компаниудыг жагсаан дор бүрнээ хэдэн ном бидэнд нийлүүлсэн талаарх мэдээлэл авах
+router.get("/publisher", (req, res) => {
+  const publisher = [];
+
+  books.books.map((a) => {
+    return publisher.push(a.publisher).join(",").split(",");
+  });
+  res.send(publisher);
 });
 
 router.get("/add", (req, res, next) => {
