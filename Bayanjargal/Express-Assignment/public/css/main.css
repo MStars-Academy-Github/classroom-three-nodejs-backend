@@ -1,0 +1,40 @@
+.book-name {
+  text-align: center;
+}
+.book-info {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  align-items: center;
+  border: solid 1px;
+  background-color: azure;
+}
+.title,
+.number,
+.desc,
+.author {
+  font-weight: 700;
+}
+.book-add {
+  min-width: 300px;
+  background-color: bisque;
+  border: none;
+  border-radius: 10px;
+  min-height: 30px;
+}
+.content-button {
+  text-align: center;
+}
+.nemeh {
+  display: flex;
+  flex-direction: column;
+}
+.btn-submit {
+  width: 200px;
+  text-align: center;
+}
