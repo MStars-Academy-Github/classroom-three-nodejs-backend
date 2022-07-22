@@ -220,7 +220,7 @@ router.get("/", (req, res, next) => {
 });
 const userValid = () => {
   return [
-    body("isbn").isLength({ min: 10, max: 13 }),
+    body("ISBN").isLength({ min: 10, max: 13 }),
     body("title").isString().matches(/(\w)/).withMessage("name must be letters"),
     body("pages").isInt(),
     body("name").isString().matches(/(\w)/).withMessage("name must be letters"),
