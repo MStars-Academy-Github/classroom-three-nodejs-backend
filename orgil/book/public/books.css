@@ -1,0 +1,44 @@
+.header {
+  margin-left: 1rem;
+  margin-bottom: 1.5vh;
+  display: flex;
+  justify-content: space-between;
+}
+.header ul {
+  list-style: none;
+  display: flex;
+  margin: 2rem 3rem 0 3rem;
+}
+.header ul li {
+  margin: 0 2rem 0 0;
+}
+.header ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+#booksMain {
+  width: 85.5vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bookCard {
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: lightblue;
+}
+.cardBottom {
+  display: flex;
+  justify-content: space-between;
+}
+.delete {
+  margin-right: 1rem;
+  color: red;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
