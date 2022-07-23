@@ -5,13 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="index.css" />
   </head>
+  <header class="header">
+    <ul>
+      <li><a href="/">Нүүр</a></li>
+      <li><a href="/books">Номнууд</a></li>
+      <li><a href="/add">Шинэ ном нэмэх</a></li>
+    </ul>
+  </header>
   <body>
-    <div id="books">
-      <ul>
+    <div id="booksMain">
+      <ul id="random3">
         <% data.forEach((item)=>{%>
-        <li><%=item.title%></li>
+        <li>
+          <p>Title: <%=item.title%></p>
+          <p>Subtitle: <%=item.subtitle%></p>
+          <p>Author: <%=item.author%></p>
+          <p>Description: <%=item.description%></p>
+          <p>Publisher: <%=item.publisher%></p>
+          <p>Published: <%=item.published%></p>
+          <p>Pages: <%=item.pages%></p>
+        </li>
         <%});%>
       </ul>
     </div>

@@ -8,13 +8,20 @@ const bookRouter = express.Router();
 const fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
+const bodyParser = require("body-parser");
 let books;
 
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(router);
 app.use("/books", bookRouter);
+app.listen(PORT, () => {
+  console.log("Running");
+});
 
 readFile("./public/book.json", "utf-8", (err, booksData) => {
   if (err) {
@@ -24,6 +31,9 @@ readFile("./public/book.json", "utf-8", (err, booksData) => {
   }
 });
 
+//******/ APIs \******\\
+
+//<--------> 1. Random 3 books <-------->\\
 router.get("/", (req, res, next) => {
   res.send([
     books.books[Math.floor(Math.random() * books.books.length)],
@@ -32,6 +42,16 @@ router.get("/", (req, res, next) => {
   ]);
 });
 
+//<--------> 2. Sort by date <-------->\\
+bookRouter.get("/byDate", (req, res, next) => {
+  let byDate = books.books;
+  let sorted = byDate.sort((a, b) => {
+    JSON.stringify(a.published) - JSON.stringify(b.published);
+  });
+  console.log(sorted);
+});
+
+//<--------> 3. Authors <-------->\\
 router.get("/authors", (req, res) => {
   let authors = [];
   books.books.map((book) => {
@@ -40,32 +60,41 @@ router.get("/authors", (req, res) => {
   res.send(authors);
 });
 
+//<--------> 4. All books <-------->\\
 bookRouter.get("/", (req, res, next) => {
   res.send(books.books);
 });
-bookRouter.get("/byDate", (req, res, next) => {
-  let byDate = books.books;
-  let sorted = byDate.sort((a, b) => {
-    JSON.stringify(a.published) - JSON.stringify(b.published);
+
+//<--------> 5. Search by isbn <-------->\\
+bookRouter.get("/isbn/:id", (req, res) => {
+  let isbnID = req.params.id;
+  let result = books.books.filter((book) => {
+    return book.isbn === isbnID;
   });
-  console.log(sorted);
-  // res.send(sorted);
+  res.send(result);
 });
 
-bookRouter.get("/isbn_id", (req, res) => {
-  let isbn = [];
-  books.books.map((book) => {
-    return isbn.push(book.isbn);
+//<--------> 6. Search by Title(query param) <-------->\\
+router.get("/search", (req, res) => {
+  let title = req.query.title;
+  const result = books.books.filter((book) => {
+    return Object.values(book.title)
+      .join("")
+      .toLowerCase()
+      .includes(title.toLowerCase());
   });
-  res.send(isbn);
+  res.send(result);
 });
 
+//<--------> 7. Search by page(max) <-------->\\
 bookRouter.get("/maxPage", (req, res) => {
   let maxPage = books.books.reduce((prev, current) =>
     prev.pages > current.pages ? prev : current
   );
   res.send(maxPage);
 });
+
+//<--------> 8. Search by page(min) <-------->\\
 bookRouter.get("/minPage", (req, res) => {
   let minPage = books.books.reduce((prev, current) =>
     prev.pages < current.pages ? prev : current
@@ -73,6 +102,7 @@ bookRouter.get("/minPage", (req, res) => {
   res.send(minPage);
 });
 
+//<--------> 9. Publishers <-------->\\
 bookRouter.get("/publishers", (req, res, next) => {
   let publishers = [];
   let count = {};
@@ -91,21 +121,38 @@ bookRouter.get("/publishers", (req, res, next) => {
   res.send(count);
 });
 
-router.get("/search", (req, res) => {
-  let title = req.query.title;
-  const result = books.books.filter((book) => {
-    return Object.values(book.title)
-      .join("")
-      .toLowerCase()
-      .includes(title.toLowerCase());
-  });
-  res.send(result);
-});
+//******/ Server side rendering \******\\
 
-router.get("/add", (req, res, next) => {
+//<--------> 1. Add new book <-------->\\
+router.get("/add", (req, res) => {
   res.render("addBook");
 });
 
-app.listen(PORT, () => {
-  console.log("Running");
+router.post("/add/book", (req, res) => {
+  let isbn = req.body.isbn;
+  let title = req.body.title;
+  let subtitle = req.body.subtitle;
+  let author = req.body.author;
+  let published = req.body.published;
+  let publisher = req.body.publisher;
+  let pages = req.body.pages;
+  let description = req.body.description;
+  let website = req.body.website;
+  console.log(
+    isbn +
+      title +
+      subtitle +
+      author +
+      published +
+      publisher +
+      pages +
+      description +
+      website
+  );
+  res.send("Амжилттай хадгалагдлаа");
+});
+
+//<--------> 2. Details of books <-------->\\
+router.get("/booksdetails", (req, res, next) => {
+  res.render("index", { books: books.books });
 });

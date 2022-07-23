@@ -18,9 +18,11 @@ router.get("/", (req, res, next) => {
   }
   res.render("index", { data: books3 });
 });
-router.get("/books",(req,res,next)=>{
-    res.render("books")
-})
+
+router.get("/books", (req, res, next) => {
+  res.render("books", { data: books });
+});
+
 router.get("/add", (req, res, next) => {
   res.render("addBook");
 });

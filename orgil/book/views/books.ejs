@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="books.css" />
+    <title>Document</title>
+  </head>
+  <header class="header">
+    <ul>
+      <li><a href="/">Нүүр</a></li>
+      <li><a href="">Номнууд</a></li>
+      <li><a href="/add">Шинэ ном нэмэх</a></li>
+    </ul>
+    <ul style="margin-right: 4.1rem">
+      <li><a href="">Бага хуудастай</a></li>
+      <li><a href="">Их хуудастай</a></li>
+    </ul>
+  </header>
+  <body>
+    <div id="booksMain">
+      <% data.books.forEach((item)=>{%>
+      <div class="bookCard">
+        <p>Title: <%=item.title%></p>
+        <p>Subtitle: <%=item.subtitle%></p>
+        <p>Author: <%=item.author%></p>
+        <p>Description: <%=item.description%></p>
+        <p>Publisher: <%=item.publisher%></p>
+        <p>Published: <%=item.published%></p>
+        <div class="cardBottom">
+          <p>Pages: <%=item.pages%></p>
+          <button class="delete">Устгах</button>
+        </div>
+      </div>
+      <%});%>
+    </div>
+  </body>
+</html>
