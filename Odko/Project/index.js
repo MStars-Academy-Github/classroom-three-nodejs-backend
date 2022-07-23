@@ -64,10 +64,13 @@ router.get("/book", (req, res, next) => {
     EJS ashigaagui 
     DASGAL-5
 */
-router.post("/book/:name", (req, res, next) => {
-  if ((req.params.name = "isbn_id")) {
-    console.log(req.body);
-  }
+router.get("/book/:isbn_id", (req, res, next) => {
+  console.log(req.method);
+  // if ((req.params.name = "isbn_id")) {
+  //   console.log(req.params.name);
+  //   let data = bookJson;
+  //   console.log(data);
+  // }
 
   res.send("hi");
 });
