@@ -1,5 +1,5 @@
 const express = require("express");
-const validator = require("express-validator");
+const { check, validationResult } = require("express-validator");
 const router = express.Router();
 require("dotenv").config();
 const app = express();
@@ -11,9 +11,6 @@ const readFile = util.promisify(fs.readFile);
 const bodyParser = require("body-parser");
 let books;
 
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
@@ -22,6 +19,8 @@ app.use("/books", bookRouter);
 app.listen(PORT, () => {
   console.log("Running");
 });
+app.use(express.json());
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 readFile("./public/book.json", "utf-8", (err, booksData) => {
   if (err) {
@@ -31,7 +30,7 @@ readFile("./public/book.json", "utf-8", (err, booksData) => {
   }
 });
 
-//******/ APIs \******\\
+//******/ APIs   \******\\
 
 //<--------> 1. Random 3 books <-------->\\
 router.get("/", (req, res, next) => {
@@ -128,31 +127,25 @@ router.get("/add", (req, res) => {
   res.render("addBook");
 });
 
-router.post("/add/book", (req, res) => {
-  let isbn = req.body.isbn;
-  let title = req.body.title;
-  let subtitle = req.body.subtitle;
-  let author = req.body.author;
-  let published = req.body.published;
-  let publisher = req.body.publisher;
-  let pages = req.body.pages;
-  let description = req.body.description;
-  let website = req.body.website;
-  console.log(
-    isbn +
-      title +
-      subtitle +
-      author +
-      published +
-      publisher +
-      pages +
-      description +
-      website
-  );
-  res.send("Амжилттай хадгалагдлаа");
-});
+router.post(
+  "/add",
+  urlencodedParser,
+  [
+    check("isbn", "Isbn must be 13 numbers")
+      .exists()
+      .isLength({ min: 13, max: 13 }),
+  ],
+  (req, res) => {
+    const errors = validationResult(req.body);
+    if (!errors.isEmpty()) {
+      // return res.status(422).jsonp(errors.array());
+      const alert = errors.array();
+    }
+    res.render("addBook");
+  }
+);
 
 //<--------> 2. Details of books <-------->\\
-router.get("/booksdetails", (req, res, next) => {
+router.get("/booksdetails", (req, res) => {
   res.render("index", { books: books.books });
 });
