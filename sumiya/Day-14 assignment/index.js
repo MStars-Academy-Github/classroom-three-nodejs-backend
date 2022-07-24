@@ -5,19 +5,21 @@ const validator = require("express-validator");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
+require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const {  validationResult } = require('express-validator');
+
+const { validationResult } = require("express-validator");
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use("/book",router);
+app.use(router);
 app.use(bodyParser.json());
 require("dotenv").config();
 
@@ -154,17 +156,7 @@ router.get("/publisher", (req, res) => {
 router.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
-router.post("/add",urlencodedParser,
-[
-  check("isbn", "not 13 numbers")
-    .exists()
-    .isLength({ min: 13, max: 13 }),
-], (req, res, next) => {
-  const errors = validationResult(req.body);
-    if (!errors.isEmpty()) {
-      // return res.status(422).jsonp(errors.array());
-      const alert = errors.array();
-    }
+router.post("/add", (req, res, next) => {
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -184,69 +176,82 @@ router.post("/add",urlencodedParser,
   });
   res.end("success");
 });
-
+let reqst = "";
 //--------------------------server side use ejs---------------------------------------------------------------
 //2. isbn id- гаар хайж олоод устгахад бэлэн болгоод амжилттай хариу буцаахад болно.
 router.get("/deletebook", (req, res, next) => {
-  
-  res.render("deletebook" , { data: books.books });
+  res.render("deletebook", { data: books.books });
 });
-router.post("/deletebook" , (req,res,next)=>{
+router.post("/deletebook", (req, res, next) => {
+  
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
       let books = JSON.parse(data);
-      console.log(typeof data,"---------------------");
-      let reqdata = req.body.isbn;
-console.log(typeof reqdata,"---------------------ob");
-    //   const removeById = (books, reqdata) => {
-        
-    //     const requiredIndex = books.books.findIndex(el => {
-    //        return el.isbn === JSON.stringify(reqdata);
-    //     });
-    //     console.log(requiredIndex);
-    //     if(requiredIndex === -1){
-    //        return false;
-    //     };
-    //     return !!books.books.splice(requiredIndex, 1);
-    //  };
-    // const data= removeById(books.books , reqdata)
-    const RemoveNode =(id) =>{
-      books.books.forEach((e, index)=>{
-      if(id === e.isbn){
-       return books.books.splice(index, 1);
-      }
-    })
-  }
- 
-  //    function RemoveNode(isbn) {
-  //     return books.books.filter(function(emp) {
-  //         if (emp.isbn == reqdata) {
-  //             return false;
-  //         }
-  //         return true;
-  //     });
-  // }
-  // var newData = RemoveNode("1");
+      console.log(typeof data);
+      reqst = req.body.isbn;
+      // let newArray=[]
+       
+      console.log(typeof reqst);
+      const indexOfOdject = books.books.filter((obj) => {
+       obj.isbn !== reqst
+      });
+      console.log(typeof indexOfOdject);
+       
+      //   const removeById = (books, reqdata) => {
+
+      //     const requiredIndex = books.books.findIndex(el => {
+      //        return el.isbn === JSON.stringify(reqdata);
+      //     });
+      //     console.log(requiredIndex);
+      //     if(requiredIndex === -1){
+      //        return false;
+      //     };
+      //     return !!books.books.splice(requiredIndex, 1);
+      //  };
+      // const data= removeById(books.books , reqdata)
+      //     const RemoveNode =(id) =>{
+      //       books.books.forEach((e, index)=>{
+      //       if(id === e.isbn){
+      //         books.books.splice(index, 1);
+      //       }
+      //     })
+      //   }
+      // const newData = RemoveNode(JSON.stringify(reqst))
+      //    function RemoveNode(isbn) {
+      //     return books.books.filter(function(emp) {
+      //         if (emp.isbn == reqdata) {
+      //             return false;
+      //         }
+      //         return true;
+      //     });
+      // }
+      // var newData = RemoveNode("1");
 
       // let foundBook = books.books.map((book)=> {return book.isbn=== reqdata})
       // console.log(foundBook);
       // let newData = books.books.splice(books.books.indexOf(foundBook),1)
       // console.log(newData);
-      fs.writeFileSync("./public/book.json", (datas), (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("success");
+      fs.writeFileSync(
+        "./public/book.json",
+        JSON.stringify({...books,indexOfOdject}),
+        (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("success");
+          }
         }
-      });
+      );
     }
   });
   res.end("success");
-  console.log(reqdata + "---------------------------");
-})
-
+  // console.log(reqdata + "---------------------------");
+});
+router.get("/deletebook", (req, res, next) => {
+  res.render("deletebook", { data: books.books });
+});
 
 app.listen(PORT || 3000, () => {
   console.log("My app is running");
