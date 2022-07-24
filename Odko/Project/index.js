@@ -19,7 +19,7 @@ app.set("view options", { layout: false });
 /* EJS */
 router.get("/book", (req, res, next) => {
   let data = bookJson;
-  // DASGARL-1
+  /*_______________________ DASGARL-1______________________________*/
   const ranBook = data.books.map((title) => {
     return title.title;
   });
@@ -29,7 +29,7 @@ router.get("/book", (req, res, next) => {
   }
   const randomBook1 = threeBookRandom(ranBook, 3);
 
-  // DASGAL-2
+  /*_______________________ DASGARL-2______________________________*/
   const published = data.books.map((published) => {
     return new Date(moment(published.published).format(`YYYY/MM/DD`));
   });
@@ -40,12 +40,12 @@ router.get("/book", (req, res, next) => {
     return moment(date).format(`YYYY/MM/DD`);
   });
 
-  // DASGAL-3
+  /*_______________________ DASGARL-3______________________________*/
   const author = data.books.map((title) => {
     return title.author;
   });
 
-  // DASGAL-4
+  /*_______________________ DASGARL-4______________________________*/
   const allBook = bookJson;
   res.render("index", {
     randomBook1: randomBook1,
@@ -57,28 +57,22 @@ router.get("/book", (req, res, next) => {
 
 /*  
     EJS ashigaagui 
-    DASGAL-5
-*/
-app.use(express.json());
-router.post("/book/:name", (req, res, next) => {
-  if (req.params.name === "isbn_id") {
-    // console.log(req.body.isbn);
-    let data = bookJson;
-    const dd = data.books.map((a) => {
-      if (a.isbn === req.body.isbn) {
-        return a;
-      }
-    });
-    // console.log(dd);
-    // DASGAL-6
-  } else if (req.params.name === "search") {
-    // console.log(req.params.name);
-  }
+_______________________ DASGARL-5______________________________*/
+
+router.get("/book/:isbn_id", (req, res, next) => {
+  console.log(req.method);
+  // if ((req.params.name = "isbn_id")) {
+  //   console.log(req.params.name);
+  //   let data = bookJson;
+  //   console.log(data);
+  // }
+
   res.send("hi");
 });
 
 router.get("/book1/:name", (req, res, next) => {
-  /* DASGAL-7  MAX pages */
+  /*_______________________ DASGARL-7______________________________*/
+
   if (req.params.name === "max") {
     let data = bookJson;
     const element = data.books.map((a) => {
@@ -91,7 +85,7 @@ router.get("/book1/:name", (req, res, next) => {
       }
     });
     // console.log(max);
-    /* DASGAL-8 MIN pages */
+    /*_______________________ DASGARL-8______________________________*/
   } else if (req.params.name === "min") {
     let data = bookJson;
     const element = data.books.map((a) => {
@@ -105,7 +99,7 @@ router.get("/book1/:name", (req, res, next) => {
     });
 
     // console.log(min);
-    /* DASGAL-9  */
+    /*_______________________ DASGARL-9______________________________*/
   } else if (req.params.name === "publisher") {
     let data = bookJson;
     let mf = 1;
@@ -131,6 +125,8 @@ router.get("/book1/:name", (req, res, next) => {
 });
 
 /* ADD BOOK EJS */
+/*_______________________ BOOK ADD______________________________*/
+
 router.get("/addBook", (req, res, next) => {
   let data1 = bookJson.books;
   res.render("addBook", { data1: data1 });
@@ -140,7 +136,6 @@ let encodeUrl = parseUrl.urlencoded({ extended: false });
 router.post("/form", encodeUrl, (req, res, next) => {
   let data = bookJson.books;
   const dataa = req.body;
-
   fs.readFile("./data/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log(err);
@@ -158,7 +153,6 @@ router.post("/form", encodeUrl, (req, res, next) => {
   });
 
   data.push(dataa);
-
   res.render("form", { dataa: dataa, data: data });
 });
 
