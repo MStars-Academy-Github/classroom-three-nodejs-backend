@@ -9,6 +9,7 @@ const util = require("util");
 const readFile = util.promisify(fs.readFile);
 const bodyParser = require("body-parser");
 const { body, validationResult } = require("express-validator");
+const { del } = require("request");
 let books;
 
 app.set("views", __dirname + "/views");
@@ -120,7 +121,7 @@ bookRouter.get("/publishers", (req, res, next) => {
   res.send(count);
 });
 
-//******/ Server side rendering \******\\
+//******/ Server side rendering 1 \******\\
 
 //<--------> 1. Add new book <-------->\\
 router.get("/add", (req, res) => {
@@ -129,11 +130,15 @@ router.get("/add", (req, res) => {
 
 const userValidationRules = () => {
   return [
-    body("isbn").isLength({ min: 10, max: 13 }),
-    body("title").isString().matches(/(\w)/).withMessage("Only letters"),
-    body("pages").isInt(),
-    body("name").isString().withMessage("Only letters"),
-    body("published").isDate(),
+    body("isbn").isLength({ min: 10, max: 13 }).withMessage("Only numbers"),
+    body("title").isString().withMessage("Only letters"),
+    body("subtitle").isString().withMessage("Only letters"),
+    body("author").isString().withMessage("Only letters"),
+    body("published").isDate().withMessage("Enter Date"),
+    body("publisher").isString().withMessage("Only letters"),
+    body("pages").isInt().withMessage("Only numbers"),
+    body("description").isString().withMessage("Only letters"),
+    body("website").isString().withMessage("Only letters"),
   ];
 };
 
@@ -146,16 +151,27 @@ const validate = (req, res, next) => {
   const extractedErrors = [];
   errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
 
-  return res.render("addBook", {
+  return res.render("errors", {
     errors: extractedErrors,
   });
 };
 
-router.post("/add", userValidationRules(), validate, (req, res, next) => {
-  res.send(req.body);
-});
+router.post("/add", userValidationRules(), validate, (req, res, next) => {});
 
 //<--------> 2. Details of books <-------->\\
+
 router.get("/booksdetails", (req, res) => {
   res.render("index", { books: books.books });
+});
+
+//******/ Server side rendering 2\******\\
+
+//<--------> 1. Delete book <-------->\\
+router.post("/booksdetails/:isbn", (req, res) => {
+  let delIsbn = req.params.isbn;
+  let result = books.books.filter((book) => {
+    return book.isbn != delIsbn;
+  });
+  res.render("index", { books: result });
+  res.redirect("/booksdetails");
 });
