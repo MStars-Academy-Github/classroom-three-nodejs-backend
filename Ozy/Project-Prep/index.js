@@ -146,13 +146,13 @@ const validate = (req, res, next) => {
   const extractedErrors = [];
   errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
 
-  return res.status(400).json({
+  return res.render("addBook", {
     errors: extractedErrors,
   });
 };
 
-router.post("/add", userValidationRules(), validate, (req, res) => {
-  res.send("Success");
+router.post("/add", userValidationRules(), validate, (req, res, next) => {
+  res.send(req.body);
 });
 
 //<--------> 2. Details of books <-------->\\
