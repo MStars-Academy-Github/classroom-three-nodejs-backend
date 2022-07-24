@@ -5,16 +5,13 @@ const validator = require("express-validator");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
-require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
-
 const { validationResult } = require("express-validator");
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
@@ -22,6 +19,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(router);
 app.use(bodyParser.json());
 require("dotenv").config();
+
 
 readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
