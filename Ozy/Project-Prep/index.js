@@ -9,6 +9,7 @@ const util = require("util");
 const readFile = util.promisify(fs.readFile);
 const bodyParser = require("body-parser");
 const { body, validationResult } = require("express-validator");
+const { del } = require("request");
 let books;
 
 app.set("views", __dirname + "/views");
@@ -120,7 +121,7 @@ bookRouter.get("/publishers", (req, res, next) => {
   res.send(count);
 });
 
-//******/ Server side rendering \******\\
+//******/ Server side rendering 1 \******\\
 
 //<--------> 1. Add new book <-------->\\
 router.get("/add", (req, res) => {
@@ -158,6 +159,19 @@ const validate = (req, res, next) => {
 router.post("/add", userValidationRules(), validate, (req, res, next) => {});
 
 //<--------> 2. Details of books <-------->\\
+
 router.get("/booksdetails", (req, res) => {
   res.render("index", { books: books.books });
+});
+
+//******/ Server side rendering 2\******\\
+
+//<--------> 1. Delete book <-------->\\
+router.post("/booksdetails/:isbn", (req, res) => {
+  let delIsbn = req.params.isbn;
+  let result = books.books.filter((book) => {
+    return book.isbn != delIsbn;
+  });
+  res.render("index", { books: result });
+  res.redirect("/booksdetails");
 });
