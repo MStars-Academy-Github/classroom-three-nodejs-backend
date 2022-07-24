@@ -1,9 +1,23 @@
-.input {
-  width: 50vw;
+.input  {
+  width: 20vw;
+  /* margin: 20px 0px 20px 0px; */
+}
+.form-example label{
+  padding: 5px 0px 10px 0px;
+  font-size: large;
 }
 .form-example {
-  width: 50vw;
-  height: 5vh;
+  width: 20vw;
+  /* height: 5vh; */
+  display: flex;
+  flex-direction: column;
+
+}
+.form-submit{
+  padding: 5px 0px 10px 0px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
 }
 .form {
   display: flex;

@@ -8,7 +8,13 @@
     <title>Document</title>
   </head>
   <body id="body">
-    <div class="row">
+    <form action="/deletebook" method="post" class="form">
+    <div class="form-example">
+        <label for="name">Enter your isbn: </label>
+        <input type="text" class="input" name="isbn" id="name" required />
+        <button>submit</button>
+      </div></form>
+    <!-- <div class="row">
       <%data.forEach((date)=>{%>
 
       <div class="column">
@@ -38,7 +44,7 @@
           <p>Website : <%= date.website %></p>
         </div>
       </div> -->
-      <%});%>
-    </div>
+      <!-- <%});%>
+    </div> --> 
   </body>
 </html>
