@@ -53,7 +53,6 @@ router.get("/books/sort", (req, res, next) => {
       moment(JSON.stringify(a.published), "YYYY")
     );
   });
-  //   console.log(typeof sorted);
   res.send(sorted);
 });
 //-----------------------------------------------------------------------------------------
@@ -148,7 +147,7 @@ router.get("/publisher", (req, res) => {
   }
   res.send(count);
 }); 
-//-----------------------validation-------------------------------------
+//-----------------------------------------------validation---------------------------------------------
 const userValidationRules = () => {
   return [
     body("isbn","invalid numbers").isLength({ min: 10, max: 13 }).notEmpty(),
