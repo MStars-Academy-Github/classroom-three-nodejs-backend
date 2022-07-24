@@ -1,5 +1,4 @@
 const express = require("express");
-const fastestValidator = require("fastest-validator");
 const router = express.Router();
 require("dotenv").config();
 const app = express();
@@ -9,8 +8,7 @@ const fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
 const bodyParser = require("body-parser");
-const v = new fastestValidator();
-const expressSession = require("express-session");
+const { body, validationResult } = require("express-validator");
 let books;
 
 app.set("views", __dirname + "/views");
@@ -20,13 +18,6 @@ app.use(router);
 app.use("/books", bookRouter);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(
-  expressSession({
-    secret: "thisissecret",
-    saveUninitialized: false,
-    resave: false,
-  })
-);
 app.listen(PORT, () => {
   console.log("Running");
 });
@@ -134,51 +125,34 @@ bookRouter.get("/publishers", (req, res, next) => {
 //<--------> 1. Add new book <-------->\\
 router.get("/add", (req, res) => {
   res.render("addBook");
-  req.session.isbnerror = null;
-  req.session.success = null;
 });
 
-const schema = {
-  isnb: { type: "number", min: 13, max: 13 },
-  title: { type: "string" },
-  subtitle: { type: "string" },
-  author: { type: "string" },
-  published: { type: "date" },
-  publisher: { type: "string" },
-  pages: { type: "number" },
-  description: { type: "string" },
-  website: { type: "string" },
+const userValidationRules = () => {
+  return [
+    body("isbn").isLength({ min: 10, max: 13 }),
+    body("title").isString().matches(/(\w)/).withMessage("Only letters"),
+    body("pages").isInt(),
+    body("name").isString().withMessage("Only letters"),
+    body("published").isDate(),
+  ];
 };
 
-router.post("/add", (req, res) => {
-  let isbn = req.body.isbn;
-  let title = req.body.title;
-  let subtitle = req.body.subtitle;
-  let author = req.body.author;
-  let published = req.body.published;
-  let publisher = req.body.publisher;
-  let pages = req.body.pages;
-  let description = req.body.description;
-  let website = req.body.website;
-  const check = v.compile(schema);
-  const result = check({
-    isbn: isbn,
-    title: title,
-    subtitle: subtitle,
-    author: author,
-    published: published,
-    publisher: publisher,
-    pages: pages,
-    description: description,
-    website: website,
-  });
-  if (result) {
-    req.session.success = true;
-    res.redirect("/add");
-  } else {
-    req.session.isbnerror = result[0];
-    req.session.success = false;
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    next();
   }
+
+  const extractedErrors = [];
+  errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
+
+  return res.status(400).json({
+    errors: extractedErrors,
+  });
+};
+
+router.post("/add", userValidationRules(), validate, (req, res) => {
+  res.send("Success");
 });
 
 //<--------> 2. Details of books <-------->\\
