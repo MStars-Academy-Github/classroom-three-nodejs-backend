@@ -19,8 +19,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(router);
 app.use(bodyParser.json());
 require("dotenv").config();
-
-
+let books;
 readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
     console.error(err);
@@ -148,13 +147,32 @@ router.get("/publisher", (req, res) => {
     }
   }
   res.send(count);
-});
+}); 
+//-----------------------validation-------------------------------------
+const userValidationRules = () => {
+  return [
+    body("isbn","invalid numbers").isLength({ min: 10, max: 13 }).notEmpty(),
+    body("title","invalid letters").isString().notEmpty(),
+  ];
+};
+
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    next();
+  }
+  const extractedErrors = [];
+  errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
+  return res.status(400).json({ errors: extractedErrors });
+  
+};
 //--------------------------server side use ejs---------------------------------------------------------------
 //1. ejs ашигланa a. Шинэ ном нэмэх форм
 router.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
-router.post("/add", (req, res, next) => {
+router.post("/addbook", userValidationRules(), validate, (req, res, next) => {
+
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -174,83 +192,19 @@ router.post("/add", (req, res, next) => {
   });
   res.end("success");
 });
-let reqst = "";
+
 //--------------------------server side use ejs---------------------------------------------------------------
 //2. isbn id- гаар хайж олоод устгахад бэлэн болгоод амжилттай хариу буцаахад болно.
-router.get("/deletebook", (req, res, next) => {
-  res.render("deletebook", { data: books.books });
-});
-router.post("/deletebook", (req, res, next) => {
-  
-  readFile("./public/book.json", "utf-8", (err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let books = JSON.parse(data);
-      console.log(typeof data);
-      reqst = req.body.isbn;
-      // let newArray=[]
-       
-      console.log(typeof reqst);
-      const indexOfOdject = books.books.filter((obj) => {
-       obj.isbn !== reqst
-      });
-      console.log(typeof indexOfOdject);
-       
-      //   const removeById = (books, reqdata) => {
 
-      //     const requiredIndex = books.books.findIndex(el => {
-      //        return el.isbn === JSON.stringify(reqdata);
-      //     });
-      //     console.log(requiredIndex);
-      //     if(requiredIndex === -1){
-      //        return false;
-      //     };
-      //     return !!books.books.splice(requiredIndex, 1);
-      //  };
-      // const data= removeById(books.books , reqdata)
-      //     const RemoveNode =(id) =>{
-      //       books.books.forEach((e, index)=>{
-      //       if(id === e.isbn){
-      //         books.books.splice(index, 1);
-      //       }
-      //     })
-      //   }
-      // const newData = RemoveNode(JSON.stringify(reqst))
-      //    function RemoveNode(isbn) {
-      //     return books.books.filter(function(emp) {
-      //         if (emp.isbn == reqdata) {
-      //             return false;
-      //         }
-      //         return true;
-      //     });
-      // }
-      // var newData = RemoveNode("1");
-
-      // let foundBook = books.books.map((book)=> {return book.isbn=== reqdata})
-      // console.log(foundBook);
-      // let newData = books.books.splice(books.books.indexOf(foundBook),1)
-      // console.log(newData);
-      fs.writeFileSync(
-        "./public/book.json",
-        JSON.stringify({...books,indexOfOdject}),
-        (err) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("success");
-          }
-        }
-      );
-    }
+router.post("/deletebook/:isbn", (req, res, next) => {
+  let reqst = req.params.isbn;
+  let indexOfOdject = books.books.filter((obj) => {
+    return obj.isbn != reqst;
   });
-  res.end("success");
-  // console.log(reqdata + "---------------------------");
-});
-router.get("/deletebook", (req, res, next) => {
-  res.render("deletebook", { data: books.books });
-});
+  res.render("deletebook", { books: indexOfOdject });
+ 
 
+});
 app.listen(PORT || 3000, () => {
-  console.log("My app is running");
+  console.log("app is running");
 });
