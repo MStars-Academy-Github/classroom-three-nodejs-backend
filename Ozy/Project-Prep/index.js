@@ -1,5 +1,5 @@
 const express = require("express");
-const { check, validationResult } = require("express-validator");
+const fastestValidator = require("fastest-validator");
 const router = express.Router();
 require("dotenv").config();
 const app = express();
@@ -9,6 +9,8 @@ const fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
 const bodyParser = require("body-parser");
+const v = new fastestValidator();
+const expressSession = require("express-session");
 let books;
 
 app.set("views", __dirname + "/views");
@@ -16,11 +18,18 @@ app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(router);
 app.use("/books", bookRouter);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(
+  expressSession({
+    secret: "thisissecret",
+    saveUninitialized: false,
+    resave: false,
+  })
+);
 app.listen(PORT, () => {
   console.log("Running");
 });
-app.use(express.json());
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 readFile("./public/book.json", "utf-8", (err, booksData) => {
   if (err) {
@@ -125,25 +134,52 @@ bookRouter.get("/publishers", (req, res, next) => {
 //<--------> 1. Add new book <-------->\\
 router.get("/add", (req, res) => {
   res.render("addBook");
+  req.session.isbnerror = null;
+  req.session.success = null;
 });
 
-router.post(
-  "/add",
-  urlencodedParser,
-  [
-    check("isbn", "Isbn must be 13 numbers")
-      .exists()
-      .isLength({ min: 13, max: 13 }),
-  ],
-  (req, res) => {
-    const errors = validationResult(req.body);
-    if (!errors.isEmpty()) {
-      // return res.status(422).jsonp(errors.array());
-      const alert = errors.array();
-    }
-    res.render("addBook");
+const schema = {
+  isnb: { type: "number", min: 13, max: 13 },
+  title: { type: "string" },
+  subtitle: { type: "string" },
+  author: { type: "string" },
+  published: { type: "date" },
+  publisher: { type: "string" },
+  pages: { type: "number" },
+  description: { type: "string" },
+  website: { type: "string" },
+};
+
+router.post("/add", (req, res) => {
+  let isbn = req.body.isbn;
+  let title = req.body.title;
+  let subtitle = req.body.subtitle;
+  let author = req.body.author;
+  let published = req.body.published;
+  let publisher = req.body.publisher;
+  let pages = req.body.pages;
+  let description = req.body.description;
+  let website = req.body.website;
+  const check = v.compile(schema);
+  const result = check({
+    isbn: isbn,
+    title: title,
+    subtitle: subtitle,
+    author: author,
+    published: published,
+    publisher: publisher,
+    pages: pages,
+    description: description,
+    website: website,
+  });
+  if (result) {
+    req.session.success = true;
+    res.redirect("/add");
+  } else {
+    req.session.isbnerror = result[0];
+    req.session.success = false;
   }
-);
+});
 
 //<--------> 2. Details of books <-------->\\
 router.get("/booksdetails", (req, res) => {
