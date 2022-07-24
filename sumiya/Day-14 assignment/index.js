@@ -5,21 +5,21 @@ const validator = require("express-validator");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
-require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const {  validationResult } = require('express-validator');
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use("/book",router);
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(bodyParser.json());
-const {  validationResult } = require('express-validator');
+require("dotenv").config();
 
 readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
