@@ -17,6 +17,28 @@ body {
 /* Remove extra left and right margins, due to padding */
 .row {margin: 0 -5px;
 }
+.menu{
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.menu button{
+  border: none;
+
+}
+.menu button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.menu button {
+  /* background: repeating-linear-gradient(angle | to side-or-corner, #3f87a6-stop1, #ebf8e1-stop2); */
+ 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  /* background-color: #f1f1f1; */
+  margin: 20px 0px 20px 0px;
+}
 
 /* Clear floats after the columns */
 .row:after {
