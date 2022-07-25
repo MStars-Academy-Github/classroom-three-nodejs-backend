@@ -5,20 +5,21 @@ const validator = require("express-validator");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
-require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
+const { validationResult } = require("express-validator");
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(router);
 app.use(bodyParser.json());
-
+require("dotenv").config();
+let books;
 readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
     console.error(err);
@@ -52,7 +53,6 @@ router.get("/books/sort", (req, res, next) => {
       moment(JSON.stringify(a.published), "YYYY")
     );
   });
-  //   console.log(typeof sorted);
   res.send(sorted);
 });
 //-----------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ router.get("/books/isbn/:id", (req, res) => {
 });
 //-----------------------------------------------------------------------------------------
 //4. Бүх номын мэдээллийг авах api.
-router.get("/all", (req, res, next) => {
+router.get("/allbooks", (req, res, next) => {
   res.render("allbook", { data: books.books });
 });
 //-----------------------------------------------------------------------------------------
@@ -146,13 +146,32 @@ router.get("/publisher", (req, res) => {
     }
   }
   res.send(count);
-});
-//-----------------------------------------------------------------------------------------
-//1. ejs ашиглан9 a. Шинэ ном нэмэх форм
-router.get("/add", (req, res, next) => {
+}); 
+//-----------------------------------------------validation---------------------------------------------
+const userValidationRules = () => {
+  return [
+    body("isbn","invalid numbers").isLength({ min: 10, max: 13 }).notEmpty(),
+    body("title","invalid letters").isString().notEmpty(),
+  ];
+};
+
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    next();
+  }
+  const extractedErrors = [];
+  errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
+  return res.status(400).json({ errors: extractedErrors });
+  
+};
+//--------------------------server side use ejs---------------------------------------------------------------
+//1. ejs ашигланa a. Шинэ ном нэмэх форм
+router.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
-router.post("/add", (req, res, next) => {
+router.post("/addbook", userValidationRules(), validate, (req, res, next) => {
+
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -173,6 +192,18 @@ router.post("/add", (req, res, next) => {
   res.end("success");
 });
 
+//--------------------------server side use ejs---------------------------------------------------------------
+//2. isbn id- гаар хайж олоод устгахад бэлэн болгоод амжилттай хариу буцаахад болно.
+
+router.post("/deletebook/:isbn", (req, res, next) => {
+  let reqst = req.params.isbn;
+  let indexOfOdject = books.books.filter((obj) => {
+    return obj.isbn != reqst;
+  });
+  res.render("deletebook", { books: indexOfOdject });
+ 
+
+});
 app.listen(PORT || 3000, () => {
-  console.log("My app is running");
+  console.log("app is running");
 });

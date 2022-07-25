@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="/allbook.css" />
     <title>Document</title>
   </head>
-  <body>
-    <div class="gadna">
+  <body id="body">
+    <div class="row">
       <%data.forEach((date)=>{%>
-      <div class="card">
-        <div class="container">
+
+      <div class="column">
+        <div class="card">
           <h4>Isbn : <b><%= date.isbn %></b></h4>
           <p>Title : <%= date.title %></p>
           <p>Subtitle : <%= date.subtitle %></p>
@@ -23,6 +24,20 @@
           <p>Website : <%= date.website %></p>
         </div>
       </div>
+
+      <!-- <div class="column">
+        <div class="card">
+          <h4>Isbn : <b><%= date.isbn %></b></h4>
+          <p>Title : <%= date.title %></p>
+          <p>Subtitle : <%= date.subtitle %></p>
+          <p>Author : <%= date.author %></p>
+          <p>Published : <%= date.published %></p>
+          <p>Publisher : <%= date.publisher %></p>
+          <p>Pages : <%= date.pages %></p>
+          <p>Description : <%= date.description %></p>
+          <p>Website : <%= date.website %></p>
+        </div>
+      </div> -->
       <%});%>
     </div>
   </body>
