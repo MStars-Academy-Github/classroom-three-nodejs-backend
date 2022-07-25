@@ -84,7 +84,7 @@ router.get("/book1/:name", (req, res, next) => {
         return a;
       }
     });
-    // console.log(max);
+    console.log(max);
     /*_______________________ DASGARL-8______________________________*/
   } else if (req.params.name === "min") {
     let data = bookJson;
@@ -101,25 +101,25 @@ router.get("/book1/:name", (req, res, next) => {
     // console.log(min);
     /*_______________________ DASGARL-9______________________________*/
   } else if (req.params.name === "publisher") {
-    let data = bookJson;
-    let mf = 1;
-    let m = 0;
-    let item;
-    for (let i = 0; i < data.books.length; i++) {
-      for (let j = i; j < data.books.length; j++) {
-        if (data.books[i] == data.books[j]) {
-          m++;
-          if (m > mf) {
-            mf = m;
-            item = arr[i];
-          }
-        }
-      }
-      m = 0;
-    }
-    console.log(mf);
-    console.log(m);
-    console.log(item);
+    // let data = bookJson;
+    // let mf = 1;
+    // let m = 0;
+    // let item;
+    // for (let i = 0; i < data.books.length; i++) {
+    //   for (let j = i; j < data.books.length; j++) {
+    //     if (data.books[i] == data.books[j]) {
+    //       m++;
+    //       if (m > mf) {
+    //         mf = m;
+    //         item = arr[i];
+    //       }
+    //     }
+    //   }
+    //   m = 0;
+    // }
+    // console.log(mf);
+    // console.log(m);
+    // console.log(item);
   }
   res.send("hi");
 });
@@ -136,6 +136,7 @@ let encodeUrl = parseUrl.urlencoded({ extended: false });
 router.post("/form", encodeUrl, (req, res, next) => {
   let data = bookJson.books;
   const dataa = req.body;
+
   fs.readFile("./data/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log(err);
@@ -151,7 +152,6 @@ router.post("/form", encodeUrl, (req, res, next) => {
       });
     }
   });
-
   data.push(dataa);
   res.render("form", { dataa: dataa, data: data });
 });
