@@ -46,7 +46,7 @@
           <td><%=item.description%></td>
           <td><%=item.website%></td>
           <td>
-            <form action="/booksdetails/<%=item.isbn%>" method="post">
+            <form action="/api/booksdetails/<%=item.isbn%>" method="post">
               <button class="btn btn-danger">Delete</button>
             </form>
           </td>
@@ -54,7 +54,7 @@
         <%});%>
       </tbody>
     </table>
-    <form action="/add" method="get">
+    <form action="/api/add" method="get">
       <button class="fixed-bottom btn btn-primary mb-4 w-25 m-auto">
         Back
       </button>
