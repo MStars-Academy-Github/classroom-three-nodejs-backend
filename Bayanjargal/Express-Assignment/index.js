@@ -5,9 +5,9 @@ const moment = require("moment");
 require("dotenv").config();
 const router = express.Router();
 const app = express();
-const bodyParser=require("body-parser")
+const bodyParser = require("body-parser");
 const PORT = process.env.PORT;
-const fs = require("fs")
+const fs = require("fs");
 app.listen(PORT, () => {
   console.log("App is running");
 });
@@ -15,7 +15,7 @@ app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 router.get("/", (req, res, next) => {
   const randomThree = (arr, num) => {
     const shuffle = [...arr].sort(() => 0.5 - Math.random());
@@ -26,27 +26,26 @@ router.get("/", (req, res, next) => {
   res.render("index", { data: dataBookThree });
 });
 router.get("/add", (req, res, next) => {
-  console.log(req.method);
   res.render("Addbook");
 });
 router.post("/add", (req, res, next) => {
-    fs.readFile("./public/book.json", "utf-8", (err, data) => {
-      if (err) {
-        console.error(err);
-      } else {
-        const arr = JSON.parse(data);
-        const book =(req.body);
-        arr.books.push(book)
-        fs.writeFile("./public/book.json", JSON.stringify(arr), (err) => {
-          if (err) {
-           console.log(err)
-          } else {
-          console.log("success")
-          }
-        });
-      }
-    });
-    res.end("amjilttai nemegdlee")
+  fs.readFile("./public/book.json", "utf-8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      const arr = JSON.parse(data);
+      const book = req.body;
+      arr.books.push(book);
+      fs.writeFile("./public/book.json", JSON.stringify(arr), (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("success");
+        }
+      });
+    }
+  });
+  res.end("amjilttai nemegdlee");
 });
 app.use(express.static("public"));
 router.get("/home/:name", (req, res, next) => {
@@ -82,9 +81,15 @@ router.get("/home/:name", (req, res, next) => {
     const oReillyMedia = books.books.filter(
       (book) => book.publisher == "O'Reilly Media"
     ).length;
-    const apress  = books.books.filter(book=>book.publisher.includes("Apress")).length
-    const Independently= books.books.filter(book=>book.publisher == "Independently published").length
-    res.send(`No Starch Press : ${noStarchPressBooks} ,O'Reilly Media :${oReillyMedia} , Apress:${apress} , Independently published:${Independently}`)
+    const apress = books.books.filter((book) =>
+      book.publisher.includes("Apress")
+    ).length;
+    const Independently = books.books.filter(
+      (book) => book.publisher == "Independently published"
+    ).length;
+    res.send(
+      `No Starch Press : ${noStarchPressBooks} ,O'Reilly Media :${oReillyMedia} , Apress:${apress} , Independently published:${Independently}`
+    );
   }
 });
 router.get("/search/:title", (req, res, next) => {
@@ -102,4 +107,4 @@ router.get("/book/:isbn_id", (req, res, next) => {
   res.send(filteredBook);
 });
 
-app.use(router);
+app.use("/api", router);
