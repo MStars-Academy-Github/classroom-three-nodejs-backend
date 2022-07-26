@@ -13,11 +13,10 @@
         <th scope="col">Pages</th>
         <th scope="col">Description</th>
         <th scope="col">Website</th>
-        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
-      <% books.forEach((item,i)=>{%>
+      <% result.forEach((item,i)=>{%>
       <tr>
         <th scope="row"><%=i+1%></th>
         <td><img src="<%=item.img%>" alt="" width="100vw" /></td>
@@ -30,16 +29,8 @@
         <td><%=item.pages%></td>
         <td><%=item.description%></td>
         <td><%=item.website%></td>
-        <td>
-          <form action="/booksdetails/<%=item.isbn%>" method="post">
-            <button class="btn btn-danger">Delete</button>
-          </form>
-        </td>
       </tr>
       <%});%>
     </tbody>
   </table>
-  <form action="/add" method="get">
-    <button class="fixed-bottom btn btn-primary mb-4 w-25 m-auto">Back</button>
-  </form>
 </body>
