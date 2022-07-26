@@ -16,13 +16,11 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 
-/* EJS */
+/*_______________________ DASGARL-1______________________________*/
+
 router.get("/", (req, res, next) => {
-  res.send("user");
-});
-router.get("/book", (req, res, next) => {
   let data = bookJson;
-  /*_______________________ DASGARL-1______________________________*/
+
   const ranBook = data.books.map((title) => {
     return title.title;
   });
@@ -31,8 +29,15 @@ router.get("/book", (req, res, next) => {
     return shuffled.slice(0, num);
   }
   const randomBook1 = threeBookRandom(ranBook, 3);
+  res.render("index", {
+    randomBook1: randomBook1,
+  });
+});
 
-  /*_______________________ DASGARL-2______________________________*/
+/*_______________________ DASGARL-2______________________________*/
+
+router.get("/published", (req, res, next) => {
+  let data = bookJson;
   const published = data.books.map((published) => {
     return new Date(moment(published.published).format(`YYYY/MM/DD`));
   });
@@ -42,25 +47,34 @@ router.get("/book", (req, res, next) => {
   const publishedDay = sort.map((date) => {
     return moment(date).format(`YYYY/MM/DD`);
   });
+  res.render("publishedDay", {
+    publishedDay: publishedDay,
+  });
+});
 
-  /*_______________________ DASGARL-3______________________________*/
+/*_______________________ DASGARL-3______________________________*/
+
+router.get("/author", (req, res, next) => {
+  let data = bookJson;
   const author = data.books.map((title) => {
     return title.author;
   });
-
-  /*_______________________ DASGARL-4______________________________*/
-  const allBook = bookJson;
-  res.render("index", {
-    randomBook1: randomBook1,
+  res.render("author", {
     author: author,
-    publishedDay: publishedDay,
+  });
+});
+
+/*_______________________ DASGARL-4______________________________*/
+
+router.get("/allBook", (req, res, next) => {
+  let allBook = bookJson;
+
+  res.render("allBook", {
     allBook: allBook,
   });
 });
 
-/*  
-    EJS ashigaagui 
-_______________________ DASGARL-5______________________________*/
+/*_______________________ DASGARL-5______________________________*/
 
 router.get("/book/:isbn_id", (req, res, next) => {
   console.log(req.method);
@@ -69,7 +83,6 @@ router.get("/book/:isbn_id", (req, res, next) => {
   //   let data = bookJson;
   //   console.log(data);
   // }
-
   res.send("hi");
 });
 
