@@ -17,6 +17,9 @@ app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 
 /* EJS */
+router.get("/", (req, res, next) => {
+  res.send("user");
+});
 router.get("/book", (req, res, next) => {
   let data = bookJson;
   /*_______________________ DASGARL-1______________________________*/
@@ -101,25 +104,25 @@ router.get("/book1/:name", (req, res, next) => {
     // console.log(min);
     /*_______________________ DASGARL-9______________________________*/
   } else if (req.params.name === "publisher") {
-    let data = bookJson;
-    let mf = 1;
-    let m = 0;
-    let item;
-    for (let i = 0; i < data.books.length; i++) {
-      for (let j = i; j < data.books.length; j++) {
-        if (data.books[i] == data.books[j]) {
-          m++;
-          if (m > mf) {
-            mf = m;
-            item = arr[i];
-          }
-        }
-      }
-      m = 0;
-    }
-    console.log(mf);
-    console.log(m);
-    console.log(item);
+    // let data = bookJson;
+    // let mf = 1;
+    // let m = 0;
+    // let item;
+    // for (let i = 0; i < data.books.length; i++) {
+    //   for (let j = i; j < data.books.length; j++) {
+    //     if (data.books[i] == data.books[j]) {
+    //       m++;
+    //       if (m > mf) {
+    //         mf = m;
+    //         item = arr[i];
+    //       }
+    //     }
+    //   }
+    //   m = 0;
+    // }
+    // console.log(mf);
+    // console.log(m);
+    // console.log(item);
   }
   res.send("hi");
 });
@@ -135,30 +138,37 @@ router.get("/addBook", (req, res, next) => {
 let encodeUrl = parseUrl.urlencoded({ extended: false });
 router.post("/form", encodeUrl, (req, res, next) => {
   let data = bookJson.books;
+
   const dataa = req.body;
+
   fs.readFile("./data/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log(err);
     } else {
       const readData = JSON.parse(data);
+      // readData.books.map((a) => {
+      //   if (parseInt(a.isbn) !== parseInt(dataa.isbn)) {
+      //     return data.push(dataa);
+      //   }
+      // });
       readData.books.push(dataa);
       fs.writeFile("./data/book.json", JSON.stringify(readData), (err) => {
         if (err) {
           console.log(err);
         } else {
           console.log("success");
+          // console.log(readData.books);
         }
       });
     }
   });
-
   data.push(dataa);
   res.render("form", { dataa: dataa, data: data });
 });
 
 app.use(router);
-app.listen(PORT, () => {
-  console.log("my app");
+app.listen(3001, () => {
+  console.log("my app hi");
 });
 
 /* 
