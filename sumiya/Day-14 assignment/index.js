@@ -1,26 +1,26 @@
 const { count } = require("console");
 const express = require("express");
-const { body } = require("express-validator");
-const validator = require("express-validator");
+const { userValidationRules,validate } = require("./validation");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
+const ejs = express.Router();
 const app = express();
 const PORT = process.env.PORT;
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const {  validationResult } = require('express-validator');
+const booksRouter = express.Router();
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use("/book",router);
+app.use("/ejs" ,ejs);
+app.use("/books",booksRouter);
 app.use(bodyParser.json());
 require("dotenv").config();
-
+let books;
 readFile("./public/book.json", "utf-8", (err, Data) => {
   if (err) {
     console.error(err);
@@ -33,20 +33,21 @@ function getMultipleRandom(arr, num) {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, num);
 }
-
-router.get("/", (req, res, next) => {
-  res.send("Hey Hey!");
+//-----------------------------------------------------------------------------------------
+//4. Бүх номын мэдээллийг авах api.
+booksRouter.get("/", (req, res, next) => {
+  res.render("allbook" ,{ books: books.books });
 });
 //-----------------------------------------------------------------------------------------
 // 1. Хэрэглэгч номын систем рүү нэвтрэх бүрт санамсаргүй байдлаар 3 номыг хардаг байна
-router.get("/books", (req, res, next) => {
+booksRouter.get("/randombooks", (req, res, next) => {
   const filterData = getMultipleRandom(books.books, 3);
   //   console.log(typeof filterData);
   res.render("index", { data: filterData });
 });
 //-----------------------------------------------------------------------------------------
 // 2. Хасгийн сүүлээс эхэн хүртэл хэвлэгдсэн дарааллаар номын мэдээллийг авна.
-router.get("/books/sort", (req, res, next) => {
+booksRouter.get("/books/sort", (req, res, next) => {
   let sortby = books.books;
   let sorted = sortby.sort((a, b) => {
     return (
@@ -54,12 +55,11 @@ router.get("/books/sort", (req, res, next) => {
       moment(JSON.stringify(a.published), "YYYY")
     );
   });
-  //   console.log(typeof sorted);
   res.send(sorted);
 });
 //-----------------------------------------------------------------------------------------
 //3. манай номын сан дахь бүх зохиолчдын нэрийг авмаар байна.
-router.get("/books/authors", (req, res) => {
+booksRouter.get("/authors", (req, res) => {
   const authors = [];
   books.books.map((a) => {
     return authors.push(a.author);
@@ -68,7 +68,7 @@ router.get("/books/authors", (req, res) => {
 });
 //-----------------------------------------------------------------------------------------
 //5. ISBN дугаараар ноPIн Pэдээлэл буцаах (localhost/book/isbn_id).
-router.get("/books/isbn/:id", (req, res) => {
+booksRouter.get("/isbn/:id", (req, res) => {
   const isbn = JSON.parse(req.params.id);
   const newBook = [];
   books.books.find((books) => {
@@ -79,14 +79,11 @@ router.get("/books/isbn/:id", (req, res) => {
   console.log(newBook);
   res.send(newBook);
 });
-//-----------------------------------------------------------------------------------------
-//4. Бүх номын мэдээллийг авах api.
-router.get("/allbooks", (req, res, next) => {
-  res.render("allbook", { data: books.books });
-});
+
+
 //-----------------------------------------------------------------------------------------
 //6. номын нэрээр хайлт хийх api (localhost/search?title=”js”)
-router.get("/books/search/:title", (req, res) => {
+booksRouter.get("/search/:title", (req, res) => {
   const searchTitle = JSON.stringify(req.params.title);
   console.log(searchTitle);
   const newBook = [];
@@ -111,7 +108,7 @@ function maxValue(...args) {
   });
   return max;
 }
-router.get("/maximiumPageNumber", (req, res) => {
+booksRouter.get("/maximiumPageNumber", (req, res) => {
   let arr = books.books;
   const max = maxValue(...arr);
   res.send(max);
@@ -124,7 +121,7 @@ function minValue(...args) {
   });
   return min;
 }
-router.get("/minimiumPageNumber", (req, res) => {
+booksRouter.get("/minimiumPageNumber", (req, res) => {
   const arr = books.books;
   console.log(typeof arr);
   const minimium = minValue(...arr);
@@ -132,7 +129,7 @@ router.get("/minimiumPageNumber", (req, res) => {
 });
 //-----------------------------------------------------------------------------------------
 //9. Хэвлэлийн компаниудыг жагсаан дор бүрнээ хэдэн ном бидэнд нийлүүлсэн талаарх мэдээлэл авах
-router.get("/publisher", (req, res) => {
+booksRouter.get("/publisher", (req, res) => {
   const publisher = [];
   const count = {};
   books.books.map((a) => {
@@ -148,23 +145,14 @@ router.get("/publisher", (req, res) => {
     }
   }
   res.send(count);
-});
+}); 
 //--------------------------server side use ejs---------------------------------------------------------------
 //1. ejs ашигланa a. Шинэ ном нэмэх форм
-router.get("/addbook", (req, res, next) => {
+ejs.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
-router.post("/add",urlencodedParser,
-[
-  check("isbn", "not 13 numbers")
-    .exists()
-    .isLength({ min: 13, max: 13 }),
-], (req, res, next) => {
-  const errors = validationResult(req.body);
-    if (!errors.isEmpty()) {
-      // return res.status(422).jsonp(errors.array());
-      const alert = errors.array();
-    }
+ejs.post("/addbook", userValidationRules(),validate, (req, res, next) => {
+
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -187,67 +175,17 @@ router.post("/add",urlencodedParser,
 
 //--------------------------server side use ejs---------------------------------------------------------------
 //2. isbn id- гаар хайж олоод устгахад бэлэн болгоод амжилттай хариу буцаахад болно.
-router.get("/deletebook", (req, res, next) => {
-  
-  res.render("deletebook" , { data: books.books });
-});
-router.post("/deletebook" , (req,res,next)=>{
-  readFile("./public/book.json", "utf-8", (err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let books = JSON.parse(data);
-      console.log(typeof data,"---------------------");
-      let reqdata = req.body.isbn;
-console.log(typeof reqdata,"---------------------ob");
-    //   const removeById = (books, reqdata) => {
-        
-    //     const requiredIndex = books.books.findIndex(el => {
-    //        return el.isbn === JSON.stringify(reqdata);
-    //     });
-    //     console.log(requiredIndex);
-    //     if(requiredIndex === -1){
-    //        return false;
-    //     };
-    //     return !!books.books.splice(requiredIndex, 1);
-    //  };
-    // const data= removeById(books.books , reqdata)
-    const RemoveNode =(id) =>{
-      books.books.forEach((e, index)=>{
-      if(id === e.isbn){
-       return books.books.splice(index, 1);
-      }
-    })
-  }
- 
-  //    function RemoveNode(isbn) {
-  //     return books.books.filter(function(emp) {
-  //         if (emp.isbn == reqdata) {
-  //             return false;
-  //         }
-  //         return true;
-  //     });
-  // }
-  // var newData = RemoveNode("1");
-
-      // let foundBook = books.books.map((book)=> {return book.isbn=== reqdata})
-      // console.log(foundBook);
-      // let newData = books.books.splice(books.books.indexOf(foundBook),1)
-      // console.log(newData);
-      fs.writeFileSync("./public/book.json", (datas), (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("success");
-        }
-      });
-    }
-  });
-  res.end("success");
-  console.log(reqdata + "---------------------------");
+ejs.get("/deletebook",(req,res)=>{
+  res.render("allbook",{ books: books.books })
 })
-
-
+ejs.post("/deletebook/:isbn", (req, res, next) => {
+  let reqst = req.params.isbn;
+  let indexOfOdject = books.books.filter((obj) => {
+    return obj.isbn != reqst;
+  });
+  res.render("allbook", { books: indexOfOdject });
+  res.redirect("/deletebook");
+});
 app.listen(PORT || 3000, () => {
-  console.log("My app is running");
+  console.log("app is running");
 });

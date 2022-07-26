@@ -1,5 +1,6 @@
 .book-name {
   text-align: center;
+  margin-top: 30px;
 }
 .book-info {
   padding-top: 30px;
@@ -34,7 +35,47 @@
   display: flex;
   flex-direction: column;
 }
-.btn-submit {
+.btn-main {
   width: 200px;
   text-align: center;
+  background-color: rgb(242, 183, 21);
+  border: none;
+  height: 30px;
+  border-radius: 10px;
+}
+.form-section {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#add-title {
+  text-align: center;
+}
+.btn-submit-add {
+  margin-top: 30px;
+  background-color: bisque;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+.nemeh label {
+  font-weight: 600;
+  margin-top: 10px;
+}
+.nemeh input {
+  margin-top: 5px;
+  height: 20px;
+}
+.header {
+  text-align: center;
+  border: none;
+  margin-top: 10px;
+}
+.header button {
+  border: none;
+  background-color: rgb(242, 183, 21);
+  border-radius: 10px;
+}
+.date-section {
+  padding-left: 50px;
 }

@@ -87,7 +87,7 @@ router.get("/book1/:name", (req, res, next) => {
         return a;
       }
     });
-    // console.log(max);
+    console.log(max);
     /*_______________________ DASGARL-8______________________________*/
   } else if (req.params.name === "min") {
     let data = bookJson;

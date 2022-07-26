@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <link rel="stylesheet" href="http://localhost:3000/css/main.css" />
+  </head>
+  <body>
     <ul>
-        <% data.forEach((item)=>{%>
-        <li><%=item.title%> <span style="padding-left: 50px;"><%=item.published.slice(0,10)%></span></li>
-        <%});%>
-     </ul>
-</body>
+      <% data.forEach((item)=>{%>
+      <li>
+        <%=item.title%>
+        <span class="date-section"><%=item.published.slice(0,10)%></span>
+      </li>
+      <%});%>
+    </ul>
+  </body>
 </html>
