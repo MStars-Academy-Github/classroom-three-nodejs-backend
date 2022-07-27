@@ -27,28 +27,28 @@ bookRouter.get("/allbooks", (req, res, next) => {
 });
 
 //<--------> 5. Search by isbn <-------->\\
-bookRouter.get("/isbn/:id", (req, res) => {
-  let isbnID = req.params.id;
+bookRouter.get("/", (req, res) => {
+  let isbnID = req.query.isbn;
   let result = books.books.filter((book) => {
     return book.isbn === isbnID;
   });
-  res.send(result);
+  res.render("isbn", { result });
 });
 
 //<--------> 7. Search by page(max) <-------->\\
-bookRouter.get("/maxPage", (req, res) => {
+bookRouter.get("/maxpage", (req, res) => {
   let maxPage = books.books.reduce((prev, current) =>
     prev.pages > current.pages ? prev : current
   );
-  res.send(maxPage);
+  res.render("maxpage", { maxPage });
 });
 
 //<--------> 8. Search by page(min) <-------->\\
-bookRouter.get("/minPage", (req, res) => {
+bookRouter.get("/minpage", (req, res) => {
   let minPage = books.books.reduce((prev, current) =>
     prev.pages < current.pages ? prev : current
   );
-  res.send(minPage);
+  res.render("minpage", { minPage });
 });
 
 //<--------> 9. Publishers <-------->\\
@@ -67,7 +67,9 @@ bookRouter.get("/publishers", (req, res, next) => {
       count[e]++;
     }
   }
-  res.send(count);
+  let keys = Object.keys(count);
+  let values = Object.values(count);
+  res.render("publishers", { keys, values });
 });
 
 module.exports = bookRouter;

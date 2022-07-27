@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
+const { userValidationRules, validate } = require("../validator");
 let books;
 
 readFile("./public/book.json", "utf-8", (err, booksData) => {
@@ -34,13 +35,13 @@ router.get("/authors", (req, res) => {
 //<--------> 6. Search by Title(query param) <-------->\\
 router.get("/search", (req, res) => {
   let title = req.query.title;
-  const result = books.books.filter((book) => {
+  const results = books.books.filter((book) => {
     return Object.values(book.title)
       .join("")
       .toLowerCase()
       .includes(title.toLowerCase());
   });
-  res.send(result);
+  res.render("search", { results });
 });
 //******/ Server side rendering 1 \******\\
 
@@ -49,7 +50,7 @@ router.get("/add", (req, res) => {
   res.render("addBook");
 });
 
-// router.post("/add", userValidationRules(), validate, (req, res, next) => {});
+router.post("/add", userValidationRules(), validate, (req, res, next) => {});
 
 //<--------> 2. Details of books <-------->\\
 
@@ -60,12 +61,12 @@ router.get("/booksdetails", (req, res) => {
 //******/ Server side rendering 2\******\\
 
 //<--------> 1. Delete book <-------->\\
-// router.post("/booksdetails/:isbn", (req, res) => {
-//   let delIsbn = req.params.isbn;
-//   let result = books.books.filter((book) => {
-//     return book.isbn != delIsbn;
-//   });
-//   res.render("index", { books: result });
-// });
+router.post("/booksdetails/:isbn", (req, res) => {
+  let delIsbn = req.params.isbn;
+  let result = books.books.filter((book) => {
+    return book.isbn != delIsbn;
+  });
+  res.render("index", { books: result });
+});
 
 module.exports = router;
