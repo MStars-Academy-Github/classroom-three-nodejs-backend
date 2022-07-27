@@ -87,28 +87,6 @@
       "pages": 310,
       "description": "Get the most out of this foundational reference and improve the productivity of your software teams. This open access book collects the wisdom of the 2017 \"Dagstuhl\" seminar on productivity in software engineering, a meeting of community leaders, who came together with the goal of rethinking traditional definitions and measures of productivity.",
       "website": "https://doi.org/10.1007/978-1-4842-4221-6"
-    },
-    { "isbn": "7", "title": "7", "author": "7", "pages": "7" },
-    { "isbn": "78", "title": "7", "author": "7", "pages": "78" },
-    { "isbn": "1234", "title": "1234", "author": "1234", "pages": "1234" },
-    {
-      "isbn": "9781484242216",
-      "title": "werwerw",
-      "author": "werwre",
-      "pages": "9781484242216"
-    },
-    {
-      "isbn": "9781484242216",
-      "title": "werwerw",
-      "author": "werwre",
-      "pages": "9781484242216"
-    },
-    {
-      "isbn": "9781484242216",
-      "title": "werwerw",
-      "author": "werwre",
-      "pages": "9781484242216"
-    },
-    { "isbn": "342", "title": "342", "author": "342", "pages": "342" }
+    }
   ]
 }
