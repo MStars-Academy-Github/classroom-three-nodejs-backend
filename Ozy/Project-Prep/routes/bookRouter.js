@@ -14,17 +14,16 @@ readFile("./public/book.json", "utf-8", (err, booksData) => {
 });
 
 //<--------> 2. Sort by date <-------->\\
-bookRouter.get("/byDate", (req, res, next) => {
-  let byDate = books.books;
-  let sorted = byDate.sort((a, b) => {
-    JSON.stringify(a.published) - JSON.stringify(b.published);
-  });
-  console.log(sorted);
+bookRouter.get("/sortbyDate", (req, res, next) => {
+  let result = books.books.sort((a, b) =>
+    a.published > b.published ? 1 : b.published > a.published ? -1 : 0
+  );
+  res.render("sortByDate", { result });
 });
 
 //<--------> 4. All books <-------->\\
-bookRouter.get("/", (req, res, next) => {
-  res.send(books.books);
+bookRouter.get("/allbooks", (req, res, next) => {
+  res.render("allbooks", { books: books.books });
 });
 
 //<--------> 5. Search by isbn <-------->\\

@@ -12,6 +12,22 @@
     />
   </head>
   <style>
+    table,
+    td,
+    th {
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      font-size: 10px;
+      padding: 10px;
+    }
     .pad {
       margin: 10px;
     }
@@ -34,21 +50,32 @@
         </div>
       </nav>
     </header>
-
     <div class="pad">
-      <%randomBook1.forEach((item)=>{ %>
-      <p><%=item%></p>
-      <% });%>
-      <!-- <img
-        src="https://www.patterns.dev/img/remote/Z2dzbwc-1280w.avif"
-        alt=""
-      /> -->
+      <table>
+        <%allBook.books.forEach((item)=>{ %>
+        <tr>
+          <th><%=item.isbn%></th>
+          <th><%=item.title%></th>
+          <th><%=item.subtitle%></th>
+          <th><%=item.author%></th>
+          <th><%=item.published%></th>
+          <th><%=item.publisher%></th>
+          <th><%=item.pages%></th>
+          <th><%=item.description%></th>
+          <th><%=item.website%></th>
+          <th>
+            <button>DELETE</button>
+          </th>
+        </tr>
+        <% });%>
+      </table>
     </div>
   </body>
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"
-  ></script>
+  <script>
+    src =
+      "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
+    integrity =
+      "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM";
+    crossorigin = "anonymous";
+  </script>
 </html>
