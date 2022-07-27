@@ -28,6 +28,7 @@ bookRouter.get("/allbooks", (req, res, next) => {
 
 //<--------> 5. Search by isbn <-------->\\
 bookRouter.get("/isbn/:id", (req, res) => {
+  console.log(req.isbn.value);
   let isbnID = req.params.id;
   let result = books.books.filter((book) => {
     return book.isbn === isbnID;
