@@ -64,7 +64,8 @@
           <th><%=item.description%></th>
           <th><%=item.website%></th>
           <th>
-            <button>DELETE</button>
+            <!-- <button onclick="hdhh(<%=item.isbn%>)">DELETE</button> -->
+            <button onclick="isbn(<%=item.isbn%>)">DELETE</button>
           </th>
         </tr>
         <% });%>
@@ -72,6 +73,10 @@
     </div>
   </body>
   <script>
+    function isbn(a) {
+      console.log(a);
+    }
+
     src =
       "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
     integrity =
