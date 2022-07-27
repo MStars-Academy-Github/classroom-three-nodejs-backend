@@ -10,7 +10,7 @@ app.use(expressLayouts);
 app.set("layout", "./layouts/full-width");
 app.set("view engine", "ejs");
 app.use(router);
-app.use(bookRouter);
+app.use("/books", bookRouter);
 
 app.get("", (req, res) => {
   res.render("index");

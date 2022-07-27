@@ -60,12 +60,12 @@ router.get("/booksdetails", (req, res) => {
 //******/ Server side rendering 2\******\\
 
 //<--------> 1. Delete book <-------->\\
-// router.post("/booksdetails/:isbn", (req, res) => {
-//   let delIsbn = req.params.isbn;
-//   let result = books.books.filter((book) => {
-//     return book.isbn != delIsbn;
-//   });
-//   res.render("index", { books: result });
-// });
+router.post("/booksdetails/:isbn", (req, res) => {
+  let delIsbn = req.params.isbn;
+  let result = books.books.filter((book) => {
+    return book.isbn != delIsbn;
+  });
+  res.render("index", { books: result });
+});
 
 module.exports = router;
