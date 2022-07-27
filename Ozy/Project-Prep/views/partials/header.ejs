@@ -34,12 +34,18 @@
           </select>
           <button class="btn btn-danger">Submit</button>
         </form>
-        <form class="d-flex justify-content-between">
+        <form
+          class="d-flex justify-content-between"
+          action="/search"
+          method="get"
+        >
           <input
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search by title"
             aria-label="Search"
+            name="title"
+            id="title"
           />
         </form>
         <li class="nav-item">
