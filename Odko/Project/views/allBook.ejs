@@ -11,12 +11,15 @@
       crossorigin="anonymous"
     />
   </head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <style>
     table,
     td,
     th {
-      border: 1px solid #ddd;
+      border: 1px solid #996575;
       text-align: left;
+     
     }
 
     table {
@@ -28,11 +31,34 @@
       font-size: 10px;
       padding: 10px;
     }
+
+    .btn{
+      border: 1px solid #BDF2DD;
+      background-color:#7BD9E8;
+      margin:20px 0px 20px 0px ;
+      border-radius:5px;
+      color:black;
+    }
+    .btn1{
+      border: 1px solid #F0795B;
+      background-color:#FA685F;
+      border-radius:3px;
+      color:black;
+    }
+    .btn1:hover{
+      background-color:#CBF0C3;
+      border: 1px solid #5BF093;
+     
+    }
+    #form {
+      width: 100%;
+      margin-bottom: 10px;
+    }
     .pad {
       margin: 10px;
     }
   </style>
-  <body>
+  <body class=" container">
     <header>
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
@@ -50,31 +76,157 @@
         </div>
       </nav>
     </header>
-    <div class="pad">
-      <table>
-        <%allBook.books.forEach((item)=>{ %>
-        <tr>
+    <div >
+      
+      <button class="btn" onclick="max([<%=allBook.books.map(a=> a.pages)%>])">Max book</button>
+      <button class="btn" onclick="min([<%=allBook.books.map(a=> a.pages)%>])">Min book</button>
+      <button class="btn" onclick="author()">author</button>
+      <button class="btn" onclick="momentDay()">moment</button>
+      <button class="btn" onclick="addbook()">addbook</button>
+      <button class="btn" onclick="randombook()">randombook</button>
+
+
+
+      <table id="myTable">
+        <%allBook.books.forEach((item,i)=>{ %>
+        <tr id= "tr">
           <th><%=item.isbn%></th>
-          <th><%=item.title%></th>
+          <th id="title"><%=item.title%></th>
           <th><%=item.subtitle%></th>
-          <th><%=item.author%></th>
-          <th><%=item.published%></th>
-          <th><%=item.publisher%></th>
-          <th><%=item.pages%></th>
-          <th><%=item.description%></th>
-          <th><%=item.website%></th>
+          <th id="author"><%=item.author%></th>
+          <th id="momentDay"><%=item.published%></th>
+          <th id="publisher"><%=item.publisher%></th>
+          <th id="pages"><%=item.pages%></th>
+          <!-- <th><%=item.description%></th> -->
+          <!-- <th><%=item.website%></th> -->
           <th>
-            <!-- <button onclick="hdhh(<%=item.isbn%>)">DELETE</button> -->
-            <button onclick="isbn(<%=item.isbn%>)">DELETE</button>
+            <button class="btn1" onclick="isbn(<%=i%>,<%=item.pages%>)">DELETE</button>
           </th>
         </tr>
         <% });%>
       </table>
+        <form action="/form" method="POST" id="form">
+          <label for="fname">isbn</label>
+          <input type="number" id="form" name="isbn" placeholder="isbn" />
+          <label for="fname">title</label>
+          <input type="text" id="form" name="title" placeholder="title" />
+          <label for="fname">author</label>
+          <input type="text" id="form" name="author" placeholder="author" />
+          <label for="fname">pages</label>
+          <input type="number" id="form" name="pages" placeholder="pages" />
+          <button>submit</button>
+       </form>
+
+       <div id="randombook">
+           <%randomBook1.forEach((item)=>{ %>
+             <p><%=item%></p>
+           <% });%>
+       </div>
     </div>
   </body>
+  
   <script>
-    function isbn(a) {
-      console.log(a);
+   
+  
+    // DELETE
+    function isbn(i, page) {
+      document.getElementById("myTable").deleteRow(i);
+    }
+    // MAXIMUM PAGES
+    function max(Books){
+      const sortMax = Books.sort((a, b)=>{
+        return  b-a;
+       })
+       let element1 = Math.max(...sortMax);
+       //  table-iin ehni tr elementiin pages elementer solij baina
+       document.getElementById("pages").innerHTML = element1
+       //  table-iin ehni tr element
+       let tr = document.getElementById("tr")
+      // buh tr-uudig awaad nohtsol shalgaad  shine table uusged butsaaj baina
+       let rows = document.querySelectorAll('tr');
+        rows.forEach((row) => {
+           if(row === tr){
+            document.getElementById("myTable").innerHTML = ""
+            const body = document.body,
+            tbl = document.createElement('table') 
+            tbd = document.createElement('td').innerHTML = row ;
+            tbl.appendChild(tbd)
+            body.appendChild(tbl);
+        }
+      })
+    
+    }
+   // MINIMUM PAGES
+    function min(Books){
+      const sortMax = Books.sort((a, b)=>{
+        return  b-a;
+       })
+       let element1 = Math.min(...sortMax);
+       console.log(sortMax)
+       //  table-iin ehni tr elementiin pages elementer solij baina
+       document.getElementById("pages").innerHTML = element1;
+       //  table-iin ehni tr element
+       let tr = document.getElementById("tr")
+      // buh tr-uudig awaad nohtsol shalgaad  shine table uusged butsaaj baina
+       let rows = document.querySelectorAll('tr');
+        rows.forEach((row) => {
+           if(row === tr){
+            document.getElementById("myTable").innerHTML = ""
+            const body = document.body,
+            tbl = document.createElement('table') 
+            tbd = document.createElement('td').innerHTML = row ;
+            tbl.appendChild(tbd)
+            body.appendChild(tbl);
+       }
+     })
+    }
+
+    function author(){
+      let author = document.querySelectorAll("th#author")
+      author.forEach((row) => {
+        row.style.backgroundColor = "red";
+       })
+    }
+
+    function momentDay(){
+      let momentDay = document.querySelectorAll("th#momentDay")
+      momentDay.forEach((row) => {
+       const dayNumber =new Date((row.textContent))
+         row.innerHTML= dayNumber.toLocaleDateString("en-US")
+         row.style.color = "red"
+       })
+    }
+
+    function addbook(){
+     const myTable= document.getElementById("myTable")
+     myTable.style.display = "none";
+     const form= document.getElementById("form")
+     form.style.display = "block";
+     const randombook= document.getElementById("randombook")
+      randombook.style.display = "none";
+    }
+    
+
+    function randombook(){
+      let title = document.querySelectorAll("th#title")
+      let arr= [];
+      title.forEach((row) => {
+        arr.push(row.textContent)
+      })
+      function threeBookRandom(arr, num) {
+        const shuffled = [...arr].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, num);
+      }
+       const randomBook1 = threeBookRandom(arr, 3);
+       const randombook= document.getElementById("randombook")
+      // RANDOM BOOK 
+       randombook.innerHTML = randomBook1
+
+      randombook.style.display = "block";
+      const myTable= document.getElementById("myTable")
+      myTable.style.display = "none";
+      const form= document.getElementById("form")
+       form.style.display = "none";
     }
 
     src =
@@ -83,4 +235,5 @@
       "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM";
     crossorigin = "anonymous";
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>

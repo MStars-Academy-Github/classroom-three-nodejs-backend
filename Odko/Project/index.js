@@ -68,9 +68,21 @@ router.get("/author", (req, res, next) => {
 
 router.get("/allBook", (req, res, next) => {
   let allBook = bookJson;
+  let Books = bookJson.books;
+
+  const ranBook = allBook.books.map((title) => {
+    return title.title;
+  });
+  function threeBookRandom(arr, num) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, num);
+  }
+  const randomBook1 = threeBookRandom(ranBook, 3);
 
   res.render("allBook", {
     allBook: allBook,
+    Books: Books,
+    randomBook1: randomBook1,
   });
 });
 
