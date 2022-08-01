@@ -24,12 +24,8 @@ async function createCategory(params) {
 }
 
 async function deleteCategory(params) {
-  const name = params.id;
-  console.log(name);
-  const data = await db.query(
-    "INSERT INTO category ( name, color, v) VALUES (?, ?, ?)",
-    [name, color, v]
-  );
+  const id = params.id;
+  const data = await db.query("DELETE FROM category where id = ?", [id]);
   return {
     data,
   };
