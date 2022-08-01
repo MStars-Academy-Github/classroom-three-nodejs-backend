@@ -8,8 +8,13 @@
     <title>Document</title>
   </head>
   <body id="body">
+    <div class="menu">
+      <button onclick="location.href='http://localhost:3000/books/'">Home</button>
+      <button onclick="location.href='http://localhost:3000/ejs/addbook'"> Addbook</button>
+      <button onclick="location.href='http://localhost:3000/books/randombooks'"> Random 3 book</button>
+    </div>
     <div class="row">
-      <%data.forEach((date)=>{%>
+      <%books.forEach((date)=>{%>
 
       <div class="column">
         <div class="card">
@@ -22,22 +27,11 @@
           <p>Pages : <%= date.pages %></p>
           <p>Description : <%= date.description %></p>
           <p>Website : <%= date.website %></p>
+          <form action="/deletebook/<%=date.isbn%>" method="post" >
+            <button> delete</button>
+           </form>
         </div>
       </div>
-
-      <!-- <div class="column">
-        <div class="card">
-          <h4>Isbn : <b><%= date.isbn %></b></h4>
-          <p>Title : <%= date.title %></p>
-          <p>Subtitle : <%= date.subtitle %></p>
-          <p>Author : <%= date.author %></p>
-          <p>Published : <%= date.published %></p>
-          <p>Publisher : <%= date.publisher %></p>
-          <p>Pages : <%= date.pages %></p>
-          <p>Description : <%= date.description %></p>
-          <p>Website : <%= date.website %></p>
-        </div>
-      </div> -->
       <%});%>
     </div>
   </body>

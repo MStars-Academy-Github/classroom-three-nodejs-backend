@@ -1,0 +1,66 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div
+      class="d-flex justify-content-between w-100 container"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav d-flex justify-content-between w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/sortbydate">Older First</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/authors">Authors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/allbooks">All books</a>
+        </li>
+        <form
+          class="d-flex justify-content-between"
+          action="/books"
+          method="get"
+        >
+          <select name="isbn" id="isbn">
+            <option value="9781593279509">9781593279509</option>
+            <option value="9781593279509">9781593279509</option>
+            <option value="9781593277574">9781593277574</option>
+            <option value="9781449365035">9781449365035</option>
+            <option value="9781449331818">9781449331818</option>
+            <option value="9798602477429">9798602477429</option>
+            <option value="9781484200766">9781484200766</option>
+            <option value="9781484242216">9781484242216</option>
+          </select>
+          <button class="btn btn-danger">Submit</button>
+        </form>
+        <form
+          class="d-flex justify-content-between"
+          action="/search"
+          method="get"
+        >
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search by title"
+            aria-label="Search"
+            name="title"
+            id="title"
+          />
+        </form>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/maxpage">Max Page</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/minpage">Min Page</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/publishers">Publishers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add">Add New Book</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

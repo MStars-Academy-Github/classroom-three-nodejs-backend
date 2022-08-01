@@ -1,0 +1,17 @@
+<body class="text-center">
+  <div class="bg-warning">
+    <h3>Publishers</h3>
+    <div class="d-flex justify-content-center">
+      <div>
+        <% keys.forEach((key)=>{%>
+        <p><%=key%></p>
+        <%});%>
+      </div>
+      <div class="ms-2">
+        <% values.forEach((value)=>{%>
+        <p><%=value%></p>
+        <%});%>
+      </div>
+    </div>
+  </div>
+</body>
