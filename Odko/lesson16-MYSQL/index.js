@@ -1,16 +1,18 @@
 const express = require("express");
-const app = express();
 require("dotenv").config();
-const PORT = process.env.PORT;
-const router = express.Router();
 
+const categoryRouter = require("./routes/categories");
+
+const PORT = process.env.PORT;
+const app = express();
 app.use(express.json());
 
-router.get("/", (req, res, next) => {
-  res.send("Node client bolgohin tuld mysql2-iig suulgana");
-});
+// router.get("/", (req, res, next) => {
+//   res.send("Node client bolgohin tuld mysql2-iig suulgana");
+// });
 
-app.use(router);
+app.use("/category", categoryRouter);
+
 app.listen(PORT, () => {
   console.log("my app");
 });

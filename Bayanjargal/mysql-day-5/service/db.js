@@ -7,4 +7,6 @@ async function query(sql, params) {
   return rows;
 }
 
-module.exports = { query };
+module.exports = {
+  query,
+};

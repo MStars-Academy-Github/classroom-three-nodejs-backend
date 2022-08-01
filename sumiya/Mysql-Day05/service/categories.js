@@ -1,45 +1,44 @@
-const db = require("./db");
+const db = require("../db");
 
 async function getAllCategories() {
-  const data = await db.query("SELECT _id, name, color FROM category");
+  const data = await db.query("select * from categories");
   const params = {};
-
   return {
     data,
     params,
   };
 }
-
 async function createCategory(params) {
   const name = params.name;
   const color = params.color;
+  const _v = params._v;
   const data = await db.query(
-    " INSERT INTO category (name, color) VALUES (?, ?)",
-    [name, color]
+    "insert into categories (name, color, _v) values(?, ?, ?)",
+    [name, color, _v]
   );
+
   return {
-    data: data,
+    data,
   };
 }
-
 async function deleteCategory(params) {
   const id = params._id;
-  const data = await db.query("DELETE FROM category where _id=?", [id]);
+  const data = await db.query("delete from categories where _id =?", [id]);
   return {
-    data: data,
+    data,
   };
 }
-
 async function updateCategory(params) {
   const id = params._id;
   const name = params.name;
   const color = params.color;
+  const _v = params._v;
   const data = await db.query(
-    "update category set name=?, color=? where _id=?  ",
-    [name, color, id]
+    "update categories set name=?, color =? , _v=? where _id=?",
+    [name, color, _v, id]
   );
   return {
-    data: data,
+    data,
   };
 }
 

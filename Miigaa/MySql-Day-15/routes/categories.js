@@ -10,7 +10,6 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-
 router.post("/", async (req, res, next) => {
   try {
     const params = req.body;
@@ -20,7 +19,6 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
-
 router.delete("/", async (req, res, next) => {
   try {
     const params = req.body;
@@ -30,7 +28,6 @@ router.delete("/", async (req, res, next) => {
     next(error);
   }
 });
-
 router.put("/", async (req, res, next) => {
   try {
     const params = req.body;
