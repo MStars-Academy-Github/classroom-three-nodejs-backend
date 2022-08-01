@@ -1,5 +1,4 @@
 const express = require("express");
-const validatorMiddleware = require("./validatorMiddleware.js");
 const { userValidationRules, validate } = require("./validatorMiddleware");
 const app = express();
 require("dotenv").config();

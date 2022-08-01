@@ -1,22 +1,23 @@
 const { count } = require("console");
 const express = require("express");
-const { body } = require("express-validator");
-const validator = require("express-validator");
+const { userValidationRules, validate } = require("./validation");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
+const ejs = express.Router();
 const app = express();
 const PORT = process.env.PORT;
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
-const { validationResult } = require("express-validator");
+const booksRouter = express.Router();
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use(router);
+app.use("/ejs", ejs);
+app.use("/books", booksRouter);
 app.use(bodyParser.json());
 require("dotenv").config();
 let books;
@@ -32,20 +33,21 @@ function getMultipleRandom(arr, num) {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, num);
 }
-
-router.get("/", (req, res, next) => {
-  res.send("Hey Hey!");
+//-----------------------------------------------------------------------------------------
+//4. Бүх номын мэдээллийг авах api.
+booksRouter.get("/", (req, res, next) => {
+  res.render("allbook", { books: books.books });
 });
 //-----------------------------------------------------------------------------------------
 // 1. Хэрэглэгч номын систем рүү нэвтрэх бүрт санамсаргүй байдлаар 3 номыг хардаг байна
-router.get("/books", (req, res, next) => {
+booksRouter.get("/randombooks", (req, res, next) => {
   const filterData = getMultipleRandom(books.books, 3);
   //   console.log(typeof filterData);
   res.render("index", { data: filterData });
 });
 //-----------------------------------------------------------------------------------------
 // 2. Хасгийн сүүлээс эхэн хүртэл хэвлэгдсэн дарааллаар номын мэдээллийг авна.
-router.get("/books/sort", (req, res, next) => {
+booksRouter.get("/books/sort", (req, res, next) => {
   let sortby = books.books;
   let sorted = sortby.sort((a, b) => {
     return (
@@ -57,7 +59,7 @@ router.get("/books/sort", (req, res, next) => {
 });
 //-----------------------------------------------------------------------------------------
 //3. манай номын сан дахь бүх зохиолчдын нэрийг авмаар байна.
-router.get("/books/authors", (req, res) => {
+booksRouter.get("/authors", (req, res) => {
   const authors = [];
   books.books.map((a) => {
     return authors.push(a.author);
@@ -66,7 +68,7 @@ router.get("/books/authors", (req, res) => {
 });
 //-----------------------------------------------------------------------------------------
 //5. ISBN дугаараар ноPIн Pэдээлэл буцаах (localhost/book/isbn_id).
-router.get("/books/isbn/:id", (req, res) => {
+booksRouter.get("/isbn/:id", (req, res) => {
   const isbn = JSON.parse(req.params.id);
   const newBook = [];
   books.books.find((books) => {
@@ -77,14 +79,10 @@ router.get("/books/isbn/:id", (req, res) => {
   console.log(newBook);
   res.send(newBook);
 });
-//-----------------------------------------------------------------------------------------
-//4. Бүх номын мэдээллийг авах api.
-router.get("/allbooks", (req, res, next) => {
-  res.render("allbook", { data: books.books });
-});
+
 //-----------------------------------------------------------------------------------------
 //6. номын нэрээр хайлт хийх api (localhost/search?title=”js”)
-router.get("/books/search/:title", (req, res) => {
+booksRouter.get("/search/:title", (req, res) => {
   const searchTitle = JSON.stringify(req.params.title);
   console.log(searchTitle);
   const newBook = [];
@@ -109,7 +107,7 @@ function maxValue(...args) {
   });
   return max;
 }
-router.get("/maximiumPageNumber", (req, res) => {
+booksRouter.get("/maximiumPageNumber", (req, res) => {
   let arr = books.books;
   const max = maxValue(...arr);
   res.send(max);
@@ -122,7 +120,7 @@ function minValue(...args) {
   });
   return min;
 }
-router.get("/minimiumPageNumber", (req, res) => {
+booksRouter.get("/minimiumPageNumber", (req, res) => {
   const arr = books.books;
   console.log(typeof arr);
   const minimium = minValue(...arr);
@@ -130,7 +128,7 @@ router.get("/minimiumPageNumber", (req, res) => {
 });
 //-----------------------------------------------------------------------------------------
 //9. Хэвлэлийн компаниудыг жагсаан дор бүрнээ хэдэн ном бидэнд нийлүүлсэн талаарх мэдээлэл авах
-router.get("/publisher", (req, res) => {
+booksRouter.get("/publisher", (req, res) => {
   const publisher = [];
   const count = {};
   books.books.map((a) => {
@@ -147,48 +145,12 @@ router.get("/publisher", (req, res) => {
   }
   res.send(count);
 });
-//-----------------------------------------------validation---------------------------------------------
-const userValidationRules = () => {
-  return [
-    body("isbn", "invalid isbn").isLength({ min: 10, max: 13 }).notEmpty(),
-    body("title", "invalid tille").isString().notEmpty(),
-    body("subtitle", "invalid subtitle").isString().notEmpty(),
-    body("author", "invalid author").isString().notEmpty(),
-    body("published", "invalid publish date").isString().notEmpty(),
-    body("publisher", "invalid publisher").isString().notEmpty(),
-    body("pages", "invalid number").isNumeric().notEmpty(),
-    body("description", "invalid desc").isString().notEmpty(),
-    body("website", "invalid website").isURL().notEmpty(),
-  ];
-};
-
-const validate = (req, res, next) => {
-  const errors = validationResult(req);
-  if (errors.isEmpty()) {
-    next();
-  }
-  const extractedErrors = [];
-  errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
-  return res.status(400).json({ errors: extractedErrors });
-};
 //--------------------------server side use ejs---------------------------------------------------------------
 //1. ejs ашигланa a. Шинэ ном нэмэх форм
-
-var log_file = fs.createWriteStream(__dirname + "/logFile.txt", {
-  flags: "w",
-});
-var log_stdout = process.stdout;
-
-console.log = function (d) {
-  //
-  log_file.write(util.format(d) + "\n");
-  log_stdout.write(util.format(d) + "\n");
-};
-
-router.get("/addbook", (req, res, next) => {
+ejs.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
-router.post("/addbook", userValidationRules(), validate, (req, res, next) => {
+ejs.post("/addbook", userValidationRules(), validate, (req, res, next) => {
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -211,13 +173,16 @@ router.post("/addbook", userValidationRules(), validate, (req, res, next) => {
 
 //--------------------------server side use ejs---------------------------------------------------------------
 //2. isbn id- гаар хайж олоод устгахад бэлэн болгоод амжилттай хариу буцаахад болно.
-
-router.post("/deletebook/:isbn", (req, res, next) => {
+ejs.get("/deletebook", (req, res) => {
+  res.render("allbook", { books: books.books });
+});
+ejs.post("/deletebook/:isbn", (req, res, next) => {
   let reqst = req.params.isbn;
   let indexOfOdject = books.books.filter((obj) => {
     return obj.isbn != reqst;
   });
-  res.render("deletebook", { books: indexOfOdject });
+  res.render("allbook", { books: indexOfOdject });
+  res.redirect("/deletebook");
 });
 app.listen(PORT || 3000, () => {
   console.log("app is running");
