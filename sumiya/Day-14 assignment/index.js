@@ -1,6 +1,6 @@
 const { count } = require("console");
 const express = require("express");
-const { userValidationRules,validate } = require("./validation");
+const { userValidationRules, validate } = require("./validation");
 const fs = require("fs");
 const moment = require("moment");
 const router = express.Router();
@@ -16,8 +16,8 @@ app.set("views", __dirname + "/views");
 app.set("view options", { layout: false });
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use("/ejs" ,ejs);
-app.use("/books",booksRouter);
+app.use("/ejs", ejs);
+app.use("/books", booksRouter);
 app.use(bodyParser.json());
 require("dotenv").config();
 let books;
@@ -36,7 +36,7 @@ function getMultipleRandom(arr, num) {
 //-----------------------------------------------------------------------------------------
 //4. Бүх номын мэдээллийг авах api.
 booksRouter.get("/", (req, res, next) => {
-  res.render("allbook" ,{ books: books.books });
+  res.render("allbook", { books: books.books });
 });
 //-----------------------------------------------------------------------------------------
 // 1. Хэрэглэгч номын систем рүү нэвтрэх бүрт санамсаргүй байдлаар 3 номыг хардаг байна
@@ -79,7 +79,6 @@ booksRouter.get("/isbn/:id", (req, res) => {
   console.log(newBook);
   res.send(newBook);
 });
-
 
 //-----------------------------------------------------------------------------------------
 //6. номын нэрээр хайлт хийх api (localhost/search?title=”js”)
@@ -145,14 +144,13 @@ booksRouter.get("/publisher", (req, res) => {
     }
   }
   res.send(count);
-}); 
+});
 //--------------------------server side use ejs---------------------------------------------------------------
 //1. ejs ашигланa a. Шинэ ном нэмэх форм
 ejs.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
-ejs.post("/addbook", userValidationRules(),validate, (req, res, next) => {
-
+ejs.post("/addbook", userValidationRules(), validate, (req, res, next) => {
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -163,9 +161,9 @@ ejs.post("/addbook", userValidationRules(),validate, (req, res, next) => {
       console.log(newData);
       fs.writeFile("./public/book.json", JSON.stringify(book), (err) => {
         if (err) {
-          console.log(err);
+          console.error = console.log();
         } else {
-          console.log("success");
+          console.log("success added the book");
         }
       });
     }
@@ -175,9 +173,9 @@ ejs.post("/addbook", userValidationRules(),validate, (req, res, next) => {
 
 //--------------------------server side use ejs---------------------------------------------------------------
 //2. isbn id- гаар хайж олоод устгахад бэлэн болгоод амжилттай хариу буцаахад болно.
-ejs.get("/deletebook",(req,res)=>{
-  res.render("allbook",{ books: books.books })
-})
+ejs.get("/deletebook", (req, res) => {
+  res.render("allbook", { books: books.books });
+});
 ejs.post("/deletebook/:isbn", (req, res, next) => {
   let reqst = req.params.isbn;
   let indexOfOdject = books.books.filter((obj) => {
