@@ -22,7 +22,21 @@ async function createCategory(params) {
     data,
   };
 }
+
+async function deleteCategory(params) {
+  const name = params.id;
+  console.log(name);
+  const data = await db.query(
+    "INSERT INTO category ( name, color, v) VALUES (?, ?, ?)",
+    [name, color, v]
+  );
+  return {
+    data,
+  };
+}
+
 module.exports = {
   getAllCategories,
   createCategory,
+  deleteCategory,
 };
