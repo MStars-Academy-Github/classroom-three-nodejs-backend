@@ -11,4 +11,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/", async (req, res, next) => {
+  try {
+    const params = req.body;
+    res.json(await categories.createCategory());
+  } catch (error) {
+    console.error(error.message);
+    next.error;
+  }
+});
 module.exports = router;
