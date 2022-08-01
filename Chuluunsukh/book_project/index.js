@@ -72,9 +72,10 @@ app.get("/", (req, res) => {
 // Publisher section
 
 router.get("/publisher", (req, res, next) => {
-  fs.readFile("./book.json", "utf-8", (err, data) => {
+  fs.readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log("So sad, Error has occured to loading this page");
+      res.send(err)
     } else {
       let count = {};
       const publishers = [];
@@ -100,9 +101,10 @@ router.get("/publisher", (req, res, next) => {
 
 router.get("/search", (req, res, next) => {
   const url = req.query.title;
-  fs.readFile("./book.json", "utf-8", (err, data) => {
+  fs.readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log("So sad, Error has occured to loading this page");
+      res.send(err)
     } else {
       const result = [];
       const ddata = JSON.parse(data.toLowerCase());
