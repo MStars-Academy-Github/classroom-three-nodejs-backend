@@ -1,0 +1,45 @@
+<body>
+  <table class="table container">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Cover</th>
+        <th scope="col">Isbn</th>
+        <th scope="col">Title</th>
+        <th scope="col">Subtitle</th>
+        <th scope="col">Author</th>
+        <th scope="col">Published</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">Pages</th>
+        <th scope="col">Description</th>
+        <th scope="col">Website</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% books.forEach((item,i)=>{%>
+      <tr>
+        <th scope="row"><%=i+1%></th>
+        <td><img src="<%=item.img%>" alt="" width="100vw" /></td>
+        <td><%=item.isbn%></td>
+        <td><%=item.title%></td>
+        <td><%=item.subtitle%></td>
+        <td><%=item.author%></td>
+        <td><%=item.published%></td>
+        <td><%=item.publisher%></td>
+        <td><%=item.pages%></td>
+        <td><%=item.description%></td>
+        <td><%=item.website%></td>
+        <td>
+          <form action="/booksdetails/<%=item.isbn%>" method="post">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <%});%>
+    </tbody>
+  </table>
+  <form action="/add" method="get">
+    <button class="fixed-bottom btn btn-primary mb-4 w-25 m-auto">Back</button>
+  </form>
+</body>

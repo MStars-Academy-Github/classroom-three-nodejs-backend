@@ -1,0 +1,14 @@
+<body>
+  <% results.forEach((result)=>{%>
+  <div class="bg-warning text-center p-4">
+    <img src="<%= result.img %> " alt="" width="100vw" />
+    <h3><%= result.title %></h3>
+    <div class="d-flex justify-content-around container">
+      <p><strong><%= result.isbn %></strong></p>
+      <p><strong><%= result.pages %></strong></p>
+      <p><strong><%= result.subtitle %></strong></p>
+      <p><strong><%= result.publisher %></strong></p>
+    </div>
+  </div>
+  <%});%>
+</body>

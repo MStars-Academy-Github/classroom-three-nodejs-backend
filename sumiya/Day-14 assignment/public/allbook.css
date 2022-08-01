@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+  
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;
+}
+.menu{
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.menu button{
+  border: none;
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+  
+  border-radius: 10px;
+}
+.menu button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.menu button {
+  /* background: repeating-linear-gradient(angle | to side-or-corner, #3f87a6-stop1, #ebf8e1-stop2); */
+ 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  /* background-color: #f1f1f1; */
+  margin: 20px 0px 20px 0px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  /* background: repeating-linear-gradient(angle | to side-or-corner, #3f87a6-stop1, #ebf8e1-stop2); */
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  /* background-color: #f1f1f1; */
+  margin: 20px 0px 20px 0px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

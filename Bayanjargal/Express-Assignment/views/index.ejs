@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="header">
+        <button>Books</button>
+        <button onclick="location.href='http://localhost:3000/home/author'">
+          Author
+        </button>
+        <button>Search</button>
+        <button onclick="location.href='http://localhost:3000/home/date'">
+          Date
+        </button>
+      </div>
+      <div class="book-name">
+        <% data.forEach((item)=>{%>
+        <div class="book-info">
+          <div class="title">Title:<%=item.title%></div>
+          <div><span class="author">Author:</span><%=item.author%></div>
+          <div><span class="desc">Description:</span><%=item.description%></div>
+          <div><span class="number"> number:</span><%=item.pages%></div>
+        </div>
+        <%});%>
+      </div>
+      <div class="content-button">
+        <button
+          onclick="location.href='http://localhost:3000/add'"
+          class="btn-main"
+        >
+          Шинэ ном нэмэх
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
