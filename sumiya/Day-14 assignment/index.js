@@ -146,12 +146,19 @@ router.get("/publisher", (req, res) => {
     }
   }
   res.send(count);
-}); 
+});
 //-----------------------------------------------validation---------------------------------------------
 const userValidationRules = () => {
   return [
-    body("isbn","invalid numbers").isLength({ min: 10, max: 13 }).notEmpty(),
-    body("title","invalid letters").isString().notEmpty(),
+    body("isbn", "invalid isbn").isLength({ min: 10, max: 13 }).notEmpty(),
+    body("title", "invalid tille").isString().notEmpty(),
+    body("subtitle", "invalid subtitle").isString().notEmpty(),
+    body("author", "invalid author").isString().notEmpty(),
+    body("published", "invalid publish date").isString().notEmpty(),
+    body("publisher", "invalid publisher").isString().notEmpty(),
+    body("pages", "invalid number").isNumeric().notEmpty(),
+    body("description", "invalid desc").isString().notEmpty(),
+    body("website", "invalid website").isURL().notEmpty(),
   ];
 };
 
@@ -163,15 +170,25 @@ const validate = (req, res, next) => {
   const extractedErrors = [];
   errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
   return res.status(400).json({ errors: extractedErrors });
-  
 };
 //--------------------------server side use ejs---------------------------------------------------------------
 //1. ejs ашигланa a. Шинэ ном нэмэх форм
+
+var log_file = fs.createWriteStream(__dirname + "/logFile.txt", {
+  flags: "w",
+});
+var log_stdout = process.stdout;
+
+console.log = function (d) {
+  //
+  log_file.write(util.format(d) + "\n");
+  log_stdout.write(util.format(d) + "\n");
+};
+
 router.get("/addbook", (req, res, next) => {
   res.render("addBook");
 });
 router.post("/addbook", userValidationRules(), validate, (req, res, next) => {
-
   readFile("./public/book.json", "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -182,9 +199,9 @@ router.post("/addbook", userValidationRules(), validate, (req, res, next) => {
       console.log(newData);
       fs.writeFile("./public/book.json", JSON.stringify(book), (err) => {
         if (err) {
-          console.log(err);
+          console.error = console.log();
         } else {
-          console.log("success");
+          console.log("success added the book");
         }
       });
     }
@@ -201,8 +218,6 @@ router.post("/deletebook/:isbn", (req, res, next) => {
     return obj.isbn != reqst;
   });
   res.render("deletebook", { books: indexOfOdject });
- 
-
 });
 app.listen(PORT || 3000, () => {
   console.log("app is running");
