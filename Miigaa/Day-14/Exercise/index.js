@@ -119,13 +119,18 @@ app.get("/book/:id", (req, res, next) => {
 });
 /// Hamgiin ih huudastai nomin medeelel
 app.get("/book/maxpage", (req, res, next) => {
+  let maxPage;
+  let result;
   fs.readFile("./models/book.json", "utf-8", (err, data) => {
     if (err) {
       console.log("error on reading");
     } else {
       const ddata = JSON.parse(data);
-      ddata.books.filter((e) => {});
-      res.send(book);
+      ddata.books.filter((e) => {
+        maxPage.push(e.pages);
+        result = Math.max(...maxPage);
+      });
+      console.log(maxPage);
     }
   });
 });

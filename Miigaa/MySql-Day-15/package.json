@@ -1,5 +1,5 @@
 {
-  "name": "mysql-day-05",
+  "name": "mysql-day-15",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,9 +12,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "mysql2": "^2.3.3"
-  },
-  "devDependencies": {
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.19"
   }
 }
