@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 
 const categoryRouter = require("./routes/categories");
 
@@ -11,12 +12,8 @@ app.use(express.json());
 
 //   res.send("Node client bolgohin tuld mysql2-iig suulgana");
 // });
-
+app.use(cors());
 app.use("/category", categoryRouter);
-res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Request-Method", "*");
-res.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS");
-res.setHeader("Access-Control-Allow-Headers", "*");
 
 app.listen(PORT, () => {
   console.log("my apddddp");
