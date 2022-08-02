@@ -24,6 +24,7 @@ router.post("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
   try {
     const params = req.body;
+    console.log(params);
     res.json(await categories.deleteCategory(params));
   } catch (error) {
     console.error(error.message);
