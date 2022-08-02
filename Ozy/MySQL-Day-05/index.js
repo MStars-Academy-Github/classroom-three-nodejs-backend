@@ -8,9 +8,9 @@ app.use(express.json());
 app.use("/category", categoryRouter);
 
 app.get("/", (req, res) => {
-  res.send("Running");
+  res.send("Working");
 });
 
 app.listen(PORT, () => {
-  console.log("Running");
+  console.log("Runnig -> " + PORT);
 });
