@@ -3,6 +3,13 @@ const app = express();
 require("dotenv").config();
 const categoryRouter = require("./routes/categories");
 const PORT = process.env.PORT;
+const cors = require("cors");
+
+app.use(
+  cors({
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 
 app.use(express.json());
 app.use("/category", categoryRouter);
