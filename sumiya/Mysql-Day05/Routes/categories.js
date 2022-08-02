@@ -2,12 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET, PUT, POST, DELETE,PATCH",
-  })
-);
+
 const router = express.Router();
 app.use("/category", router);
 const categories = require("../service/categories");
