@@ -30,9 +30,23 @@ async function deleteCategory(params) {
     data,
   };
 }
+async function updateCategory(params) {
+  const id = params.id;
+  const name = params.name;
+  const color = params.color;
+  const v = params.v;
+  const data = await db.query(
+    "UPDATE category SET name=?, color=?, v=? where id=?  ",
+    [name, color, v, id]
+  );
+  return {
+    data,
+  };
+}
 
 module.exports = {
   getAllCategories,
   createCategory,
   deleteCategory,
+  updateCategory,
 };
