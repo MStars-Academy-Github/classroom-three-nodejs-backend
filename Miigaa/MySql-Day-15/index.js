@@ -1,23 +1,17 @@
 const express = require("express");
+const router = express.Router();
 const app = express();
 require("dotenv").config();
 const categoryRouter = require("./routes/categories");
 const PORT = process.env.PORT;
-const cors = require("cors");
-
-app.use(
-  cors({
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-  })
-);
 
 app.use(express.json());
-app.use("/category", categoryRouter);
+app.use("/api/categories", categoryRouter);
 
 app.get("/", (req, res) => {
-  res.send("Working");
+  res.send("My app is running");
 });
 
 app.listen(PORT, () => {
-  console.log("Runnig -> " + PORT);
+  console.log("MY app is running");
 });

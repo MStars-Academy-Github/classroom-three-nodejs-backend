@@ -1,5 +1,5 @@
 {
-  "name": "MySQL-Day-05",
+  "name": "mysql-day-15",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",

@@ -1,4 +1,4 @@
-const db = require("../db");
+const db = require("./db");
 
 async function getAllCategories() {
   const data = await db.query("SELECT id, name, color FROM category");
@@ -7,6 +7,17 @@ async function getAllCategories() {
   return {
     data,
     params,
+  };
+}
+
+async function updateCategory(params) {
+  const id = params.id;
+  const data = await db.query(
+    "INSERT INTO category (name, color) VALUES (?, ?)",
+    [name, color]
+  );
+  return {
+    hello: "hello",
   };
 }
 
@@ -25,4 +36,5 @@ async function createCategory(params) {
 module.exports = {
   getAllCategories,
   createCategory,
+  updateCategory,
 };
