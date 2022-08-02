@@ -7,12 +7,16 @@ const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
 
-// router.get("/", (req, res, next) => {
-//   res.send("Node client bolgohin tuld mysql2-iig suulgana");
-// });
+router.get("/", (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Request-Method", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.send("Node client bolgohin tuld mysql2-iig suulgana");
+});
 
 app.use("/category", categoryRouter);
 
 app.listen(PORT, () => {
-  console.log("my app");
+  console.log("my apddddp");
 });
