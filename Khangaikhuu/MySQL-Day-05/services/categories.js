@@ -10,6 +10,19 @@ async function getAllCategories() {
   };
 }
 
+async function getCategoryById(id) {
+  const data = await db.query(
+    "SELECT id, name, color FROM category WHERE id = ?",
+    [id]
+  );
+  const params = {};
+
+  return {
+    data,
+    params,
+  };
+}
+
 async function createCategory(params) {
   const name = params.name;
   const color = params.color;
@@ -25,4 +38,5 @@ async function createCategory(params) {
 module.exports = {
   getAllCategories,
   createCategory,
+  getCategoryById,
 };
