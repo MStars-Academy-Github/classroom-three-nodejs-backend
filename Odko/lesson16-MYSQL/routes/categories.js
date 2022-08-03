@@ -12,6 +12,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    res.json(await categories.getCategoryById(id));
+  } catch (err) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const params = req.body;

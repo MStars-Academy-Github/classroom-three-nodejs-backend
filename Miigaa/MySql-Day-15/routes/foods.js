@@ -1,30 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const categories = require("../services/categories");
+const foods = require("../services/foods");
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(await categories.getAllCategories());
+    res.json(await foods.getAllFoods());
   } catch (err) {
     console.error(err.message);
     next(err);
   }
 });
-
-router.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    res.json(await categories.getCategoryById(id));
-  } catch (err) {
-    console.error(err.message);
-    next(err);
-  }
-});
-
 router.post("/", async (req, res, next) => {
   try {
     const params = req.body;
-    res.json(await categories.createCategory(params));
+    console.log(params);
+    res.json(await foods.createFood({ params }));
   } catch (error) {
     console.error(error.message);
     next(error);

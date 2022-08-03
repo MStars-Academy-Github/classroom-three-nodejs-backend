@@ -1,10 +1,15 @@
 const express = require("express");
 require("dotenv");
+const cors = require("cors");
 
-const router = express.Router();
 const categoryRouter = require("./routes/categories");
 const PORT = process.env.PORT;
 const app = express();
+app.use(
+  cors({
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 
 app.use(express.json());
 app.use("/category", categoryRouter);
@@ -14,5 +19,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("My app is running");
+  console.log("My app is running ", PORT);
 });

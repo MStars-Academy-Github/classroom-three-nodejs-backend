@@ -30,6 +30,18 @@ async function deleteCategory(params) {
     data,
   };
 }
+
+async function getCategoryById(id) {
+  const data = await db.query(
+    "SELECT id, name, color, v FROM category WHERE id=?",
+    [id]
+  );
+  const params = {};
+  return {
+    data,
+    params,
+  };
+}
 async function updateCategory(params) {
   const id = params.id;
   const name = params.name;
@@ -49,4 +61,5 @@ module.exports = {
   createCategory,
   deleteCategory,
   updateCategory,
+  getCategoryById,
 };
