@@ -23,6 +23,7 @@ async function createCategory(params) {
 }
 async function deleteCategory(params) {
   const id = params._id;
+  console.log(id);
   const data = await db.query("delete from categories where _id =?", [id]);
   return {
     data,

@@ -5,7 +5,12 @@ require("dotenv").config();
 
 const PORT = process.env.PORT;
 const app = express();
-
+const cors = require("cors");
+app.use(
+  cors({
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 app.use(express.json());
 app.use("/category", categoriesRouter);
 app.use("/", router);
