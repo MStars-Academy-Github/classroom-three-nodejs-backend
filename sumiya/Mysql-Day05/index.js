@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const categoriesRouter = require("./Routes/categories");
+const foodrouter = require("./Routes/food");
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -13,6 +14,7 @@ app.use(
 );
 app.use(express.json());
 app.use("/category", categoriesRouter);
+app.use("/food", foodrouter);
 app.use("/", router);
 
 // app.get("/", (req, res) => {
