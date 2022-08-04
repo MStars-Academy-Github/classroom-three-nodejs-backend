@@ -15,6 +15,6 @@ app.use(express.json());
 app.use(cors());
 app.use("/category", categoryRouter);
 
-app.listen(PORT, () => {
-  console.log("my apddddp");
+app.listen(3003, () => {
+  console.log(3003);
 });
