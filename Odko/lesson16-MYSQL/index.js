@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 
 const categoryRouter = require("./routes/categories");
+const foodsRouter = require("./routes/foods");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -14,7 +15,8 @@ app.use(express.json());
 // });
 app.use(cors());
 app.use("/category", categoryRouter);
+app.use("/services", foodsRouter);
 
 app.listen(PORT, () => {
-  console.log("my apddddp");
+  console.log(PORT);
 });
