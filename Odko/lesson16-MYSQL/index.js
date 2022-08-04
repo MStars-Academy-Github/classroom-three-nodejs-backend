@@ -15,7 +15,7 @@ app.use(express.json());
 // });
 app.use(cors());
 app.use("/category", categoryRouter);
-app.use("/services", foodsRouter);
+app.use("/food", foodsRouter);
 
 app.listen(PORT, () => {
   console.log(PORT);
