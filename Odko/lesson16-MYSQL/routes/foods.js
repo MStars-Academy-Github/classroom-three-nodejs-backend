@@ -11,5 +11,13 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-
+router.delete("/", async (req, res, next) => {
+  try {
+    const params = req.query._id;
+    res.json(await foods.deleteFood(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
 module.exports = router;
