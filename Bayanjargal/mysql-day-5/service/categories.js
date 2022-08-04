@@ -37,9 +37,21 @@ async function updateCategory(params) {
     hello: "update higdlee",
   };
 }
+async function getCategoryById(id) {
+  const data = await db.query(
+    "SELECT id , name ,color FROM categories WHERE id = ? ",
+    [id]
+  );
+  const params = {};
+  return {
+    data,
+    params,
+  };
+}
 module.exports = {
   getAllCategories,
   createCategory,
   deleteCategory,
   updateCategory,
+  getCategoryById,
 };

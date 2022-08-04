@@ -10,28 +10,28 @@ async function getAllCategories() {
   };
 }
 
-async function getCategoryById(params) {
-  const data = await db.query(
-    "SELECT id, name, color FROM category WHERE id = ?",
-    [id]
-  );
-  const params = {};
-  return {
-    data,
-    params,
-  };
-}
+// async function getCategoryById(params) {
+//   const data = await db.query(
+//     "SELECT id, name, color FROM category WHERE id = ?",
+//     [id]
+//   );
+//   const params = {};
+//   return {
+//     data,
+//     params,
+//   };
+// }
 
 async function createCategory(params) {
   const name = params.name;
   const color = params.color;
   const v = params.v;
   const data = await db.query(
-    "INSERT INTO category ( name, color, v) VALUES (?, ?, ?)",
+    "INSERT INTO category (name, color, v) values (?, ?, ?)",
     [name, color, v]
   );
   return {
-    data,
+    hello: "hello",
   };
 }
 
@@ -61,5 +61,5 @@ module.exports = {
   createCategory,
   updateCategory,
   deleteCategory,
-  getCategoryById,
+  // getCategoryById,
 };
