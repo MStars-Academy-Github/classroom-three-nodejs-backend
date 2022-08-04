@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-router.post("/", async (req, res, next) => {
+router.post("/add", async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categories.createCategory(params));
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
     next(err);
   }
 });
-router.delete("/", async (req, res, next) => {
+router.delete("/delete", async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categories.deleteCategory(params));
@@ -37,7 +37,7 @@ router.delete("/", async (req, res, next) => {
     next(error);
   }
 });
-router.put("/", async (req, res, next) => {
+router.put("/update", async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categories.updateCategory(params));

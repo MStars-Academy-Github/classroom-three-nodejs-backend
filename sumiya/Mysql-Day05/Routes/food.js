@@ -16,5 +16,34 @@ foodrouter.get("/getfood", async (req, res, next) => {
     next(err);
   }
 });
+foodrouter.post("/insertfood", async (req, res, next) => {
+  try {
+    const params = req.body;
+    res.json(await food.createFood(params));
+  } catch (err) {
+    console.error(err.message);
+    next(err);
+  }
+});
+foodrouter.delete("/deletefood", async (req, res, next) => {
+  try {
+    const params = req.body;
+    console.log(params);
+    res.json(await food.deletefood(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
+foodrouter.put("/updatefood", async (req, res, next) => {
+  try {
+    const params = req.body;
+    res.json(await food.updateFood(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
 
 module.exports = foodrouter;

@@ -28,7 +28,7 @@ async function deleteCategory(params) {
 }
 async function getCategoryById(id) {
   const data = await db.query(
-    "SELECT id, name, color FROM category WHERE ID = ?",
+    "SELECT id, name, color FROM categories WHERE ID = ?",
     [id]
   );
   const params = {};
