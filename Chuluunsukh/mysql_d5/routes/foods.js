@@ -1,26 +1,15 @@
 const express = require("express");
 const router = express.Router();
-
-const foods = require("../services/foods");
+const foods = require("../foods");
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(await foods.getAllFood());
+    res.json(await foods.getAllFoods());
   } catch (err) {
-    console.error(err.messeage);
+    console.log(err.message);
     next(err);
   }
 });
-router.delete("/", async (req, res, next) => {
-  try {
-    const params = req.query;
-    res.json(await foods.deleteFood(params));
-  } catch (error) {
-    console.error(error.message);
-    next(error);
-  }
-});
-
 router.post("/", async (req, res, next) => {
   try {
     const params = req.body;
@@ -30,4 +19,5 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+
 module.exports = router;

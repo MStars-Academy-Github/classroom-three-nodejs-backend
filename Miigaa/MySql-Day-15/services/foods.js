@@ -8,9 +8,7 @@ async function getAllFoods() {
     params,
   };
 }
-async function createFood({ params }) {
-  console.log(params);
-
+async function createFood(params) {
   const name = params.name;
   const price = params.price;
   const ingredient = params.ingredient;
@@ -19,11 +17,11 @@ async function createFood({ params }) {
   const discount = params.discount;
   const image = params.image;
   const portion = params.portion;
-  const thumb_img = params.thumb_img;
+  const tumb_img = params.tumb_img;
   const sales = params.sales;
   const category = params.category;
   const data = await db.query(
-    "INSERT INTO food ( name, price, ingredient, stock, category_id, discount, image, portion, thumb_img, sales, category) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )",
+    "INSERT INTO food ( name, price, ingredient, stock, category_id, discount, image, portion, tumb_img, sales, category) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )",
     [
       name,
       price,
@@ -33,7 +31,7 @@ async function createFood({ params }) {
       discount,
       image,
       portion,
-      thumb_img,
+      tumb_img,
       sales,
       category,
     ]
@@ -42,7 +40,15 @@ async function createFood({ params }) {
     hello: "hello",
   };
 }
+async function deleteFood(params) {
+  const id = params.id;
+  const data = await db.query("DELETE FROM food WHERE id=?", [id]);
+  return {
+    hello: "hello",
+  };
+}
 module.exports = {
   getAllFoods,
   createFood,
+  deleteFood,
 };
