@@ -13,8 +13,18 @@ router.get("/", async (req, res, next) => {
 });
 router.delete("/", async (req, res, next) => {
   try {
-    const params = req.query._id;
+    const params = req.query;
     res.json(await foods.deleteFood(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    const params = req.body;
+    res.json(await foods.createFood(params));
   } catch (error) {
     console.error(error.message);
     next(error);

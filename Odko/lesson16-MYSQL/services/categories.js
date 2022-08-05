@@ -11,12 +11,13 @@ async function getAllCategories() {
 }
 
 async function createCategory(params) {
+  const id = params.id;
   const name = params.name;
   const color = params.color;
   const v = params.v;
   const data = await db.query(
-    "INSERT INTO category ( name, color, v) VALUES (?, ?, ?)",
-    [name, color, v]
+    "INSERT INTO category (id, name, color, v) VALUES (?, ?, ?, ?)",
+    [id, name, color, v]
   );
   return {
     data,

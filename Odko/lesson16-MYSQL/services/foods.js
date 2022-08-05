@@ -41,7 +41,7 @@ async function createFood(params) {
   };
 }
 async function deleteFood(params) {
-  const id = params;
+  const id = params._id;
   const data = await db.query("DELETE FROM foods where _id = ?", [id]);
   return {
     data,
@@ -50,4 +50,5 @@ async function deleteFood(params) {
 module.exports = {
   getAllFood,
   deleteFood,
+  createFood,
 };
