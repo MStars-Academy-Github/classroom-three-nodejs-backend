@@ -38,13 +38,15 @@ async function deleteCategory(params) {
     data,
   };
 }
+
 async function updateCategory(params) {
+  console.log(params);
   const id = params._id;
   const name = params.name;
   const color = params.color;
   const _v = params._v;
   const data = await db.query(
-    "update categories set name=?, color =? , _v=? where _id=?",
+    "update categories set  name=? , color =? ,  _v=? where _id=?;",
     [name, color, _v, id]
   );
   return {
