@@ -40,7 +40,7 @@ async function deleteCategory(params) {
 }
 
 async function updateCategory(params) {
-  console.log(params);
+  console.log("----------", params);
   const id = params._id;
   const name = params.name;
   const color = params.color;
