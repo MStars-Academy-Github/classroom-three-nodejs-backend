@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const categories = require("../categories");
-const deleteCategory = require("../categories");
+const categories = require("../service/categories");
+const deleteCategory = require("../service/categories");
 
 router.get("/", async (req, res, next) => {
   try {
