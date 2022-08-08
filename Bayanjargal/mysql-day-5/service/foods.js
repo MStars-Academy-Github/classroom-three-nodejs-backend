@@ -1,6 +1,11 @@
 const db = require("./db");
 async function getAllfoods() {
-  const data = await db.query("SELECT * FROM food");
+  const data = await db.query(
+    `SELECT f.id FoodId ,f.name FoodName,f.price foodPrice,f.ingredients 
+    foodIngredients,f.stock foodStock,f.discount foodDiscount,f.image foodImage,f.portion foodPortion,f.thumb_image
+    foodThumbImage,c.id categoryId,c.name categoryName,c.color categoryColor 
+    FROM food f LEFT JOIN categories c on f.id=c.id`
+  );
   const params = {};
   return {
     data,
