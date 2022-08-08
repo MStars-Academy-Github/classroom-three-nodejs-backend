@@ -1,99 +1,94 @@
-CREATE DATABASE testUpdate;
 
-use testUpdate;
+
+use food_delivery;
 -- drop database test
 
-CREATE TABLE testUpdate(
-Names VARCHAR(255),
-Age INT,
-Email VARCHAR(255)
+
+
+CREATE TABLE foods(
+_id INT,
+discount INT,
+sales INT,
+category_id INT,
+name VARCHAR(255),
+price INT,
+portion INT,
+stock INT,
+image VARCHAR(255),
+tumb_img VARCHAR(255),
+ingredients VARCHAR(255)
 );
 
--- column add
-ALTER TABLE testUpdate ADD register VARCHAR(10);
--- column delete
-ALTER TABLE testUpdate DROP COLUMN Age;
--- column type update
-ALTER TABLE testUpdate MODIFY COLUMN Email VARCHAR(255);
--- column name update
-ALTER TABLE testUpdate RENAME COLUMN Email TO userID;
--- table name update  
-ALTER TABLE testUpdate RENAME  TO testLesson;
+CREATE TABLE country_unit(
+Country_Date INT,
+CountryID INT,
+Units INT
+);
+
+CREATE TABLE countries(
+ID INT,
+Country VARCHAR(255)
+);
+
+-- yag tenstuu baigaa idg awna 
+SELECT * FROM country_unit INNER JOIN countries ON countries.ID = country_unit.CountryID;
+-- bigdig ni awna
+SELECT * FROM country_unit INNER JOIN countries ON countries.ID <> country_unit.CountryID;
+
+insert into countries (ID , Country) values(2,"Canada");
+-- baihgui baigaa utga null gargaj ogno 
+SELECT * FROM country_unit 	LEFT JOIN countries ON countries.ID = country_unit.CountryID;
+-- NULL   gesen utguudig awna
+SELECT * FROM country_unit 	LEFT JOIN countries ON countries.ID = country_unit.CountryID WHERE countries.ID IS NULL;
 
 
 
-CREATE DATABASE Library;
-use Library;
+DELETE FROM countries WHERE ID = 1;
+-- RIGHT JOIN
+SELECT * FROM country_unit 	as cu RIGHT JOIN countries c ON cu.CountryID = c.ID IS NULL;
 
- CREATE TABLE book(
-		isbn INT,
-      title VARCHAR(255),
-      subtitle VARCHAR(255),
-      author VARCHAR(255),
-      published INT,
-      publisher VARCHAR(255),
-      pages INT,
-      book_description VARCHAR(255),
-      website VARCHAR(255)
- );
- ALTER TABLE book RENAME COLUMN description TO book_description;
- ALTER TABLE book MODIFY COLUMN isbn BIGINT;
- INSERT INTO book(isbn,title, subtitle, author, published, publisher,pages, book_description, website) 
- VALUES(9781484200766,  "Pro Git","Everything you neeed to know about Git","Scott Chacon and Ben Straub","2014-11-18T00:00:00.000Z",
- "Apress; 2nd edition",
-      458,"Pro Git (Second Edition) is your fully-updated 
-      guide to Git and its usage in the modern world. Git has come a long way 
-      since it was first developed by Linus Torvalds for Linux kernel development. It 
-      has taken the open source world by storm since its inception in 2005, and this book t
-      eaches you how to use it like a pro.","https://git-scm.com/book/en/v2");
+-- update hiihde
 
+
+SELECT * FROM country_unit;
+SELECT * FROM countries;
+INSERT INTO country_unit(Country_Date,Units) 
+VALUES("2020-07-02", 97 );
+SELECT * FROM foods;
+SELECT * FROM category;
+ALTER TABLE foods ADD PRIMARY KEY (_id);
+ALTER TABLE country_unit MODIFY COLUMN CountryID MEDIUMINT NOT NULL AUTO_INCREMENT;
+ALTER TABLE category MODIFY COLUMN id INT;
+ALTER TABLE foods ADD FOREIGN KEY (category_id) references category(id);
+-- mor ustgahdaa
+DELETE FROM table_name WHERE column_name;
+
+
+
+
+INSERT INTO foods( discount , sales, category_id, name, price,portion,stock,image,tumb_img,ingredients) 
+VALUES( 0, false, 4, "Самарны нухаш", 8800, 1, 10,  "/food/nut_mash.png","/tumbnails/nut_mash.png", "Самар, улаан лооль, авакадо, бусад ногоо");
+
+INSERT INTO category(name , color , v) VALUES("Салад ба зууш", "orange", 0 );
+ SELECT * FROM category;
+  SELECT * FROM foods;
+-- data nemehdee 
+ SELECT * FROM food_delivery.category;
+ 
+--  password solihdoo
+ ALTER USER 'root'@'%' IDENTIFIED BY 'P&EsbM700Hp0Wh';
+--  zaawal eniig bichne hadgal baiga
+--  flush priveleges;
 
  
- SELECT * FROM book;
- ALTER TABLE book MODIFY COLUMN book_description VARCHAR(1000);
-  SELECT * FROM book;
-  SELECT * FROM book WHERE publisher <> "No Starch Press";
-  SELECT * FROM book WHERE publisher = "No Starch Press";
-  SELECT * FROM book WHERE pages <= 400 and publisher = "OReilly Media";
-  SELECT * FROM book WHERE  publisher = "OReilly Media" or publisher = "No Starch Press";
---   javascript ugnees hoish
-  SELECT * FROM book WHERE  book_description  LIKE "JavaScript%" ;
-  
---   PRIMARY KEY
-  use testUpdate;
-  CREATE TABLE Persons(
- --  dawtagdajhgui ID 
-  ID int NOT NUll,
-  LastName VARCHAR(255) NOT NULL,
-  FirstName VARCHAR(255),
-  Age INT,
-  PRIMARY KEY (ID)
-  );
-  
-INSERT INTO Persons(ID,LastName,FirstName,Age) 
-VALUES(1, "Test", "TestTest",23);
-   
-INSERT INTO Persons values( 5,"Test5", "TestTeeest5",25);
-
-  
- SELECT * FROM Persons;
- ALTER TABLE Persons MODIFY COLUMN ID MEDIUMINT NOT NULL AUTO_INCREMENT;
- use Library;
- SELECT * FROM book;
- DELETE FROM book WHERE title = 9781593279509;
+-- table hoorond holboh JOIN
+SELECT * FROM category;
+INSERT INTO category(id,name,color,v) 
+VALUES(6,"Үндсэн хоол","green",0);
+SELECT * FROM foods f LEFT JOIN category c ON f.category_id = c.id ;
+SELECT c.id category_id, c.name category_name, c.color category_color  FROM foods f LEFT JOIN category c ON f.category_id = c.id 
  
  
- -- UNIQUE ADD 
-ALTER TABLE book
-ADD UNIQUE(isbn);
-
--- UNIQUE DELETE 
-ALTER TABLE book
-DROP CONSTRAINT isbn;
-
--- ehni 4 column
- SELECT * FROM book LIMIT 4;
-
 
  
   
