@@ -5,8 +5,9 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 app.use(express.json());
+const cors = require("cors");
 
-app.get("/", (req, res) => {
+app.get("/", cors(), (req, res) => {
   res.send("<h1>Hello world</h1>");
 });
 app.post("/users", userValidationRules(), validate, (req, res) => {

@@ -3,6 +3,7 @@ require("dotenv");
 const cors = require("cors");
 
 const categoryRouter = require("./routes/categories");
+const foodRouter = require("./routes/foods");
 const PORT = process.env.PORT;
 const app = express();
 app.use(
@@ -12,7 +13,8 @@ app.use(
 );
 
 app.use(express.json());
-app.use("/category", categoryRouter);
+app.use("/category", cors(), categoryRouter);
+app.use("/food", cors(), foodRouter);
 
 app.get("/", (req, res) => {
   res.send("My app is running");
