@@ -1,7 +1,9 @@
 const db = require("../db");
 
 async function getAllUser() {
-  const data = await db.query("select * from User");
+  const data =
+    await db.query(`select a.id, a.firstname, a.lastname, a.email, a.address, a.phone_number, a.rode_id, b.role_name, b.role_description from User a 
+join Role b on a.rode_id=b.id`);
   const params = {};
   return {
     data,
@@ -46,7 +48,12 @@ async function UpdateUser(params) {
   };
 }
 async function getUserById(id) {
-  const data = await db.query("select * from User where id=?", [id]);
+  const data = await db.query(
+    `select a.id, a.firstname, a.lastname, a.email, a.address, a.phone_number, 
+    a.rode_id, b.role_name, b.role_description from User a 
+join Role b on a.rode_id=b.id where a.id=?`,
+    [id]
+  );
   const params = {};
   return {
     data,
