@@ -1,6 +1,4 @@
 const db = require("../db");
-const categories = require("./categories");
-const router = require("../routes/categories");
 
 async function getAllFoods() {
   const data = await db.query(
