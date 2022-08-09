@@ -12,10 +12,39 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    res.json(await categories.getCategoryById(id));
+  } catch (err) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categories.createCategory(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
+router.delete("/", async (req, res, next) => {
+  try {
+    const params = req.query;
+    res.json(await categories.deleteCategory(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
+router.put("/", async (req, res, next) => {
+  try {
+    const params = req.body;
+    res.json(await categories.updateCategory(params));
   } catch (error) {
     console.error(error.message);
     next(error);
