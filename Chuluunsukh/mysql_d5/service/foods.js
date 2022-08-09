@@ -1,6 +1,6 @@
-const db = require("./db");
+const db = require("../db");
 const categories = require("./categories");
-const router = require("./routes/categories");
+const router = require("../routes/categories");
 
 async function getAllFoods() {
   const data = await db.query(
@@ -30,6 +30,7 @@ async function createFood(params) {
   const name = params.name;
   const category_id = params.category_id;
   const price = params.price;
+  g;
   const portion = params.portion;
   const stock = params.stock;
   const image = params.image;
