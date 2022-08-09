@@ -17,7 +17,7 @@ foodrouter.get("/", async (req, res, next) => {
   }
 });
 
-foodrouter.post("/insertfood", async (req, res, next) => {
+foodrouter.post("/", async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await food.createFood(params));
@@ -27,7 +27,7 @@ foodrouter.post("/insertfood", async (req, res, next) => {
   }
 });
 
-foodrouter.delete("/deletefood", async (req, res, next) => {
+foodrouter.delete("/", async (req, res, next) => {
   try {
     const params = req.body;
     console.log(params);

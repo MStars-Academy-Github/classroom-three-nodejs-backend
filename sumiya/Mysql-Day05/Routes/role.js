@@ -39,15 +39,28 @@ roleRoute.put("/", async (req, res, next) => {
 });
 
 roleRoute.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  console.log(req.params);
-  console.log(id);
+  const params = req.params;
+  // console.log(req.params);
+  // console.log(id);
   try {
-    res.json(await user.getUserById(id));
+    res.json(await role.getRoleById(params));
   } catch (err) {
     console.error(err.message);
     next(err);
   }
 });
+
+
+roleRoute.delete("/", async (req, res, next) => {
+  try {
+    const params = req.body;
+    // console.log(params);
+    res.json(await role.deleteRole(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
 
 module.exports = roleRoute;

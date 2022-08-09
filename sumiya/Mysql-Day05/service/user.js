@@ -11,6 +11,16 @@ join Role b on a.rode_id=b.id`);
   };
 }
 
+async function deleteUser(params) {
+  const id = params.id;
+  console.log(id);
+  const data = await db.query("delete from User where id =?", [id]);
+  return {
+    data,
+  };
+}
+
+
 async function insertUser(params) {
   const firstname = params.firstname;
   const lastname = params.lastname;
@@ -66,4 +76,5 @@ module.exports = {
   insertUser,
   UpdateUser,
   getUserById,
+  deleteUser,
 };

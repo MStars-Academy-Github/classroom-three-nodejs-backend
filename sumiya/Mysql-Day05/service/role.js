@@ -9,6 +9,16 @@ async function getAllRole() {
   };
 }
 
+async function deleteRole(params) {
+  const id = params.id;
+  console.log(id);
+  const data = await db.query("delete from Role where id =?", [id]);
+  return {
+    data,
+  };
+}
+
+
 async function insertRole(params) {
   const role_name = params.role_name;
   const role_description = params.role_description;
@@ -36,12 +46,12 @@ async function UpdateRole(params) {
     data,
   };
 }
-async function getRoleById(id) {
-  const data = await db.query("select * from User where id=?", [id]);
-  const params = {};
+async function getRoleById(params) {
+  const id = params.id;
+  const data = await db.query("select * from Role where id=?", [id]);
   return {
     data,
-    params,
+  
   };
 }
 
@@ -49,5 +59,6 @@ module.exports = {
   getAllRole,
   insertRole,
   UpdateRole,
+  deleteRole,
   getRoleById,
 };

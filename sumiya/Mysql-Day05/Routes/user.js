@@ -50,4 +50,15 @@ userRoute.get("/:id", async (req, res, next) => {
   }
 });
 
+userRoute.delete("/", async (req, res, next) => {
+  try {
+    const params = req.body;
+    // console.log(params);
+    res.json(await user.deleteUser(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
+  }
+});
+
 module.exports = userRoute;
