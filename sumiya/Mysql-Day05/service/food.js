@@ -9,7 +9,7 @@ async function getAllFood() {
   };
 }
 async function createFood(params) {
-  const name = params.namee;
+  const namee = params.namee;
   const price = params.price;
   const ingredients = params.ingredients;
   const category_id = params.category_id;
@@ -22,7 +22,7 @@ async function createFood(params) {
   const data = await db.query(
     "insert into food (namee , price, ingredients,category_id,stock,portion,image,tumb_img,discount,sales ) values (?,?,?,?,?,?,?,?,?,? )",
     [
-      name,
+      namee,
       price,
       ingredients,
       category_id,
@@ -49,8 +49,18 @@ async function deletefood(params) {
   };
 }
 
+async function getFoodById(id) {
+  const data = await db.query("select * from food where id=?", [id]);
+  const params = {};
+  return {
+    data,
+    params,
+  };
+}
+
 async function updateFood(params) {
-  const name = params.namee;
+  console.log(params);
+  const namee = params.namee;
   const price = params.price;
   const ingredients = params.ingredients;
   const category_id = params.category_id;
@@ -62,9 +72,12 @@ async function updateFood(params) {
   const sales = params.sales;
   const id = params.id;
   const data = await db.query(
-    "update food set namee=? , price=?, ingredients=?,category_id=?,stock=?,portion=?,image=?,tumb_img=?,discount=?,sales=? where id=?",
+    `update food set namee=? , 
+    price=?, ingredients=?, category_id=?, 
+    stock=?,  portion=?, image=?, tumb_img=?, 
+    discount=?, sales=? where id=?`,
     [
-      name,
+      namee,
       price,
       ingredients,
       category_id,
@@ -77,6 +90,7 @@ async function updateFood(params) {
       id,
     ]
   );
+
   return {
     data,
   };
@@ -87,4 +101,5 @@ module.exports = {
   createFood,
   deletefood,
   updateFood,
+  getFoodById,
 };
