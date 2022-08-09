@@ -38,11 +38,15 @@ async function deleteFoods(params) {
   };
 }
 async function updateFoods(params) {
-  const id = params.id;
   const name = params.name;
   const price = params.price;
+  const ing = params.ingredients;
+  const stock = params.stock;
+  const catId = params.categoryID;
   const discount = params.discount;
+  const image = params.image;
   const portion = params.portion;
+  const thumbImage = params.thumb_image;
   const data = await db.query(
     "UPDATE food SET name=?,price=?,discount=?,portion=? WHERE id=?",
     [name, price, discount, portion, id]
