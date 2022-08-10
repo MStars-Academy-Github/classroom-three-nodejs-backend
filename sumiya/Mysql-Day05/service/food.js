@@ -1,7 +1,9 @@
 const db = require("../db");
 
 async function getAllFood() {
-  const data = await db.query("select * from food");
+  const data =
+    await db.query(`select a.id, a.namee, a.price, a.ingredients, a.category_id, a.stock, a.portion, a.image, a.tumb_img, a.discount, a.sales,  b.name, b.color, b._v from food a 
+join categories b on a.category_id=b._id`);
   const params = {};
   return {
     data,
@@ -50,7 +52,12 @@ async function deletefood(params) {
 }
 
 async function getFoodById(id) {
-  const data = await db.query("select * from food where id=?", [id]);
+  const data = await db.query(
+    `select a.id, a.namee, a.price, a.ingredients, a.category_id, 
+    a.stock, a.portion, a.image, a.tumb_img, a.discount, a.sales, b.name, b.color, b._v from food a 
+join categories b on a.category_id=b._id where a.id=?`,
+    [id]
+  );
   const params = {};
   return {
     data,
