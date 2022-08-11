@@ -11,14 +11,18 @@ async function getAllUsers() {
 }
 
 async function createUsers(params) {
+  console.log(params);
   const lastname = params.lastname;
   const firstname = params.firstname;
   const address = params.address;
-  const phone = params.phone;
+  const phoneNumber = params.phone;
+  const email = params.email;
+  const age = params.age;
+  const register = params.register;
   const role_id = params.role_id;
   const data = await db.query(
-    "INSERT INTO users ( lastname, firstname,address,phone,role_id) VALUES (?, ?, ?, ?, ?)",
-    [lastname, firstname, address, phone, role_id]
+    "INSERT INTO users ( lastname, firstname,address,phoneNumber,role_id,email,age,register) VALUES (?, ?, ?, ?, ?,?,?,?)",
+    [lastname, firstname, address, phoneNumber, role_id, email, age, register]
   );
   return {
     data,
@@ -41,13 +45,13 @@ async function getUsersById(id) {
     params,
   };
 }
-async function getUserJoinRoles(id) {
+async function getUserJoinRoles() {
   const data = await db.query(
-    // `SELECT * FROM users f LEFT JOIN roles c ON f.id = c.id `
-    `SELECT u.id userID, u.lastname userLastnmae, u.firstname userFirstname,  
-    u.address userAddress, u.phone userPhone, u.role_id userRoleID,
+    // ` SELECT * FROM users u LEFT JOIN roles r ON u.id = r.id WHERE u.id=1 `
+    `SELECT u.id userID, u.lastname userLastname, u.firstname userFirstname,
+    u.address userAddress, u.phoneNumber userPhoneNumber, u.email userEmail,   u.register userRegister, 
     r.id roleID, r.role_name rolesRole_name, r.role_desc rolesRole_desc
-    FROM users u LEFT JOIN roles r ON u.role_id = r.id `
+    FROM users u LEFT JOIN roles r ON u.role_id = r.id`
   );
   const params = {};
   return {
@@ -61,12 +65,26 @@ async function updateUsers(params) {
   const lastname = params.lastname;
   const firstname = params.firstname;
   const address = params.address;
-  const phone = params.phone;
+  const phoneNumber = params.phoneNumber;
+  const email = params.email;
+  const age = params.age;
+  const register = params.register;
   const role_id = params.role_id;
+  console.log(role_id);
 
   const data = await db.query(
-    "UPDATE users SET lastname =?, firstname=?, address=?, phone=?, role_id=? WHERE id=? ",
-    [id, lastname, firstname, address, phone, role_id]
+    "UPDATE users SET lastname =?, firstname=?, address=?, phoneNumber=?, role_id=? ,email=?,age=?,register=? WHERE id=? ",
+    [
+      lastname,
+      firstname,
+      address,
+      phoneNumber,
+      role_id,
+      email,
+      age,
+      register,
+      id,
+    ]
   );
   return {
     data,

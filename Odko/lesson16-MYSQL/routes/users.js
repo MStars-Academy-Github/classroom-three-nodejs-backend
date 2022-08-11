@@ -34,9 +34,7 @@ router.post("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    console.log(req);
     const id = req.params.id;
-
     res.json(await users.getUsersById(id));
   } catch (err) {
     console.error(error.message);
@@ -47,6 +45,7 @@ router.get("/:id", async (req, res, next) => {
 router.put("/", async (req, res, next) => {
   try {
     const params = req.body;
+
     res.json(await users.updateUsers(params));
   } catch (error) {
     console.error(error.message);
