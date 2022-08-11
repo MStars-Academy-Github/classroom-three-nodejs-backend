@@ -1,7 +1,7 @@
 const express = require("express");
-const categoryRouter = require("./routes/categories");
-const foodsRouter = require("./routes/foodapi");
-const userRouter = require("./routes/user");
+const categoryRouter = require("./controller/categories");
+const foodsRouter = require("./controller/foodapi");
+const AuthenticationController = require("./controller/AuthenticationController.js");
 require("dotenv").config();
 const cors = require("cors");
 const PORT = process.env.PORT;
@@ -17,7 +17,7 @@ app.use(
 );
 app.use("/category", categoryRouter);
 app.use("/foods", foodsRouter);
-app.use("/user", userRouter);
+app.use("/user", AuthenticationController);
 
 app.listen(PORT, () => {
   console.log("my app is runnig");

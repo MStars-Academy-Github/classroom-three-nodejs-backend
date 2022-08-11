@@ -4,7 +4,7 @@ async function getAllfoods() {
     `SELECT f.id FoodId ,f.name FoodName,f.price foodPrice,f.ingredients 
     foodIngredients,f.stock foodStock,f.discount foodDiscount,f.image foodImage,f.portion foodPortion,f.thumb_image
     foodThumbImage,c.id categoryId,c.name categoryName,c.color categoryColor 
-    FROM food f LEFT JOIN categories c on f.id=c.id`
+    FROM food f LEFT JOIN categories c on f.categoryID=c.id`
   );
   const params = {};
   return {
@@ -47,9 +47,10 @@ async function updateFoods(params) {
   const image = params.image;
   const portion = params.portion;
   const thumbImage = params.thumb_image;
+  const id = params.id;
   const data = await db.query(
-    "UPDATE food SET name=?,price=?,discount=?,portion=? WHERE id=?",
-    [name, price, discount, portion, id]
+    "UPDATE food SET name=?,price=?,discount=?,portion=?,categoryID=? ,ingredients=?,stock=?,image=? ,thumb_image=? WHERE id=?",
+    [name, price, discount, portion, catId, ing, stock, image, thumbImage, id]
   );
   return {
     hello: "update higdlee",
@@ -57,7 +58,7 @@ async function updateFoods(params) {
 }
 async function getFoodById(id) {
   const data = await db.query(
-    "SELECT name,price,ingredients,stock,categoryID,discount,image,portion,thumb_image FROM food WHERE id = ? ",
+    "SELECT id,name,price,ingredients,stock,categoryID,discount,image,portion,thumb_image FROM food WHERE id = ? ",
     [id]
   );
   const params = {};

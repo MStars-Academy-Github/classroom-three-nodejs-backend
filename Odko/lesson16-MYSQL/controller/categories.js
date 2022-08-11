@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const categories = require("../services/categories");
+const auth = require("../middleware/auth");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", auth, async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categories.createCategory(params));
