@@ -4,6 +4,7 @@ const router = express.Router();
 
 const categoreis = require("../service/categories");
 
+const auth = require("../middleware/auth");
 router.get("/", async (req, res, next) => {
   try {
     res.json(await categoreis.getAllCategories());
@@ -12,7 +13,7 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-router.post("/add", async (req, res, next) => {
+router.post("/add", auth, async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categoreis.createCategory(params));
