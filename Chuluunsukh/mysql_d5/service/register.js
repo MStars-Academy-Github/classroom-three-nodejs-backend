@@ -1,14 +1,35 @@
 const db = require("../db");
+const bcrypt = require("bcryptjs");
 
 async function registerUser(params) {
-  const { email, phone_number, address, firstname, last_name, age, register } =
-    params;
+  const {
+    email,
+    phoneNumber,
+    address,
+    firstName,
+    lastName,
+    age,
+    register,
+    password,
+  } = params;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log("hashed password");
+  console.log(hashedPassword);
+
   const data = await db.query(
-    `INSERT INTO register(email, phone_number, address, firstname, last_name, age, register) VALUES(?,?,?,?,?,?,?)`[
-      (email, phone_number, address, firstname, last_name, age, register)
+    `INSERT INTO users(email, phone_number, 
+      address, firstName, lastName, age, register, password) VALUES(?,?,?,?,?,?,?,?)`[
+      (email,
+      phoneNumber,
+      address,
+      firstName,
+      lastName,
+      age,
+      register,
+      hashedPassword)
     ]
   );
-  const params = {};
 
   return {
     data,
