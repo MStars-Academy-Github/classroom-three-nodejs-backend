@@ -1,7 +1,9 @@
 const db = require("../db");
 
 async function getAllFood() {
-  const data = await db.query("select * from food");
+  const data =
+    await db.query(`select a.id, a.namee, a.price, a.ingredients, a.category_id, a.stock, a.portion, a.image, a.tumb_img, a.discount, a.sales,  b.name, b.color, b._v from food a 
+join categories b on a.category_id=b._id`);
   const params = {};
   return {
     data,
@@ -9,7 +11,7 @@ async function getAllFood() {
   };
 }
 async function createFood(params) {
-  const name = params.namee;
+  const namee = params.namee;
   const price = params.price;
   const ingredients = params.ingredients;
   const category_id = params.category_id;
@@ -22,7 +24,7 @@ async function createFood(params) {
   const data = await db.query(
     "insert into food (namee , price, ingredients,category_id,stock,portion,image,tumb_img,discount,sales ) values (?,?,?,?,?,?,?,?,?,? )",
     [
-      name,
+      namee,
       price,
       ingredients,
       category_id,
@@ -49,8 +51,23 @@ async function deletefood(params) {
   };
 }
 
+async function getFoodById(id) {
+  const data = await db.query(
+    `select a.id, a.namee, a.price, a.ingredients, a.category_id, 
+    a.stock, a.portion, a.image, a.tumb_img, a.discount, a.sales, b.name, b.color, b._v from food a 
+join categories b on a.category_id=b._id where a.id=?`,
+    [id]
+  );
+  const params = {};
+  return {
+    data,
+    params,
+  };
+}
+
 async function updateFood(params) {
-  const name = params.namee;
+  console.log(params);
+  const namee = params.namee;
   const price = params.price;
   const ingredients = params.ingredients;
   const category_id = params.category_id;
@@ -62,9 +79,12 @@ async function updateFood(params) {
   const sales = params.sales;
   const id = params.id;
   const data = await db.query(
-    "update food set namee=? , price=?, ingredients=?,category_id=?,stock=?,portion=?,image=?,tumb_img=?,discount=?,sales=? where id=?",
+    `update food set namee=? , 
+    price=?, ingredients=?, category_id=?, 
+    stock=?,  portion=?, image=?, tumb_img=?, 
+    discount=?, sales=? where id=?`,
     [
-      name,
+      namee,
       price,
       ingredients,
       category_id,
@@ -77,6 +97,7 @@ async function updateFood(params) {
       id,
     ]
   );
+
   return {
     data,
   };
@@ -87,4 +108,5 @@ module.exports = {
   createFood,
   deletefood,
   updateFood,
+  getFoodById,
 };

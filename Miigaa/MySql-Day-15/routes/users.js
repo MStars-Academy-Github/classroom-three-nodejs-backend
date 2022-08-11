@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const foods = require("../services/foods");
+const users = require("../services/user");
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(await foods.getAllFoods());
+    res.json(await users.getAllUser());
   } catch (err) {
     console.error(err.message);
     next(err);
@@ -13,8 +13,7 @@ router.get("/", async (req, res, next) => {
 router.post("/add", async (req, res, next) => {
   try {
     const params = req.body;
-    console.log(params);
-    res.json(await foods.createFood(params));
+    res.json(await users.createUser(params));
   } catch (error) {
     console.error(error.message);
     next(error);
@@ -23,7 +22,7 @@ router.post("/add", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
-    res.json(await foods.getFoodById(id));
+    res.json(await users.getUserById(id));
   } catch (err) {
     console.error(err.message);
     next(err);
@@ -32,7 +31,7 @@ router.get("/:id", async (req, res, next) => {
 router.put("/update", async (req, res, next) => {
   try {
     const params = req.body;
-    res.json(await foods.updateFood(params));
+    res.json(await users.updateUser(params));
   } catch (error) {
     console.error(error.message);
     next(error);
@@ -41,7 +40,7 @@ router.put("/update", async (req, res, next) => {
 router.delete("/delete", async (req, res, next) => {
   try {
     const params = req.body;
-    res.json(await foods.deleteFood(params));
+    res.json(await users.deleteUser(params));
   } catch (error) {
     console.error(error.message);
     next(error);

@@ -36,11 +36,14 @@ async function getCategoryById(id) {
 }
 async function updateCategory(params) {
   const name = params.name;
-  const id = params.id;
-  const data = await db.query("UPDATE categories SET name=? WHERE id=?", [
-    name,
-    id,
-  ]);
+  const color = params.color;
+  const categoryId = params.categoryId;
+  const data = await db.query(
+    "UPDATE categories SET name=? , color=? WHERE id = ?",
+    [name, color, categoryId]
+  );
+  const param = {};
+  return { data, param };
 }
 module.exports = {
   getAllCategories,
