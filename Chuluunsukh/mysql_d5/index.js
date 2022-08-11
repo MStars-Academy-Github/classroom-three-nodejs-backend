@@ -17,6 +17,7 @@ app.use(express.json());
 app.use("/category", cors(), categoryRouter);
 app.use("/food", cors(), foodRouter);
 app.use("/users", cors(), usersRouter);
+app.use("/register", cors(), registerRouter);
 
 app.get("/", (req, res) => {
   res.send("My app is running");
