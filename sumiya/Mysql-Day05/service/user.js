@@ -1,13 +1,25 @@
 const db = require("../db");
 
 async function getAllUser() {
-  const data = await db.query("select * from User");
+  const data =
+    await db.query(`select a.id, a.firstname, a.lastname, a.email, a.address, a.phone_number, a.rode_id, b.role_name, b.role_description from User a 
+join Role b on a.rode_id=b.id`);
   const params = {};
   return {
     data,
     params,
   };
 }
+
+async function deleteUser(params) {
+  const id = params.id;
+  console.log(id);
+  const data = await db.query("delete from User where id =?", [id]);
+  return {
+    data,
+  };
+}
+
 
 async function insertUser(params) {
   const firstname = params.firstname;
@@ -46,7 +58,12 @@ async function UpdateUser(params) {
   };
 }
 async function getUserById(id) {
-  const data = await db.query("select * from User where id=?", [id]);
+  const data = await db.query(
+    `select a.id, a.firstname, a.lastname, a.email, a.address, a.phone_number, 
+    a.rode_id, b.role_name, b.role_description from User a 
+join Role b on a.rode_id=b.id where a.id=?`,
+    [id]
+  );
   const params = {};
   return {
     data,
@@ -59,4 +76,5 @@ module.exports = {
   insertUser,
   UpdateUser,
   getUserById,
+  deleteUser,
 };
