@@ -18,16 +18,17 @@ async function registerUser(params) {
   console.log(hashedPassword);
 
   const data = await db.query(
-    `INSERT INTO users(email, phone_number, 
-      address, firstName, lastName, age, register, password) VALUES(?,?,?,?,?,?,?,?)`[
-      (email,
+    `INSERT INTO users(email, phoneNumber, 
+      address, firstName, lastName, age, register, password) VALUES(?,?,?,?,?,?,?,?)`,
+    [
+      email,
       phoneNumber,
       address,
       firstName,
       lastName,
       age,
       register,
-      hashedPassword)
+      hashedPassword,
     ]
   );
 
