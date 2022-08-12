@@ -14,7 +14,6 @@ async function createRegister(params) {
   } = params;
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log(hashedPassword);
   const data = await db.query(
     "INSERT INTO users ( email,phoneNumber,address,firstname,lastname,age,register,password) VALUES (?, ?, ?, ?,?,?,?,?)",
     [
