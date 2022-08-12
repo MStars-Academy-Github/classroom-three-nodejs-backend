@@ -1,7 +1,7 @@
 const db = require("../db");
 
 async function getAllCategories() {
-  const data = await db.query("SELECT id, name, color, v FROM category");
+  const data = await db.query("SELECT id, name, color FROM category");
   const params = {};
 
   return {
@@ -14,9 +14,8 @@ async function createCategory(params) {
   const id = params.id;
   const name = params.name;
   const color = params.color;
-  const v = params.v;
   const data = await db.query(
-    "INSERT INTO category (id, name, color, v) VALUES (?, ?, ?, ?)",
+    "INSERT INTO category (id, name, color) VALUES (?, ?, ?, ?)",
     [id, name, color, v]
   );
   return {
@@ -34,7 +33,7 @@ async function deleteCategory(params) {
 
 async function getCategoryById(id) {
   const data = await db.query(
-    "SELECT id, name, color, v FROM category WHERE id=?",
+    "SELECT id, name, color FROM category WHERE id=?",
     [id]
   );
   const params = {};
@@ -47,9 +46,8 @@ async function updateCategory(params) {
   const id = params.id;
   const name = params.name;
   const color = params.color;
-  const v = params.v;
   const data = await db.query(
-    "UPDATE category SET name=?, color=?, v=? where id=?  ",
+    "UPDATE category SET name=?, color=? where id=?  ",
     [name, color, v, id]
   );
   return {

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const categories = require("../service/categories");
 const deleteCategory = require("../service/categories");
+const auth = require("../middleware/auth");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", auth, async (req, res, next) => {
   try {
     const params = req.body;
     res.json(await categories.createCategory(params));
@@ -21,15 +22,6 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
-// router.get("/:id", (req,res, next)=>{
-//   const id = req.params.id;
-//   try{
-//     res.json(await categories.getCategoryById(id))
-//   } catch (err) {
-//     console.error(err.message)
-//     next.err
-//   }
-// });
 
 router.get("/", async (req, res, next) => {
   const id = req.params.id;
@@ -50,4 +42,5 @@ router.delete("/", async (req, res, next) => {
     next.error;
   }
 });
+
 module.exports = router;

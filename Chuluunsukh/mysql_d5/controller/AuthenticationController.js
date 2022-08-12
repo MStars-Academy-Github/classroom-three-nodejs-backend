@@ -43,6 +43,7 @@ router.post("/login", async (req, res, next) => {
           data: "Email or Password doesn't match!",
         });
       }
+      next();
     }
     res.status(200).json("user login");
   } catch (error) {
