@@ -53,16 +53,15 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   try {
     const params = req.body;
-    console.log(params);
+
     if (Object.values(params).length === 0) {
       res.status(400).json({
         success: false,
         message: "No user is provided",
       });
     }
-    const { email, password } = params;
+    const { email, password, firstname } = params;
     const existingUser = await register.findUserByEmail(email);
-    console.log(existingUser);
     if (existingUser.data.length === 0) {
       res.status(400).json({
         success: false,
@@ -87,8 +86,9 @@ router.post("/login", async (req, res, next) => {
           success: true,
           data: {
             email: email,
+            firstname: existingUser.data[0].firstname,
           },
-          toke: token,
+          token: token,
         });
       } else {
         res.status(401).json({
