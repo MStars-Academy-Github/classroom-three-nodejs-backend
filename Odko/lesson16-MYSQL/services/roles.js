@@ -11,7 +11,6 @@ async function getAllRoles() {
 }
 
 async function createRoles(params) {
-  console.log(params);
   const role_name = params.role_name;
   const role_desc = params.role_desc;
   const data = await db.query(
@@ -56,7 +55,6 @@ async function getRoleJoin(id) {
 }
 
 async function updateRoles(params) {
-  console.log(params);
   const id = params.id;
   const role_name = params.role_name;
   const role_desc = params.role_desc;

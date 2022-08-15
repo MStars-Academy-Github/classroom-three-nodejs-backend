@@ -11,7 +11,6 @@ async function getAllUsers() {
 }
 
 async function createUsers(params) {
-  console.log(params);
   const lastname = params.lastname;
   const firstname = params.firstname;
   const address = params.address;
@@ -70,7 +69,6 @@ async function updateUsers(params) {
   const age = params.age;
   const register = params.register;
   const role_id = params.role_id;
-  console.log(role_id);
 
   const data = await db.query(
     "UPDATE users SET lastname =?, firstname=?, address=?, phoneNumber=?, role_id=? ,email=?,age=?,register=? WHERE id=? ",
