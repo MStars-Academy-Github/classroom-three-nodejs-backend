@@ -3,7 +3,6 @@ const config = process.env;
 
 const verifyToken = (req, res, next) => {
   const token = req.body.token;
-  console.log(token);
   if (!token) {
     return res.status(403).json({
       success: false,
