@@ -5,8 +5,8 @@ async function registerUser(params) {
   const { firstname, lastname, email, address, phone_number, password } =
     params;
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("hashedpassword");
-  console.log(hashedPassword);
+  // console.log("hashedpassword");
+  // console.log(hashedPassword);
   const data = await db.query(
     `insert into User (firstname ,lastname , 
   email, address , phone_number,password) values (?, ?, ?, ?, ?, ?)`,
