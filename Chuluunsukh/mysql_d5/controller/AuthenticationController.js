@@ -51,6 +51,17 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.delete("/delete-user", async (req, res, next) => {
+  try {
+    const params = req.body;
+    console.log(params);
+    res.json(await users.deleteUser(params));
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
 router.post("/register", async (req, res, next) => {
   try {
     const params = req.body;
@@ -93,6 +104,25 @@ router.post("/register", async (req, res, next) => {
   } catch (error) {
     console.error(error.message);
     next(error);
+  }
+});
+
+router.put("/update-user", async (req, res, next) => {
+  const params = req.body;
+  try {
+    res.json(await users.updateUser(params));
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+});
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    res.json(await users.getUserById(id));
+  } catch (err) {
+    console.error(err);
+    next(err);
   }
 });
 

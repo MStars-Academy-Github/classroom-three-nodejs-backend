@@ -7,4 +7,14 @@ async function query(sql, params) {
   return rows;
 }
 
-module.exports = { query };
+async function beginTransaction() {
+  return await pool.beginTransaction();
+}
+
+async function rollBack() {
+  return await pool.rollBack();
+}
+async function commit() {
+  return await pool.commit();
+}
+module.exports = { query, beginTransaction, rollBack, commit };

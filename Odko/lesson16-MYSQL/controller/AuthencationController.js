@@ -60,7 +60,7 @@ router.post("/login", async (req, res, next) => {
         message: "No user is provided",
       });
     }
-    const { email, password, firstname } = params;
+    const { email, password } = params;
     const existingUser = await register.findUserByEmail(email);
     if (existingUser.data.length === 0) {
       res.status(400).json({
