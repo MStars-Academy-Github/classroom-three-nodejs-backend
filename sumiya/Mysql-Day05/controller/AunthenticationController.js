@@ -18,9 +18,9 @@ register.post("/login", async (req, res, next) => {
         message: "no user data",
       });
     }
-    const { email, password, firstname, lastname, phone_number, address } =
+    const { email, password, firstname, lastname, address, phone_number } =
       params;
-    console.log(params, "params =====================");
+    console.log(params);
     const existingUser = await userService.findUserbyEmail(email);
     if (existingUser.data.length === 0) {
       res.status(400).json({
@@ -45,13 +45,13 @@ register.post("/login", async (req, res, next) => {
             email: email,
             firstname: existingUser.data[0].firstname,
             lastname: existingUser.data[0].lastname,
-            phone_number: existingUser.data[0].phone_number,
             address: existingUser.data[0].address,
+            phone_number: existingUser.data[0].phone_number,
           },
           token: token,
         });
-        console.log(data);
-        console.log(existingUser.data[0].phone_number);
+        // console.log(data);
+        // console.log(existingUser.data[0].phone_number);
         // console.log(token);
       } else {
         res.status(401).json({
