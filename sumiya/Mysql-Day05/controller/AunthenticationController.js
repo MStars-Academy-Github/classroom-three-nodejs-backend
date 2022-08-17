@@ -50,7 +50,9 @@ register.post("/login", async (req, res, next) => {
           },
           token: token,
         });
-        console.log(token);
+        console.log(data);
+        console.log(existingUser.data[0].phone_number);
+        // console.log(token);
       } else {
         res.status(401).json({
           success: false,
