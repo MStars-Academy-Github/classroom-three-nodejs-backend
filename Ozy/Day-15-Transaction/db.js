@@ -9,15 +9,15 @@ async function query(sql, params) {
 }
 
 async function beginTransaction() {
-  pool.getConnection((err, connection) => {
-    connection.beginTransaction();
-  });
+  return await connection.beginTransaction();
 }
 
 async function rollBack() {
   return await connection.rollBack();
 }
+
 async function commit() {
   return await connection.commit();
 }
+
 module.exports = { query, beginTransaction, rollBack, commit };
