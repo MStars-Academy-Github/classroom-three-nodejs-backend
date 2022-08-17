@@ -1,5 +1,5 @@
 const express = require("express");
-
+const auth = require("../middleware/auth");
 const router = express.Router();
 const categories = require("../service/categories");
 
@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/insert", async (req, res, next) => {
+router.post("/", auth, async (req, res, next) => {
   try {
     const params = req.body;
     console.log(params);
@@ -22,7 +22,7 @@ router.post("/insert", async (req, res, next) => {
     next(error);
   }
 });
-router.delete("/delete", async (req, res, next) => {
+router.delete("/", async (req, res, next) => {
   try {
     const params = req.body;
     console.log(params);

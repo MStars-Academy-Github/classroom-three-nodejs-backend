@@ -176,7 +176,7 @@ SELECT lastName, firstName, "EMPLOYEES" from employees;
       SELECT * FROM employees;
       SELECT *
 	  FROM employees INNER JOIN offices 
-	  ON  employees.officeCode = offices.officeCode WHERE city = "San Francisco"
+	  ON  employees.officeCode = offices.officeCode WHERE city = "San Francisco";
       
 --  2. Америкт нийт хэдэн ажилчин ажиллаж байна вэ
 	  SELECT * from offices ;
@@ -184,7 +184,7 @@ SELECT lastName, firstName, "EMPLOYEES" from employees;
   
 	  SELECT count(country) , country
 	  FROM employees INNER JOIN offices 
-	  ON  employees.officeCode = offices.officeCode WHERE country = "USA"
+	  ON  employees.officeCode = offices.officeCode WHERE country = "USA";
   
   
 --  3. Хот бүрээр ажилтны тоог гарга (хамгийн их ажилтантай хот хамгийн бага нь аль 6э)
@@ -219,12 +219,67 @@ SELECT lastName, firstName, "EMPLOYEES" from employees;
   
   
   
+  CREATE TABLE Order_Detail(
+id INT not null primary key auto_increment,
+food_id INT,
+food_price INT,
+order_id INT,
+foreign key (order_id) references orders(id),
+foreign key (food_id) references food(food_id)
+);
+  
+ 
+alter table food modify column food_id INT  auto_increment;
+    
+CREATE TABLE orders(
+ id INT not null primary key auto_increment,
+ customer_id INT,
+ deliverman_id INT,
+ ordered_date DATE,
+ order_status varchar(255),
+total_fee DOUBLE,
+foreign key (customer_id) references users(id),
+foreign key (deliverman_id) references users(id)
+);
   
   
+  select * from orders;
+  select * from users;
+  select * from food;
+  select * from roles;
+  select * from Order_Detail;
+  desc orders;
+  desc Order_Detail;
   
   
+INSERT INTO orders(customer_id,deliverman_id, ordered_date, order_status, total_fee ) 
+value(1,1,"2022-08-15", 1, 5000);
   
   
-  
-  
+-- orderluu hiiged daraa ni order_detailruu hiine
+SET @id = LAST_INSERT_ID();
+select @id;
+INSERT INTO Order_Detail(food_id, food_price, order_id ) values(1,1800, @id);
+
+-- transaction step
+select * from users;
+
+start transaction;
+savepoint sp1;
+delete from users WHERE id =25;
+savepoint sp2;
+delete from users WHERE id =24;
+
+-- bugdiin butsaana  
+rollback;
+-- sp1-g butsaana
+rollback to sp1;
+
+
+-- isolation layer "auto -matar commit hiideg ON-iig OFF bolgodog"
+show variables like "autocommit";
+set autocommit = off;
+
+-- busdaas yak tursgaarlah we 4 torliin table baidag ehni default ni REPEATABLE-READ baina
+show variables like "%isolation%";
 

@@ -1,22 +1,22 @@
 const express = require("express");
-const users = require("../service/user");
 const router = express.Router();
+const foods = require("../service/users");
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(await users.getAllUser());
-  } catch (err) {
-    console.error(err.message);
-    next(err);
-  }
-});
-router.post("/adduser", async (req, res, next) => {
-  const params = req.body;
-  try {
-    res.json(await users.createUser(params));
+    res.json(await foods.getAllUsers());
   } catch (err) {
     console.log(err.message);
     next(err);
+  }
+});
+router.post("/add-user", async (req, res, next) => {
+  try {
+    const params = req.body;
+    res.json(await foods.createUsers(params));
+  } catch (error) {
+    console.error(error.message);
+    next(error);
   }
 });
 router.delete("/delete", async (req, res, next) => {
@@ -38,13 +38,5 @@ router.put("/update-user", async (req, res, next) => {
     next(err);
   }
 });
-router.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    res.json(await users.getUserById(id));
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
-});
+
 module.exports = router;

@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const foods = require("../service/users");
+const usersRole = require("../services/usersRole");
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(await foods.getAllUsers());
+    res.json(await usersRole.getAllUsersRole());
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
     next(err);
   }
 });
-router.post("/", async (req, res, next) => {
+router.put("/update", async (req, res, next) => {
   try {
     const params = req.body;
-    res.json(await foods.createUsers(params));
+    res.json(await usersRole.updateRole(params));
   } catch (error) {
     console.error(error.message);
     next(error);
