@@ -8,6 +8,29 @@ async function query(sql, params) {
   return rows;
 }
 
+async function beginTransaction() {
+  pool.getConnection((err, connection) => {
+    connection.beginTransaction((err) => {
+      if (err) {
+        connection.rollBack();
+      }
+    });
+  });
+}
+
+async function rollBack() {
+  const connection = mysql.createConnection(config.db);
+  await connection.rollBack();
+}
+
+async function commit() {
+  const connection = mysql.createConnection(config.db);
+  await connection.commit();
+}
+
 module.exports = {
   query,
+  beginTransaction,
+  rollBack,
+  commit,
 };
