@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) => {
 router.post("/register", async (req, res, next) => {
   try {
     const params = req.body;
+    console.log(params);
     // if params have a no body data send user data provided
     if (Object.values(params).length == 0) {
       res.status(400).json({
@@ -84,6 +85,9 @@ router.post("/login", async (req, res, next) => {
         success: true,
         data: {
           email: email,
+          firstName: existingUser.data[0].first_name,
+          address: existingUser.data[0].address,
+          phoneNumber: existingUser.data[0].phone_number,
         },
         token: token,
       });

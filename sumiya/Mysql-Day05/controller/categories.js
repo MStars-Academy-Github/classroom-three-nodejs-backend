@@ -3,7 +3,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 const categories = require("../service/categories");
 
-router.get("/", auth, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     res.json(await categories.getAllCategories());
   } catch (err) {
