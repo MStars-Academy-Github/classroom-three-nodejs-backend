@@ -2,6 +2,7 @@ const express = require("express");
 const categoryRouter = require("./controller/categories");
 const foodsRouter = require("./controller/foodapi");
 const AuthenticationController = require("./controller/AuthenticationController.js");
+const transaction = require("./controller/order");
 require("dotenv").config();
 const cors = require("cors");
 const PORT = process.env.PORT;
@@ -18,7 +19,7 @@ app.use(
 app.use("/category", categoryRouter);
 app.use("/foods", foodsRouter);
 app.use("/user", AuthenticationController);
-
+app.use("/order", transaction);
 app.listen(PORT, () => {
   console.log("my app is runnig");
 });

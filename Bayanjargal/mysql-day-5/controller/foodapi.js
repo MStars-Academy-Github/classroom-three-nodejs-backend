@@ -12,6 +12,7 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
 router.post("/addfood", async (req, res, next) => {
   const params = req.body;
   console.log(params);
