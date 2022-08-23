@@ -15,24 +15,14 @@ async function createOrder() {
   console.log("start transaction");
 
   try {
-    connection.execute(
-      `INSERT INTO orders( customer_id,deliverman_id, ordered_date, order_status, total_fee ) 
-       values(?,?,?,?,?)`,
-      [1, 1, "2022-08-15", 1, 5000]
-    );
+    connection.execute(" CALL food_delivery_orders2(?,?,?,?,?)", [
+      1,
+      1,
+      "3333-08-15",
+      1,
+      5000,
+    ]);
     console.log("insert data into orders");
-
-    const [rows] = await connection.execute(
-      "SELECT LAST_INSERT_ID() as order_id;"
-    );
-    console.log(rows);
-    console.log("last id");
-
-    connection.execute(
-      `INSERT INTO Order_Detail(food_id, food_price, order_id ) values(?,?,?)`,
-      [1, 1800, rows[0].order_id]
-    );
-    console.log("insert data into orders_details");
 
     connection.commit();
     console.log("commit succesfully");
