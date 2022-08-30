@@ -1,3 +1,4 @@
 import User from "./user.module";
 import * as userInterfaces from "./user.interface";
-export { User, userInterfaces };
+import * as userController from "./user.controller";
+export { User, userInterfaces, userController };
