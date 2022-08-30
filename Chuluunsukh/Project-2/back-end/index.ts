@@ -5,6 +5,7 @@ dotenv.config();
 const PORT = process.env.PORT;
 
 app.use(express.json());
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Project-2");
 });
