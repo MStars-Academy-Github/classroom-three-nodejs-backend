@@ -2,13 +2,12 @@
   "name": "back-end",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Bayanjargal",
+  "author": "Odko",
   "license": "MIT",
   "dependencies": {
     "concurrently": "^7.3.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "mongoose": "^6.5.3",
     "nodemon": "^2.0.19"
   },
   "scripts": {

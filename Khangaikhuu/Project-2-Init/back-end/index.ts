@@ -7,6 +7,8 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 
+const asdf = "";
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Project 2");
 });
