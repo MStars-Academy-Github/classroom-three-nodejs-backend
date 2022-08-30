@@ -52,7 +52,7 @@ async function createOrder() {
       "SELECT LAST_INSERT_ID() as order_id"
     );
 
-    return `order created with id ${rows[0].order_id}`;
+    return `Order created with id ${rows[0].order_id}`;
   } catch (error) {
     console.error(error);
     connection.rollback();
