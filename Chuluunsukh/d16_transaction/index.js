@@ -27,7 +27,7 @@ async function createOrder() {
     for (const itemToOrder of itemsToOrder) {
       if (itemToOrder.quantity < 1) {
         throw new Error(
-          `One of the itesm is out of stock ${itemToOrder.quantity}`
+          `One of the item is out of stock ${itemToOrder.quantity}`
         );
       }
 
