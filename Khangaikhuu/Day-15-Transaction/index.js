@@ -40,6 +40,8 @@ async function createOrder() {
       [orderItems.join(), orderTotal]
     );
 
+    await connection.execute("CALL transaction_test(?,?);", [param1, param2]);
+
     console.log("Order created");
 
     await connection.execute(
