@@ -29,17 +29,27 @@ async function createCategory(params) {
     hello: "HALO",
   };
 }
-async function updateCategory(params){
-	const id = params.id;
-	const name = params.name;
-	const data = await db.query('UPDATE category SET  name =?  where id =?', [name , id] )
-	return {
-	work : 'this is working'
+async function updateCategory(params) {
+  const id = params.id;
+  const name = params.name;
+  const data = await db.query("UPDATE category SET  name =?  where id =?", [
+    name,
+    id,
+  ]);
+  return {
+    work: "this is working",
+  };
 }
+async function getCategoryById(id) {
+  const data = await db.query("SELECT * from category where id = ?", [id]);
+  return {
+    data,
+  };
 }
 module.exports = {
   getAllCategories,
   createCategory,
   deleteCategory,
-	updateCategory
+  updateCategory,
+  getCategoryById,
 };

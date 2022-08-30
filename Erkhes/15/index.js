@@ -211,9 +211,9 @@ router.get("/", (req, res, next) => {
         console.log("err");
       } else {
         const ddata = JSON.parse(data);
-
+        console.log(ddata);
         // res.send(ddata);
-        res.render("index", { data: ddata.books });
+        ddata && res.render("index", { data: ddata.books });
       }
     }
   );
@@ -250,5 +250,45 @@ router.post("/add/book", userValid()  , (req, res) => {
   console.log(req.body.title);
   res.send(req.body);
 });
+// router.get('/delete' , (req ,res ,next)=>{
+//   const url = req.query.isbn;
+//   let result = []
+//   function filtering (e){
+//     return e.isbn != url
+//   }
+//   fs.readFile(
+//     "/Users/mstars_lab3_02/Desktop/classroom-three-nodejs-backend/Erkhes/14-express-router/public/book.json",
+//     "utf-8",
+//     (err, data) => {
+//       if (err) {
+//         console.log("err");
+//       } else {
+//         const ddata = JSON.parse(data);
+//         ddata.books.forEach(e=>{
+//           if(e.isbn != url){
+//             result.push(e)
+//           }
+//           // if(result.length === 0){
+//           //   result = ddata
+//           //   console.log('there is no book with this isbn');
+//           // }
+//         })
+//         console.log(result);
+//         fs.writeFile(
+//           "/Users/mstars_lab3_02/Desktop/classroom-three-nodejs-backend/Erkhes/14-express-router/public/book.json",
+//           JSON.stringify(result),
+//           (err) => {
+//             if (err) {
+//               console.error(err);
+//             } else {
+//               console.log("success");
+//             }
+//           }
+//         );
+//       }
+//     }
+//   );
+//   res.end('test')
+// })
 app.use(router);
 app.listen(PORT);
