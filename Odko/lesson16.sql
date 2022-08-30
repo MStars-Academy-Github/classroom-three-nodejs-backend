@@ -257,6 +257,7 @@ value(1,1,"2022-08-15", 1, 5000);
   
   
 -- orderluu hiiged daraa ni order_detailruu hiine
+-- suuld insert hiigdsen table-iin id awaad hadgaldag 
 SET @id = LAST_INSERT_ID();
 select @id;
 INSERT INTO Order_Detail(food_id, food_price, order_id ) values(1,1800, @id);
@@ -280,6 +281,50 @@ rollback to sp1;
 show variables like "autocommit";
 set autocommit = off;
 
--- busdaas yak tursgaarlah we 4 torliin table baidag ehni default ni REPEATABLE-READ baina
+-- busdaas yaj tursgaarlah we 4 torliin table baidag ehni default ni REPEATABLE-READ baina
 show variables like "%isolation%";
+
+
+
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sku` char(6) COLLATE utf8_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL COMMENT 'in cents',
+  `quantity` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `sku` (`sku` ASC) VISIBLE
+) ;
+
+
+CREATE TABLE `sales_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `items` text COLLATE utf8_unicode_ci NOT NULL,
+  `total` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ;
+select * from product;
+select * from sales_order;
+
+INSERT INTO `product` (`id`, `name`, `sku`, `price`, `quantity`) VALUES
+(1, 'Toilet paper 10 pack', 'TP0001', 750, 1),
+(2, 'Rice 1 Kg', 'RI0002', 140, 500),
+(3, 'Pasta 500 g', 'PA0003', 260, 500),
+(4, 'Chicken Breast 1 Kg', 'CB0004', 1200, 500),
+(5, 'Hand Sanitizer', 'HS0005', 300, 500);
+
+
+
+
+
+
+
+
+
+
+
 
