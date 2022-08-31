@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IUserDoc } from "./user.interfaces";
-
+import bcrypt from "bcryptjs";
 // User has
 // firstName
 // lastName
@@ -44,6 +44,14 @@ const userSchema = new Schema<IUserDoc>({
     trim: true,
   },
 });
+
+userSchema.method(
+  "isPasswordMatch",
+  async (password: string): Promise<boolean> => {
+    const user: any = this;
+    return bcrypt.compare(password, user.password);
+  }
+);
 
 const User = mongoose.model<IUserDoc>("User", userSchema);
 export default User;
