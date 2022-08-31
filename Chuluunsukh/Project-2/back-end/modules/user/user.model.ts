@@ -30,8 +30,7 @@ const userSchema = new Schema<IUserDoc>({
     type: String,
     required: true,
     trim: true,
-    minLength: 10,
-    maxLength: 10,
+    minLength: 8,
   },
   phone: {
     type: Number,
