@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IUserDoc } from "./user.interface";
+import bcrypt from "bcryptjs";
 /**
  * User
  * -FirstName
@@ -41,7 +42,23 @@ const userSchema = new Schema<IUserDoc>({
     maxlength: 10,
   },
 });
-
+userSchema.method(
+  "isPasswordMatch",
+  async function (password: string): Promise<boolean> {
+    console.log("is password match");
+    console.log(password);
+    const user: any = this;
+    console.log(this);
+    return bcrypt.compare(password, user.password);
+  }
+);
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+    next();
+  }
+});
 const User = mongoose.model<IUserDoc>("User", userSchema);
 
 export default User;
