@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { IUserDoc } from "./user.interface";
+import { IUserDoc, IUserModel } from "./user.interface";
 import bcrypt from "bcryptjs";
 /**
  * User
@@ -59,6 +59,6 @@ userSchema.pre("save", async function (next) {
     next();
   }
 });
-const User = mongoose.model<IUserDoc>("User", userSchema);
+const User = mongoose.model<IUserDoc | IUserModel>("User", userSchema);
 
 export default User;

@@ -1,14 +1,16 @@
-import mongoose, { Model, Document } from "mongoose";
+import { Model, Document } from "mongoose";
 
 export interface IUser {
-  firstName: String;
-  lastName: String;
-  email: String;
-  phone: Number;
-  password: String;
-  register: String;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: number;
+  password: string;
+  register: string;
 }
 
 export interface IUserDoc extends IUser, Document {
-  isPasswordMatch(password: String): Promise<boolean>;
+  isPasswordMatch(password: string): Promise<boolean>;
 }
+
+export interface IUserModel extends Model<IUserDoc> {}
