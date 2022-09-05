@@ -7,7 +7,7 @@ export const loginUser = async (
   password: string
 ): Promise<IUserDoc> => {
   const user = await getUserByEmail(email);
-  if (!user || (await user.isPasswordMatch(password))) {
+  if (!user || !(await user.isPasswordMatch(password))) {
     throw new Error("Incorrect email or password");
   }
   return user;
