@@ -6,7 +6,7 @@ import { User } from "../user";
 import Media from "./media.model";
 import fs from "fs";
 let gridfs: GridFSBucket;
-mongoose.connection.on("connectd", () => {
+mongoose.connection.on("connected", () => {
   gridfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db);
 });
 
@@ -18,30 +18,27 @@ export const createMedia = (req: Request, res: Response) => {
         error: "Video could not be uploaded",
       });
     }
-    const user = await User.findById("63116db99b1d2156b425bfc7");
+
+    const user = await User.findById("630ec7701b1bf5648c9e03e7");
     let media = new Media(fields);
     media.postedBy = user?._id;
-
-    console.log(fields);
     const file = files["media"];
-
-    // console.log(file);
-
-    // Save the parse file
+    console.log(file);
+    // console.log(fields);
+    // save the parse file
     if (file) {
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
         contentType: "binary/octet-stream",
       });
       fs.createReadStream(file.filepath).pipe(writeStream);
     }
+
     try {
       let result = await media.save();
-      res.status(200).json({
-        data: result,
-      });
-    } catch (err) {
+      return res.status(200).json({ data: result });
+    } catch (error) {
       return res.status(400).json({
-        err: "Error during file upload",
+        error: "Error during file upload",
       });
     }
   });
@@ -52,8 +49,12 @@ export const getMediaById = async (req: Request, res: Response) => {
     const media = await Media.findById(mediaId)
       .populate("postedBy", "_id firstName lastName")
       .exec();
+    let files = await gridfs
+      .find({ filename: media?._id.toString() })
+      .toArray();
     res.json({
       data: media,
+      file: files,
     });
   } catch (err) {
     return res.status(404).json({
