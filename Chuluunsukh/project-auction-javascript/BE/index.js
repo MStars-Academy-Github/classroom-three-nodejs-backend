@@ -31,9 +31,24 @@ app.post("/roles/create", async (req, res) => {
   }
 });
 
-app.post("/roles", (req, res) => {
+app.post("/roles", async (req, res) => {
+  const roles = await Roles.find();
   res.json({
-    data: "i'm here",
+    data: "roles",
+  });
+});
+
+app.put("/roles/update", async (req, res) => {
+  console.log(req.body);
+  console.log(req.query);
+
+  const { id } = req.query;
+
+  await Roles.findByIdAndUpdate(id, req.body);
+  console.log(role);
+
+  res.json({
+    data: role,
   });
 });
 
