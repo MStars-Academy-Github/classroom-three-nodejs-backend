@@ -1,11 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const Roles = require("./modules/roles/role.model");
 const routes = require("./routes/v1");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use("/v1", routes);
 
 dotenv.config();
