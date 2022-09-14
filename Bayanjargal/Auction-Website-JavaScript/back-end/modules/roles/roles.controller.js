@@ -45,4 +45,15 @@ const getAll = async (req, res) => {
     data: roles,
   });
 };
-module.exports = { getAll, deleteRole, updateRole, createRole };
+const getById = async (req, res) => {
+  try {
+    const role = await rolesService.getById(req);
+    res.json({
+      success: true,
+      data: role,
+    });
+  } catch (err) {
+    res.json({ success: false, data: err });
+  }
+};
+module.exports = { getAll, deleteRole, updateRole, createRole, getById };
