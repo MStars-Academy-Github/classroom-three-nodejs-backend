@@ -15,4 +15,9 @@ const deleteRole = (req) => {
   const { id } = req.params;
   return Roles.findByIdAndDelete(id);
 };
-module.exports = { createRole, getAll, updateRole, deleteRole };
+const getById = async (req) => {
+  const { id } = req.params;
+  const role = await Roles.findById(id);
+  return role;
+};
+module.exports = { createRole, getAll, updateRole, deleteRole, getById };
