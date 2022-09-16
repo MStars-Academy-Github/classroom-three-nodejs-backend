@@ -51,7 +51,8 @@ export const createMedia = (req: Request, res: Response) => {
 
 export const getMediaById = async (req: Request, res: Response) => {
   const { mediaId } = req.params;
-
+  console.log(req.headers);
+  const range = req.headers["range"];
   try {
     const media = await Media.findById({
       _id: mediaId,

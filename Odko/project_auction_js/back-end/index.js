@@ -1,14 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
+const router = require("./routes/V1/router");
 
 require("dotenv").config();
-const router = require("./routes/V1/router");
+app.use(express.json());
+app.use(cors());
+
+app.use("/roles", router);
+
 const PORT = process.env.PORT;
 const ATLAS_MONGO_CONNECTION = process.env.ATLAS_MONGO_CONNECTION;
-
-app.use(express.json());
-app.use("/roles", router);
 
 mongoose.connect(ATLAS_MONGO_CONNECTION).then(() => {
   console.log("Connected to the MongoDB");

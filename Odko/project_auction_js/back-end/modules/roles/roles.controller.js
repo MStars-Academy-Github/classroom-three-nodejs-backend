@@ -51,4 +51,16 @@ const deleteRoles = async (req, res) => {
   }
 };
 
-module.exports = { getRoles, createRoles, updateRoles, deleteRoles };
+const getById = async (req, res) => {
+  try {
+    const role = await rolesService.getByIdEdit(req);
+    res.json({
+      data: role,
+    });
+  } catch (err) {
+    console.error(err.messeage);
+    next(err);
+  }
+};
+
+module.exports = { getRoles, createRoles, updateRoles, deleteRoles, getById };
